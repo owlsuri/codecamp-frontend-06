@@ -8,7 +8,8 @@ import { useMutation, gql } from "@apollo/client";
 
 const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput: CreateBoardInput!) {
-        createBoard(createBoardInput: $createBoardInput) {
+        # 가져올 것이 여러개일때 바로 아래줄부터 필요(2중구조인 이유)
+        createBoard(createBoardInput: $createBoardInput) {  
         _id
         writer
         title
@@ -34,8 +35,6 @@ export default function BoardsNewPage(){
     const [titleError, setTitleError] = useState("");
     const [contentsError, setContentsError] = useState("");
     const [createBoard] = useMutation(CREATE_BOARD);
-
-
 
 
     const onChangeWriter = (event) => {
@@ -72,38 +71,35 @@ export default function BoardsNewPage(){
 
     const onClickSubmit = async () => {
         let result = await createBoard({
-        variables: {
-            createBoardInput: {
-            writer: writer,
-            password: password,
-            title: title,
-            contents: contents,
+            variables: {
+                createBoardInput: {
+                writer,
+                password,
+                title,
+                contents
+                //키와 밸류가 같으면 밸류 생략가능 
+                },
             },
-        },
         });
         console.log(result);
         console.log(result.data.createBoard.message);
         setData(result.data.createBoard.message);
 
         if (writer === "") {
-        setWriterError("작성자를 입력해주세요.");
+            setWriterError("작성자를 입력해주세요.");
         }
         if (password === "") {
-        setPasswordError("비밀번호를 입력해주세요.");
+            setPasswordError("비밀번호를 입력해주세요.");
         }
         if (title === "") {
-        setTitleError("제목을 입력해주세요.");
+            setTitleError("제목을 입력해주세요.");
         }
         if (contents === "") {
-        setContentsError("내용을 입력해주세요.");
+            setContentsError("내용을 입력해주세요.");
         }
         if (
-        writer !== "" &&
-        password !== "" &&
-        title !== "" &&
-        contents !== ""
-        ) {
-        alert("게시물 등록 완료!");
+            writer !== "" && password !== "" && title !== "" && contents !== "") {
+            alert("게시물 등록 완료!");
         }
     };
 
