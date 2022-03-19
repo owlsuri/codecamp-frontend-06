@@ -5,10 +5,11 @@ import {Wrapper, Title, UserBox, User, ListName, Insert, TitleBox,
     MainBox, MainRadio1,MainRadio2, SubmitBtn, BtnBox, Error} from '../../../styles/boardnew'
 import { useState } from 'react'
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput: CreateBoardInput!) {
-        # 가져올 것이 여러개일때 바로 아래줄부터 필요(2중구조인 이유)
+    
         createBoard(createBoardInput: $createBoardInput) {  
         _id
         writer
@@ -24,17 +25,14 @@ export default function BoardsNewPage(){
     const [title, setTitle] = useState("");
     const [contents, setContents] = useState("");
     const [data, setData] = useState("");
-    // const [youtubeUrl, setYoutubeUrl] = useState("");
-    // const [zipcode, setZipcode] = useState("");
-    // const [address, setAddress] = useState("");
-    // const [addressDetail, setAddressDetail] = useState("");
-    // const [image, setImage] = useState("");
 
     const [writerError, setWriterError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [titleError, setTitleError] = useState("");
     const [contentsError, setContentsError] = useState("");
     const [createBoard] = useMutation(CREATE_BOARD);
+
+    const router = useRouter();
 
 
     const onChangeWriter = (event) => {
@@ -70,56 +68,44 @@ export default function BoardsNewPage(){
     };
 
     const onClickSubmit = async () => {
-        let result = await createBoard({
-            variables: {
-                createBoardInput: {
-                writer,
-                password,
-                title,
-                contents
-                //키와 밸류가 같으면 밸류 생략가능 
+        try{
+            const result = await createBoard({
+                variables: {
+                    createBoardInput: {
+                    writer,
+                    password,
+                    title,
+                    contents
+                    //키와 밸류가 같으면 밸류 생략가능 
+                    },
                 },
-            },
-        });
-        console.log(result);
-        console.log(result.data.createBoard.message);
-        setData(result.data.createBoard.message);
+            });
+            console.log(result);
+            console.log(result.data.createBoard.message);
+            setData(result.data.createBoard.message);
 
-        if (writer === "") {
-            setWriterError("작성자를 입력해주세요.");
-        }
-        if (password === "") {
-            setPasswordError("비밀번호를 입력해주세요.");
-        }
-        if (title === "") {
-            setTitleError("제목을 입력해주세요.");
-        }
-        if (contents === "") {
-            setContentsError("내용을 입력해주세요.");
-        }
-        if (
-            writer !== "" && password !== "" && title !== "" && contents !== "") {
-            alert("게시물 등록 완료!");
+            if (writer === "") {
+                setWriterError("작성자를 입력해주세요.");
+            }
+            if (password === "") {
+                setPasswordError("비밀번호를 입력해주세요.");
+            }
+            if (title === "") {
+                setTitleError("제목을 입력해주세요.");
+            }
+            if (contents === "") {
+                setContentsError("내용을 입력해주세요.");
+            }
+            if (
+                writer !== "" && password !== "" && title !== "" && contents !== "") {
+                alert("게시물 등록 완료!");
+                router.push(`/boards/${result.data.createBoard._id}`);
+            }            
+        }catch (error){
+            alert(error.message);
         }
     };
 
-
-
-    // const onChangeYoutube = (event) => {
-    //     setYoutubeUrl(event.target.value);
-    // }
-    // const onChangeZipcode = (event) => {
-    //     setZipcode(event.target.value);
-    // };
-    // const onChangeAddress = (event) => {
-    //     setAddress(event.target.value);
-    // };
-    // const onChangeAddressDetail = (event) => {
-    //   setAddressDetail(event.target.value);
-    // };
-    // const onChangeImage = (event) => {
-    //   setImage([event.target.value]);
-    // };
 
     return (
     <Wrapper>
