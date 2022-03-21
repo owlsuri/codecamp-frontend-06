@@ -30,22 +30,25 @@ import {
   MenuBox,
   MenuBtn,
 } from "../../../styles/boardDetail";
-import { library } from "@fortawesome/fontawesome-svg-core";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
 import { useRouter } from "next/router";
 
     const FETCH_BOARD = gql`
-    query fetchBoard($boardId: ID!) {
+      query fetchBoard($boardId: ID!) {
         fetchBoard(boardId: $boardId) {
-        writer
-        title
-        contents
+          writer
+          title
+          contents
+          createdAt
+          likeCount
+          dislikeCount
         }
-    }
+      }
     `;
 
 
@@ -69,10 +72,12 @@ export default function boardDetail(){
           </LocationBox>
           <WriterBox>
             <WriterSection>
-              <FontAwesomeIcon icon={faUserCircle} size="3x" color="#BDBDBD" />
+              <FontAwesomeIcon icon={faCircleUser} size="3x" color="#BDBDBD" />
               <WriterInfo>
                 <Writer>{data ? data.fetchBoard.writer : "loading..."}</Writer>
-                <CreateAt>Date : 2022. 03.19</CreateAt>
+                <CreateAt>
+                  {data ? data.fetchBoard.createdAt.slice(0, 10) : "loading..."}
+                </CreateAt>
               </WriterInfo>
             </WriterSection>
             <Icons>
@@ -83,19 +88,25 @@ export default function boardDetail(){
           <BoardBox>
             <Title>{data ? data.fetchBoard.title : "loading..."}</Title>
             <BoardImg src="/owl-g0594f89d7_1920.jpg" />
-            <Contents>{data ? data.fetchBoard.contents : "loading..."}</Contents>
+            <Contents>
+              {data ? data.fetchBoard.contents : "loading..."}
+            </Contents>
             <VideoBox>
               <Video src="" />
             </VideoBox>
           </BoardBox>
           <LikeBox>
             <Like>
-              <LikeIcon src="/like.png"/>
-              <LikeNum>1515</LikeNum>
+              <LikeIcon src="/like.png" />
+              <LikeNum>
+                {data ? data.fetchBoard.likeCount : "loading..."}
+              </LikeNum>
             </Like>
             <DisLike>
               <DisLikeIcon src="/dislike.png" />
-              <DisLikeNum>1515</DisLikeNum>
+              <DisLikeNum>
+                {data ? data.fetchBoard.dislikeCount : "loading..."}
+              </DisLikeNum>
             </DisLike>
           </LikeBox>
         </Wrapper>

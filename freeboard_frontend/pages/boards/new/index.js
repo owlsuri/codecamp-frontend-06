@@ -14,7 +14,7 @@ const CREATE_BOARD = gql`
         _id
         writer
         title
-        contents
+        contents        
         }
     }
 `;
@@ -30,6 +30,7 @@ export default function BoardsNewPage(){
     const [passwordError, setPasswordError] = useState("");
     const [titleError, setTitleError] = useState("");
     const [contentsError, setContentsError] = useState("");
+   
     const [createBoard] = useMutation(CREATE_BOARD);
 
     const router = useRouter();

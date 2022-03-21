@@ -106,6 +106,10 @@ justify-content: center;
 `;
 export const Like = styled.div`
 margin-right: 50px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 `;
 export const LikeIcon = styled.img`
  width: 30px;
@@ -116,7 +120,13 @@ export const LikeNum = styled.div`
   font-weight: 600;
   color: #ffd600;
 `;
-export const DisLike = styled.div``;
+export const DisLike = styled.div`
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 export const DisLikeNum = styled.div`
   padding-top: 5px;
   font-weight: 600;
