@@ -1,6 +1,10 @@
+//상세보기
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import * as S from './read.styles'
+import { getDate } from "../../../../../src/commons/libraries/utils";
+
 
 export default function BoardReadUI(props) {
 
@@ -22,9 +26,9 @@ export default function BoardReadUI(props) {
                 {props.data ? props.data.fetchBoard.writer : "loading..."}
               </S.Writer>
               <S.CreateAt>
-                {props.data
-                  ? props.data.fetchBoard.createdAt.slice(0, 10)
-                  : "loading..."}
+                {getDate(
+                  props.data ? props.data.fetchBoard.createdAt : "loading..."
+                )}
               </S.CreateAt>
             </S.WriterInfo>
           </S.WriterSection>
@@ -62,9 +66,9 @@ export default function BoardReadUI(props) {
       </S.Wrapper>
 
       <S.MenuBox>
-        <S.MenuBtn>목록으로</S.MenuBtn>
-        <S.MenuBtn>수정하기</S.MenuBtn>
-        <S.MenuBtn>삭제하기</S.MenuBtn>
+        <S.MenuBtn onClick={props.onClickList}>목록으로</S.MenuBtn>
+        <S.MenuBtn onClick={props.onClickEdit}>수정하기</S.MenuBtn>
+        <S.MenuBtn onClick={props.onClickDelete}>삭제하기</S.MenuBtn>
       </S.MenuBox>
     </S.Container>
   );

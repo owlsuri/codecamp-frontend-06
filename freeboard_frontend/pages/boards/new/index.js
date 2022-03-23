@@ -1,8 +1,10 @@
-import BoardWrite from "../src/write/write.container";
+//게시물 등록
+import BoardWrite from "../../../src/components/units/board/write/write.container";
 
 export default function BoardsNewPage() {
 
 
 
-  return <BoardWrite />;
+  return <BoardWrite 
+  isEdit={false}/>;
 }
