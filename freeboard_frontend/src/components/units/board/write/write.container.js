@@ -120,6 +120,8 @@ export default function BoardWrite(props){
     }
 
     const onClickEdit = async () =>{
+
+      const myVariables = { boardId: router.query.boardId };
         const result = await updateBoard({
           variables: {
             updateBoardInput: {

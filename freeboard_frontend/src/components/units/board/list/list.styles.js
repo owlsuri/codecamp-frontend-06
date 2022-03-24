@@ -60,6 +60,7 @@ export const LineBottom = styled.div`
   width: 1200px;
 `;
 export const CreateBtn = styled.button`
+  background-color: white;
   width: 171px;
   height: 52px;
 `;
