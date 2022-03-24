@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CREATE_BOARD, UPDATE_BOARD } from "./write.queries";
+import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./write.queries";
 import BoardWriteUI from './write.presenter';
 
 export default function BoardWrite(props){
@@ -9,7 +9,6 @@ export default function BoardWrite(props){
     const [password, setPassword] = useState("");
     const [title, setTitle] = useState("");
     const [contents, setContents] = useState("");
-    const [data, setData] = useState("");
 
     const [writerError, setWriterError] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -22,6 +21,10 @@ export default function BoardWrite(props){
     const [updateBoard] = useMutation(UPDATE_BOARD);
 
     const router = useRouter();
+    
+    const { data } = useQuery(FETCH_BOARD, {
+      variables: { boardId: router.query.boardId },
+    });
 
 
     const onChangeWriter = (event) => {
@@ -93,9 +96,7 @@ export default function BoardWrite(props){
                     },
                 },
             });
-            console.log(result);
-            console.log(result.data.createBoard.message);
-            setData(result.data.createBoard.message);
+
 
             if (writer === "") {
                 setWriterError("작성자를 입력해주세요.");
@@ -121,17 +122,19 @@ export default function BoardWrite(props){
 
     const onClickEdit = async () =>{
 
-      const myVariables = { boardId: router.query.boardId };
+      const myUpdateBoardInput = {}
+
+      const myVariables = {
+        updateBoardInput: myUpdateBoardInput,
+        boardId: router.query.boardId
+      }
+          if (password !== "") myVariables.password = password;
+          if (writer !== "") myUpdateBoardInput.writer = writer;
+          if (title !== "")  myUpdateBoardInput.title = title;
+          if (contents !== "") myUpdateBoardInput.contents = contents;
+
         const result = await updateBoard({
-          variables: {
-            updateBoardInput: {
-              title: title,
-              contents: contents,
-            },
-            password: password,
-            boardId: router.query.boardId,
-          },
-        });
+          variables:  myVariables });
         alert("게시글 수정 성공!");
         router.push(`/boards/${router.query.boardId}`);
     }
@@ -149,6 +152,7 @@ export default function BoardWrite(props){
             isActive={isActive}
             isEdit={props.isEdit}
             onClickEdit={onClickEdit}
+            data={data}
           />
         );
 }

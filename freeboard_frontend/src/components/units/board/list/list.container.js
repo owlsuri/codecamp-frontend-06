@@ -8,8 +8,8 @@ export default function BoardList(){
     const { data } = useQuery(FETCH_BOARDS)
     const router = useRouter();
 
-    const onClickDetail = () =>{
-        router.push(`/boards/${router.query.boardId}`);
+    const onClickDetail = (event) =>{
+        router.push(`/boards/${event.target.id}`);
     } 
 
     const onClickList = () =>{

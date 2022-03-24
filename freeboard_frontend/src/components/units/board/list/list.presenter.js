@@ -21,7 +21,7 @@ export default function BoardListUI(props){
             .map((el, index) => (
               <S.Row key={el._id}>
                 <S.ColumnNumber>{10 - index}</S.ColumnNumber>
-                <S.ColumnTitle onClick={props.onClickDetail}>
+                <S.ColumnTitle id={el._id} onClick={props.onClickDetail}>
                   {el.title}
                 </S.ColumnTitle>
                 <S.ColumnWriter>{el.writer}</S.ColumnWriter>

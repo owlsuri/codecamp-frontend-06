@@ -25,9 +25,6 @@ export default function BoardWrite(props:IBoardWriteProps) {
 
   //수정하기 함수
   const onClickUpdate = async () => {
-
-
-
     //바뀐 부분만 보내기 위해서 
     //if문이 한줄일때만 중괄호 생략가능
     const myVariables:IMyVariables = {number:Number(router.query.mynumber)}
