@@ -1,8 +1,8 @@
 import * as S from './list.styles'
 import { getDate } from '../../../../../src/commons/libraries/utils';
+import {IBoardListUIProps} from './list.typescript'
 
-
-export default function BoardListUI(props){
+export default function BoardListUI(props:IBoardListUIProps){
 
     
 

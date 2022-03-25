@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import {IEditButtonProps} from './write.typescript'
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -121,7 +122,7 @@ export const MainRadio2 = styled.input`
 export const SubmitBtn = styled.button`
   width: 179px;
   height: 52px;
-  background-color: ${(props) => (props.isActive ? "#ffd600" : "none")};
+  background-color: ${(props:IEditButtonProps) => (props.isActive ? "#ffd600" : "none")};
   color: black;
   font-weight: 700;
   border: none;

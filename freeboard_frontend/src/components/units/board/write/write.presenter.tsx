@@ -1,7 +1,7 @@
 import * as S from './write.styles'
+import {IBoardWriteUIProps} from './write.typescript'
 
-export default function BoardWriteUI(props) {
-  console.log(props.data)
+export default function BoardWriteUI(props:IBoardWriteUIProps) {
   return (
     <S.Wrapper>
       <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
@@ -13,6 +13,7 @@ export default function BoardWriteUI(props) {
             type={"text"}
             placeholder="이름을 적어주세요."
             defaultValue={props.data?.fetchBoard.writer}
+            readOnly={!!props.data?.fetchBoard.writer}
           ></S.Insert>
           <S.Error>{props.writerError}</S.Error>
         </S.User>
@@ -42,7 +43,6 @@ export default function BoardWriteUI(props) {
         <S.ListName>내용</S.ListName>
         <S.InsertContent
           onChange={props.onChangeContents}
-          type={"textarea"}
           placeholder="내용을 작성해주세요."
           defaultValue={props.data?.fetchBoard.contents}
         ></S.InsertContent>
@@ -90,11 +90,9 @@ export default function BoardWriteUI(props) {
         사진
       </S.MainBox>
       <S.BtnBox>
-        <S.SubmitBtn
-          isActive={props.isActive}
+        <S.SubmitBtn          
           onClick={props.isEdit ? props.onClickEdit : props.onClickSubmit}
-        >
-          {" "}
+          isActive={props.isEdit ? true : props.isActive}>
           {props.isEdit ? "수정" : "등록"}하기
         </S.SubmitBtn>
       </S.BtnBox>
