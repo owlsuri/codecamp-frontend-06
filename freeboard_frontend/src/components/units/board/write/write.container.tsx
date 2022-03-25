@@ -1,3 +1,5 @@
+// 게시물 등록하기 & 수정하기 페이지 컨테이너
+
 import { ChangeEvent, MouseEvent, useState } from 'react'
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -16,6 +18,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
 
+  // 버튼 활성화 여부 useState
   const [isActive, setIsActive] = useState(false);
 
   const [createBoard] = useMutation(CREATE_BOARD);
@@ -27,6 +30,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     variables: { boardId: router.query.boardId },
   });
 
+  // 작성자 input
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
 
@@ -41,6 +45,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
 
+  // 페스워드 input
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     if ((props.isEdit === true && event.target.value !=="") || 
     (writer && event.target.value && title && contents)) {
@@ -56,6 +61,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     
   };
 
+  // 제목 input
   const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
 
@@ -70,6 +76,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
 
+  // 내용 input
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
 
@@ -84,6 +91,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
 
+  // 등록하기 버튼
   const onClickSubmit = async () => {
     try {
       const result = await createBoard({
@@ -117,7 +125,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
       alert(error.message);
     }
   };
-  // 게시글 수정
+
+  // 게시글 수정 버튼
   const onClickEdit = async (event: MouseEvent<HTMLButtonElement>) => {
     if (!password) {
       setPasswordError("비밀번호를 입력해주세요.")
@@ -144,6 +153,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     alert("게시글 수정 성공!");
     router.push(`/boards/${router.query.boardId}`);
   };
+
   return (
     <BoardWriteUI
       onChangeWriter={onChangeWriter}

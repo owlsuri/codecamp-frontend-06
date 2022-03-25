@@ -1,3 +1,5 @@
+// 게시글 등록하기 & 수정하기 스타일
+
 import styled from "@emotion/styled";
 import {IEditButtonProps} from './write.typescript'
 

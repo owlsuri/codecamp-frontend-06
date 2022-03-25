@@ -1,9 +1,9 @@
-import { MouseEvent } from "react";
-
+// 게시물 리스트 타입스크립트
+ 
 // 프리젠터
 export interface IBoardListUIProps{
     data:any
-    onClickDetail: (event:MouseEvent<HTMLDivElement>) => void
+    onClickDetail: () => void
     onClickList: () => void
     id?:any
 }

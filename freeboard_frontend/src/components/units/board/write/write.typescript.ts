@@ -34,7 +34,7 @@ export interface IBoardWriteUIProps{
     data?: any
 }
 
-// 스티일드
+// 스타일
 export interface IEditButtonProps {
     isActive: boolean
 }

@@ -1,3 +1,4 @@
+// 디테일 스타일
 
 import styled from "@emotion/styled";
 
@@ -22,7 +23,6 @@ export const Box = styled.div`
   height: 64px;
   background-color: #666666;
   display: flex;
-
   align-items: center;
   justify-content: center;
 `;
@@ -155,29 +155,26 @@ export const MenuBtn = styled.button`
 
   cursor: pointer;
 `;
-export const CommentBox= styled.div`
-padding-top: 30px;
-
-
+  export const CommentBox= styled.div`
+  padding-top: 30px;
 `;
 export const CommentTitleBox= styled.div`
-padding-top: 30px;
-display: flex;
-flex-direction: row;
-align-items: center;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 export const CommentTitle= styled.div`
-font-weight: 600;
-font-size: 18px;
-margin-left: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-left: 5px;
 `;
 export const Star= styled.div`
-margin-left: 20px;
+  margin-left: 20px;
 `;
 export const CommentInputBox= styled.div`
-width:1200px;
-
-border: 1px solid #BDBDBD;
+  width:1200px;
+  border: 1px solid #BDBDBD;
 `;
 export const CommentInput= styled.textarea`
   width: 1198px;
@@ -239,43 +236,43 @@ export const CommentShowBox= styled.div`
   border-bottom: 1px solid #BDBDBD;
 `;
 export const CommentUserName= styled.div`
-font-weight: 600;
+  font-weight: 600;
 
 `;
 export const CommentUserInfo= styled.div`
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 `;
-export const CommentStar= styled.div`
-margin-left: 20px;
+  export const CommentStar= styled.div`
+  margin-left: 20px;
 `;
-export const Comment= styled.div`
-padding-top: 10px;
+  export const Comment= styled.div`
+  padding-top: 10px;
 `;
-export const CommentDate= styled.div`
-padding-top: 30px;
+  export const CommentDate= styled.div`
+  padding-top: 30px;
 `;
 export const CommentUserImg= styled.div`
-width: 5.5%;
-padding-bottom: 30px;
+  width: 5.5%;
+  padding-bottom: 30px;
 
 `;
 export const CommentDesc= styled.div`
 
 `;
 export const CommentDescBox= styled.div`
-width: 94.5%;
-padding-top: 20px;
+  width: 94.5%;
+  padding-top: 20px;
 
 `;
 export const CommentIcon= styled.div`
-display: flex;
-justify-content: space-between;
-width: 40px;
+  display: flex;
+  justify-content: space-between;
+  width: 40px;
 
 `;
 export const CommentUserProfile= styled.div`
-display: flex;
-flex-direction: row;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;

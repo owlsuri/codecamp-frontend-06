@@ -1,7 +1,7 @@
-// 상세보기
+// 디테일 프레젠터
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faComment, faMemory, faPencil, faX } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser, faComment, faPencil, faX } from "@fortawesome/free-solid-svg-icons";
 import * as S from './read.styles'
 import { getDate } from "../../../../commons/libraries/utils";
 import {IBoardReadUIProps} from './read.typescript'
@@ -9,16 +9,19 @@ import {IBoardReadUIProps} from './read.typescript'
 
 export default function BoardReadUI(props:IBoardReadUIProps) {
 
-
   return (
+ 
     <S.Container>
       <S.Wrapper>
+    {/* 주소 */}
         <S.LocationBox>
           <S.Box>
             <S.Address>서울 구로구 구로동 패스트파이브 코드캠프 </S.Address>
           </S.Box>
           <S.Tail></S.Tail>
         </S.LocationBox>
+
+    {/* 작성자 정보 및 헤더 */}
         <S.WriterBox>
           <S.WriterSection>
             <FontAwesomeIcon icon={faCircleUser} size="3x" color="#BDBDBD" />
@@ -27,29 +30,37 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
                 {props.data ? props.data.fetchBoard.writer : "loading..."}
               </S.Writer>
               <S.CreateAt>
-                {getDate(
-                  props.data ? props.data.fetchBoard.createdAt : "loading..."
-                )}
+                {getDate(props.data ? props.data.fetchBoard.createdAt : "loading...")}
               </S.CreateAt>
             </S.WriterInfo>
           </S.WriterSection>
+    
+    {/* 왼쪽상단 아이콘 */}
           <S.Icons>
             <S.Clip src="/clip.png" />
             <S.Location src="/location.png" />
           </S.Icons>
         </S.WriterBox>
+
+    {/* 게시물 제목 */}
         <S.BoardBox>
           <S.Title>
             {props.data ? props.data.fetchBoard.title : "loading..."}
           </S.Title>
+
+    {/* 게시물 이미지 */}
           <S.BoardImg src="/owl-g0594f89d7_1920.jpg" />
           <S.Contents>
             {props.data ? props.data.fetchBoard.contents : "loading..."}
           </S.Contents>
+
+    {/* 게시물 동영상 */}
           <S.VideoBox>
             <S.Video src="" />
           </S.VideoBox>
         </S.BoardBox>
+
+    {/* 좋아요 */}
         <S.LikeBox>
           <S.Like>
             <S.LikeIcon src="/like.png" />
@@ -57,6 +68,8 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
               {props.data ? props.data.fetchBoard.likeCount : "loading..."}
             </S.LikeNum>
           </S.Like>
+
+    {/* 싫어요 */}
           <S.DisLike>
             <S.DisLikeIcon src="/dislike.png" />
             <S.DisLikeNum>
@@ -66,6 +79,7 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
         </S.LikeBox>
       </S.Wrapper>
 
+    {/* 하단 버튼 메뉴 박스 */}
       <S.MenuBox>
         <S.MenuBtn onClick={props.onClickList}>목록으로</S.MenuBtn>
         <S.MenuBtn onClick={props.onClickMoveEdit}>수정하기</S.MenuBtn>
@@ -77,6 +91,7 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
           <S.CommentTitle>댓글</S.CommentTitle>
           </S.CommentTitleBox>
 
+    {/* 댓글 */}
         <S.CommentUser>
           <S.CommentWriter type="text" placeholder="작성자" />
           <S.CommentPassword type="password" placeholder="비밀번호" />
@@ -90,7 +105,7 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
             <S.CommentInputBtn>등록하기</S.CommentInputBtn>
           </S.CommentInputBottom>          
           </S.CommentInputBox>
-          
+
           <S.CommentShowBox>
             <S.CommentUserImg>
               <FontAwesomeIcon icon={faCircleUser} size="3x" color="#BDBDBD" />
@@ -109,7 +124,7 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
               <S.CommentDesc>
                   <S.Comment>진짜 유익하고 정말 필요한 정보인 것 같아요~! 앞으로도 좋은 정보 부탁드립니다~!</S.Comment>
                   <S.CommentDate>{getDate(
-                    props.data ? props.data.fetchBoardComment.createdAt : "loading..."
+                    // props.data ? props.data.fetchBoardComment.createdAt : "loading..."
                   )}</S.CommentDate>
               </S.CommentDesc>
             </S.CommentDescBox> 

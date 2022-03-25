@@ -1,11 +1,10 @@
+// 게시물 리스트 프리젠터
+
 import * as S from './list.styles'
 import { getDate } from '../../../../../src/commons/libraries/utils';
 import {IBoardListUIProps} from './list.typescript'
 
 export default function BoardListUI(props:IBoardListUIProps){
-
-    
-
 
     return (
       <S.Wrap>
@@ -16,6 +15,7 @@ export default function BoardListUI(props:IBoardListUIProps){
           <S.ColumnWriterTH>작성자</S.ColumnWriterTH>
           <S.ColumnDateTH>날짜</S.ColumnDateTH>
         </S.Row>
+        
         <div>
           {props.data?.fetchBoards
             .map((el, index) => (

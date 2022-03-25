@@ -1,3 +1,5 @@
+// 게시물 리스트 스타일
+
 import styled from '@emotion/styled'
 
 
@@ -65,8 +67,8 @@ export const CreateBtn = styled.button`
   height: 52px;
 `;
 export const btnBox = styled.div`
-padding-top: 30px;
-width: 1200px;
-display: flex;
-justify-content: flex-end;
+  padding-top: 30px;
+  width: 1200px;
+  display: flex;
+  justify-content: flex-end;
 `;

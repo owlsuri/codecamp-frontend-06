@@ -1,3 +1,5 @@
+// 게시글 등록하기 & 수정하기 프레젠터
+
 import * as S from './write.styles'
 import {IBoardWriteUIProps} from './write.typescript'
 
@@ -28,6 +30,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
           <S.Error>{props.passwordError}</S.Error>
         </S.User>
       </S.UserBox>
+
       <S.TitleBox>
         <S.ListName>제목</S.ListName>
         <S.InsertTitle
@@ -58,6 +61,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
         <S.InsertAddress type={"text"}></S.InsertAddress>
         <S.InsertAddress type={"text"}></S.InsertAddress>
       </S.AddressBox>
+
       <S.YoutubeBox>
         <S.ListName>유투브</S.ListName>
         <S.InsertTitle
@@ -65,6 +69,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
           placeholder="링크를 복사해주세요."
         ></S.InsertTitle>
       </S.YoutubeBox>
+
       <S.AddPhotoBox>
         <S.ListName>사진 첨부</S.ListName>
         <S.UploadBoxes>
@@ -82,13 +87,13 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
           </S.UploadBox>
         </S.UploadBoxes>
       </S.AddPhotoBox>
+
       <S.MainBox>
         <S.ListName>메인설정</S.ListName>
-        <S.MainRadio1 type={"radio"} name="main" />
-        유투브
-        <S.MainRadio2 type={"radio"} name="main" />
-        사진
+        <S.MainRadio1 type={"radio"} name="main" /> 유투브
+        <S.MainRadio2 type={"radio"} name="main" /> 사진
       </S.MainBox>
+      
       <S.BtnBox>
         <S.SubmitBtn          
           onClick={props.isEdit ? props.onClickEdit : props.onClickSubmit}
