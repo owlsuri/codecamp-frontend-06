@@ -1,4 +1,4 @@
-// 댓글 컨테이너
+// 댓글쓰기 컨테이너
 
 import React, {useState} from "react";
 import CommentUI from './commentWrite.presenter'

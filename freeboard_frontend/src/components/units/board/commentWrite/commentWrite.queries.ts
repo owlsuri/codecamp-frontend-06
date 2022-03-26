@@ -1,4 +1,4 @@
-// 댓글 쿼리
+// 댓글쓰기 쿼리
 import { gql } from "@apollo/client";
 
 export const CREATE_BOARD_COMMENT = gql`

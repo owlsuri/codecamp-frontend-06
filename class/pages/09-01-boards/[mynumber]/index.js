@@ -1,4 +1,4 @@
-//상세보기 페이지
+// 상세보기 페이지
 
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";

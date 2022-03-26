@@ -12,9 +12,13 @@ export default function CommentRead(){
     const { data } = useQuery(FETCH_BOARD_COMMENTS, {
         variables: { boardId: String(router.query.boardId)},
     });
-    console.log(data)
+
+    const onClickToEdit = () => {
+        router.push(`/boards/${router.query.boardId}`)
+    }
 
 
     return(<CommentReadUI 
-    data={data}/>)
+    data={data}
+    onClickToEdit={onClickToEdit}/>)
 }

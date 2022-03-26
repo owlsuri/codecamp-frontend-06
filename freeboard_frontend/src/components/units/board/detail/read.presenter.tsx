@@ -5,9 +5,17 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import * as S from './read.styles'
 import { getDate } from "../../../../commons/libraries/utils";
 import {IBoardReadUIProps} from './read.typescript'
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import { ThemeProvider } from '@mui/styles';
 
 
 export default function BoardReadUI(props:IBoardReadUIProps) {
+
+  const theme = {
+    fontSize:'large',
+    color: '#FFD600'
+  }
 
   return (
     <S.Container>
@@ -62,7 +70,9 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
     {/* 좋아요 */}
         <S.LikeBox>
           <S.Like>
-            <S.LikeIcon src="/like.png" />
+            <ThemeProvider theme={theme}>
+              <ThumbUpOffAltIcon fontSize="large" />
+            </ThemeProvider>
             <S.LikeNum>
               {props.data ? props.data.fetchBoard.likeCount : "loading..."}
             </S.LikeNum>
@@ -70,7 +80,7 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
 
     {/* 싫어요 */}
           <S.DisLike>
-            <S.DisLikeIcon src="/dislike.png" />
+            <ThumbDownOffAltIcon fontSize="large" color="disabled" />
             <S.DisLikeNum>
               {props.data ? props.data.fetchBoard.dislikeCount : "loading..."}
             </S.DisLikeNum>
