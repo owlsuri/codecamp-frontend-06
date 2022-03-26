@@ -45,7 +45,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
 
-  // 페스워드 input
+  // 패스워드 input
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     if ((props.isEdit === true && event.target.value !=="") || 
     (writer && event.target.value && title && contents)) {

@@ -3,6 +3,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardReadUI from "./read.presenter";
 import {DELETE_BOARD, FETCH_BOARD} from "./read.queries"
+import React from "react";
 
 export default function BoardRead(){
     const router = useRouter();
