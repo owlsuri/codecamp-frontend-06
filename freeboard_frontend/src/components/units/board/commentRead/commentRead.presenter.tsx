@@ -9,16 +9,18 @@ export default function CommentReadUI(props){
 
 
     return(
-        <S.Container>
-                {/* 내용 보여주는 부분 */}
-            <S.CommentShowBox>
+        <div>
+        {props.data?.fetchBoardComments
+        .map((el) => (
+        <S.Container key={el._id}>        
+            <S.CommentShowBox >                
                 <S.CommentUserImg>
                     <FontAwesomeIcon icon={faCircleUser} size="3x" color="#BDBDBD" />
                 </S.CommentUserImg>
                 <S.CommentDescBox>           
                     <S.CommentUserInfo>
                         <S.CommentUserProfile>
-                        <S.CommentUserName>{props.data ? props.data.fetchBoardComments.writer : "loading..."}</S.CommentUserName>
+                        <S.CommentUserName>{el.writer}</S.CommentUserName>
                         <S.CommentStar>⭐⭐⭐⭐⭐</S.CommentStar>
                         </S.CommentUserProfile>
                         <S.CommentIcon>
@@ -27,11 +29,13 @@ export default function CommentReadUI(props){
                         </S.CommentIcon>
                     </S.CommentUserInfo>
                     <S.CommentDesc>
-                        <S.Comment>{props.data ? props.data.fetchBoardComments.contents : "loading..."}</S.Comment>
-                        <S.CommentDate>{getDate(props.data ? props.data.fetchBoardComments.createdAt : "loading...")}</S.CommentDate>
+                        <S.Comment>{el.contents}</S.Comment>
+                        <S.CommentDate>{getDate(el.createdAt)}</S.CommentDate>
                     </S.CommentDesc>
-                </S.CommentDescBox> 
-            </S.CommentShowBox>        
+                </S.CommentDescBox>                 
+            </S.CommentShowBox>               
         </S.Container>
+       ))}
+       </div>
     )
 }
