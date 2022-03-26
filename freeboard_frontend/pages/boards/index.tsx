@@ -1,4 +1,4 @@
-//게시글 목록조회하기
+// 게시글 목록조회하기
 import BoardList from '../../src/components/units/board/list/list.container'
 
 

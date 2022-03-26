@@ -1,4 +1,4 @@
-//게시물 등록
+// 게시물 등록
 import BoardWrite from "../../../src/components/units/board/write/write.container";
 
 

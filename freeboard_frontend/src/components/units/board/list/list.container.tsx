@@ -13,7 +13,7 @@ export default function BoardList(){
     const { data } = useQuery(FETCH_BOARDS)
     const router = useRouter();
 
-    const onClickDetail = (event:MouseEvent<HTMLButtonElement>) =>{
+    const onClickDetail = (event:MouseEvent<HTMLDivElement>) =>{
         router.push(`/boards/${event.target.id}`);
     } 
 

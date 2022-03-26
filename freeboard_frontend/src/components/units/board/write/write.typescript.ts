@@ -2,7 +2,6 @@ import { ChangeEvent, MouseEvent } from "react";
 
 // 컨테이너
 export interface IBoardWriteProps{
-    isActive:boolean
     isEdit:boolean
 }
 

@@ -18,7 +18,7 @@ export default function BoardListUI(props:IBoardListUIProps){
         
         <div>
           {props.data?.fetchBoards
-            .map((el, index) => (
+            .map((el:any, index:number) => (
               <S.Row key={el._id}>
                 <S.ColumnNumber>{10 - index}</S.ColumnNumber>
                 <S.ColumnTitle id={el._id} onClick={props.onClickDetail}>
