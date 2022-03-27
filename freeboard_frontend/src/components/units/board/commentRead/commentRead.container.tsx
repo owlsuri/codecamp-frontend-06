@@ -4,21 +4,24 @@ import CommentReadUI from "./commentRead.presenter"
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
 import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from './commentRead.queries'
+import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types";
 
 
 export default function CommentRead(){
     const router = useRouter();
 
-    const { data } = useQuery(FETCH_BOARD_COMMENTS, {
+    const { data } = useQuery<Pick<IQuery,'fetchBoardComments'>,IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
         variables: { boardId: String(router.query.boardId)},
     });
 
-    const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+    const [deleteBoardComment] = useMutation<Pick<IMutation,'deleteBoardComment'>,IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT);
 
+    // 댓글 수정하러가기 버튼
     const onClickToEdit = () => {
-        router.push(`/boards/${router.query.boardId}/${event.target._id}`)
+        router.push(`/boards/${router.query.boardId}/${data.boardCommentId}`)
     }
 
+    // 댓글 삭제하기 버튼
     const onClickDelete = async () =>{
         try {
             const result = await deleteBoardComment({

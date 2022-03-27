@@ -1,13 +1,16 @@
 // 댓글쓰기 컨테이너
 
-import React, {useState} from "react";
+import React, { ChangeEvent, useState} from "react";
 import CommentWriteUI from './commentWrite.presenter'
 import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT  } from './commentWrite.queries'
 import { FETCH_BOARD_COMMENTS } from "../commentRead/commentRead.queries";
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
+import { ICommentWriteProps, IMyVariables, ImyUpdateBoardCommentInput } from './commentWrite.types'
+import { IMutation, IMutationCreateBoardCommentArgs, IMutationUpdateBoardCommentArgs } from "../../../../commons/types/generated/types";
 
-export default function CommentWrite(props) {
+
+export default function CommentWrite(props:ICommentWriteProps) {
     const router = useRouter();
 
     const [writer, setWriter] = useState("");
@@ -15,8 +18,8 @@ export default function CommentWrite(props) {
     const [contents, setContents] = useState("");
     const [rating, setRating] = useState(1);
 
-    const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
-    const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
+    const [createBoardComment] = useMutation<Pick<IMutation,'createBoardComment'>,IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT);
+    const [updateBoardComment] = useMutation<Pick<IMutation,'updateBoardComment'>,IMutationUpdateBoardCommentArgs>(UPDATE_BOARD_COMMENT);
     const { data } = useQuery(FETCH_BOARD_COMMENTS, {
         variables: { boardCommentId: router.query.boardCommentId },
         });
@@ -94,12 +97,12 @@ export default function CommentWrite(props) {
             return;
         }
         
-        const myUpdateBoardCommentInput = {
+        const myUpdateBoardCommentInput: ImyUpdateBoardCommentInput = {
             contents,
             rating
         }
 
-        const MyVariables = {
+        const MyVariables : IMyVariables = {
             updateBoardCommentInput: myUpdateBoardCommentInput,
             boardCommentId:router.query.boardCommentId,
             password

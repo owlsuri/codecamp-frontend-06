@@ -5,14 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faX } from "@fortawesome/free-solid-svg-icons";
 import * as S from './commentRead.styles'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { ICommentReadUIProps } from './CommentRead.types'
 
-export default function CommentReadUI(props){
+export default function CommentReadUI(props:ICommentReadUIProps){
 
 
     return(
         <div>
             {props.data?.fetchBoardComments
-            .map((el) => (
+            .map((el:any) => (
             <S.Container key={el._id}>        
                 <S.CommentShowBox >                
                     <S.CommentUserImg>

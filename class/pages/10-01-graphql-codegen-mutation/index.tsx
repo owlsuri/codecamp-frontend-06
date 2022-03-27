@@ -24,7 +24,7 @@ export default function GraphqlMutationPage() {
   const callGraphqlAPI = async () => {
     const result = await callApi({
       variables: { writer: writer, title: title, contents: contents },
-    }); //graphql방식
+    }); // graphql방식
     
     console.log(result);
     setData(result.data?.createBoard?.message || "");
