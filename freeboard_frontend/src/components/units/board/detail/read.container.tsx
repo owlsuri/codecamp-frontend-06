@@ -19,7 +19,7 @@ export default function BoardRead(){
       router.push(`/boards/${router.query.boardId}/edit`);
     }
     
-    // 수정하기 버튼 기능
+    // 삭제하기 버튼 기능
     const onClickDelete = async () => {
       try {
         const result = await deleteBoard({

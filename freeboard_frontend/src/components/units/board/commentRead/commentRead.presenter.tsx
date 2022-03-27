@@ -26,7 +26,7 @@ export default function CommentReadUI(props){
                             </S.CommentUserProfile>
                             <S.CommentIcon>
                             <FontAwesomeIcon onClick={props.onClickToEdit} icon={faPencil}  color="#BDBDBD" />
-                            <FontAwesomeIcon icon={faX} color="#BDBDBD" />
+                            <FontAwesomeIcon onClick={props.onClickDelete} icon={faX} color="#BDBDBD" />
                             </S.CommentIcon>
                         </S.CommentUserInfo>
                         <S.CommentDesc>

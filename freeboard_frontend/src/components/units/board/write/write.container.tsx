@@ -3,7 +3,8 @@
 import { ChangeEvent, MouseEvent, useState } from 'react'
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./write.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./write.queries";
+import { FETCH_BOARD } from '../detail/read.queries'
 import BoardWriteUI from './write.presenter';
 import {IBoardWriteProps, IMyVariables, IMyUpdateBoardInput} from './write.typescript'
 
