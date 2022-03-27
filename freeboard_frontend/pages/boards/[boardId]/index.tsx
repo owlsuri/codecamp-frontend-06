@@ -4,12 +4,16 @@ import BoardRead from "../../../src/components/units/board/detail/read.container
 import CommentPage from "../../../src/components/units/board/commentWrite/commentWrite.container";
 import CommentRead from "../../../src/components/units/board/commentRead/commentRead.container";
 
+import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 export default function boardDetail() {
 
 
 
     return (
     <div>
+        <CssBaseline />
         <BoardRead />
         <CommentPage />        
         <CommentRead />

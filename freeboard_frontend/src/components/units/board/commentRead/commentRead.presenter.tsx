@@ -7,6 +7,12 @@ import * as S from './commentRead.styles'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { ICommentReadUIProps } from './CommentRead.types'
 
+
+import Rating from '@material-ui/lab/Rating';
+import { useState } from "react";
+
+
+
 export default function CommentReadUI(props:ICommentReadUIProps){
 
 
@@ -23,7 +29,16 @@ export default function CommentReadUI(props:ICommentReadUIProps){
                         <S.CommentUserInfo>
                             <S.CommentUserProfile>
                             <S.CommentUserName>{el.writer}</S.CommentUserName>
-                            <S.CommentStar>⭐⭐⭐⭐⭐</S.CommentStar>
+                            {/* 별 */}
+                            <div style={{ display: 'block', paddingLeft: 10 }}>
+                                <Rating
+                                name="Rating Label"
+                                value={props.rating}
+                                onChange={(event, newValue) => {
+                                    props.setRating(Number(newValue));
+                                }}
+                                />
+                            </div>
                             </S.CommentUserProfile>
                             <S.CommentIcon>
                             <FontAwesomeIcon onClick={props.onClickToEdit} icon={faPencil}  color="#BDBDBD" />

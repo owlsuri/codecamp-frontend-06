@@ -3,9 +3,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 import * as S from './commentWrite.styles'
+import {ICommentWriteUIProps} from './commentWrite.types'
+import React from 'react';
+import Rating from '@material-ui/lab/Rating';
 
 
-export default function CommentUI(props){
+export default function CommentUI(props:ICommentWriteUIProps){
+
+    const [ratingValue, setRating] = React.useState(0);
 
     return (
         <S.Container>                        
@@ -20,7 +25,16 @@ export default function CommentUI(props){
                                 defaultValue={props.data?.fetchBoard.writer} 
                                 readOnly={!!props.data?.fetchBoardComments.writer}/>
                 <S.CommentPassword onChange={props.onChangePassword} type="password" placeholder="비밀번호" />
-                <S.Star onChange={props.onChangeRating}>⭐⭐⭐⭐⭐</S.Star>
+                {/* 별 */}
+                    <S.Star  onChange={props.onChangeRating} style={{ display: 'block', paddingLeft: 20 }}>
+                        <Rating
+                        name="Rating Label"
+                        value={ratingValue}
+                        onChange={(event, newValue) => {
+                            setRating(newValue);
+                        }}
+                        />
+                    </S.Star>
                 </S.CommentUser>  
         {/* 내용 입력 부분 */}
                 <S.CommentInputBox>

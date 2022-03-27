@@ -112,7 +112,7 @@ export const Like = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const LikeIcon = styled.img`
+export const LikeIcon = styled.div`
   width: 30px;
   height: 30px;
 `;

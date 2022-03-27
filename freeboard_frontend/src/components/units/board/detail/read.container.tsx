@@ -4,8 +4,9 @@ import { useRouter } from "next/router";
 import BoardReadUI from "./read.presenter";
 import {DELETE_BOARD, FETCH_BOARD} from "./read.queries"
 import React from "react";
+import { IBoardReadProps } from './read.typescript'
 
-export default function BoardRead(){
+export default function BoardRead(props:IBoardReadProps){
     const router = useRouter();
 
     const { data } = useQuery(FETCH_BOARD, {
