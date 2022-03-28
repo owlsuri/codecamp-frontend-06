@@ -111,7 +111,6 @@ export default function BoardWrite(props: IBoardWriteProps) {
           },
         },
       });
-      console.log(result)
       if (writer === "") {
         setWriterError("작성자를 입력해주세요.");
       }

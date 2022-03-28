@@ -5,12 +5,10 @@ import BoardReadUI from "./read.presenter";
 import {DELETE_BOARD, FETCH_BOARD, LIKE_BOARD} from "./read.queries"
 import React from "react";
 import { IBoardReadProps } from './read.typescript'
-import { useState } from 'react';
+
 
 export default function BoardRead(props:IBoardReadProps){
     const router = useRouter();
-
-    const [like, setLike] = useState(0)
 
     const { data } = useQuery(FETCH_BOARD, {
         variables: { boardId: router.query.boardId },
@@ -21,13 +19,14 @@ export default function BoardRead(props:IBoardReadProps){
 
     // 좋아요
     const onClickLike = async () => {
-       try { await likeBoard({
-        variables: { boardId: router.query.boardId }})
-       } catch (error) {
-      alert(error.message);
+        try { 
+          const result = await likeBoard({
+          variables: { boardId: router.query.boardId },})
+          console.log(result)
+        } catch (error) {
+        alert(error.message);
+      }
     }
-      setLike(+1)
-  }
     
     // 싫어요
     const onClickDisLike = async () => {
@@ -69,7 +68,5 @@ export default function BoardRead(props:IBoardReadProps){
             onClickList={onClickList}
             onClickLike={onClickLike}
             onClickDisLike={onClickDisLike}
-
-
           />
         );};
