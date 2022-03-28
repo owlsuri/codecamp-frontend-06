@@ -8,6 +8,7 @@ import { MouseEvent } from "react";
 
 
 
+
 export default function BoardList(){
 
     const { data } = useQuery(FETCH_BOARDS)

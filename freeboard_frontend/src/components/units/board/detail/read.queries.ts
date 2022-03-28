@@ -9,6 +9,7 @@ export const FETCH_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
       createdAt
       likeCount
       dislikeCount
@@ -22,3 +23,21 @@ export const DELETE_BOARD = gql`
   }
 `;
 
+
+export const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+    }
+  }
+`;
+
+export const LIKE_BOARD = gql`
+  mutation likeBoard($BoardId: ID!) {
+    likeBoard(boardId: $boardId)
+  }
+`;

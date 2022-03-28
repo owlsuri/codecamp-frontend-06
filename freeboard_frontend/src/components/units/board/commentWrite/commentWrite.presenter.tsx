@@ -5,12 +5,11 @@ import { faComment } from "@fortawesome/free-solid-svg-icons";
 import * as S from './commentWrite.styles'
 import {ICommentWriteUIProps} from './commentWrite.types'
 import React from 'react';
-import Rating from '@material-ui/lab/Rating';
+import { Rate } from 'antd';
 
 
 export default function CommentUI(props:ICommentWriteUIProps){
 
-    const [ratingValue, setRating] = React.useState(0);
 
     return (
         <S.Container>                        
@@ -23,23 +22,17 @@ export default function CommentUI(props:ICommentWriteUIProps){
                 <S.CommentUser>
                 <S.CommentWriter onChange={props.onChangeWriter} type="text" placeholder="작성자" 
                                 defaultValue={props.data?.fetchBoard.writer} 
+                                value={props.writer}
                                 readOnly={!!props.data?.fetchBoardComments.writer}/>
-                <S.CommentPassword onChange={props.onChangePassword} type="password" placeholder="비밀번호" />
+                <S.CommentPassword value={props.password} onChange={props.onChangePassword} type="password" placeholder="비밀번호" />
                 {/* 별 */}
-                    <S.Star  onChange={props.onChangeRating} style={{ display: 'block', paddingLeft: 20 }}>
-                        <Rating
-                        name="Rating Label"
-                        value={ratingValue}
-                        onChange={(event, newValue) => {
-                            setRating(newValue);
-                        }}
-                        />
+                    <S.Star>
+                        <Rate onChange={props.handleChange} value={props.value}></Rate>
                     </S.Star>
                 </S.CommentUser>  
         {/* 내용 입력 부분 */}
                 <S.CommentInputBox>
-                <S.CommentInput onChange={props.onChangeContents} placeholder="개인정보를 공유 및 요청하거나 명예회손, 무단광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에대한 책임은 게시자에게 있습니다." 
-                                defaultValue={props.data?.fetchBoardComments.title}/>
+                <S.CommentInput maxlength={100} value={props.contents} onChange={props.onChangeContents} placeholder="개인정보를 공유 및 요청하거나 명예회손, 무단광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에대한 책임은 게시자에게 있습니다."/>
                 <S.CommentInputBottom>
                     <S.CommentCount>0/100</S.CommentCount>
                     <S.CommentInputBtn onClick={props.isCommentEdit ? props.OnClickCommentEdit : props.onClickComment}

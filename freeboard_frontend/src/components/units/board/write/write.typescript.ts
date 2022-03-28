@@ -22,6 +22,7 @@ export interface IBoardWriteUIProps{
     onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void
     onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void
     onChangePassword:(event: ChangeEvent<HTMLInputElement>) => void
+    onChangeYoutube:(event: ChangeEvent<HTMLInputElement>) => void
     onClickSubmit: () => void    
     onClickEdit:(event: MouseEvent<HTMLButtonElement>) => void
     writerError: string

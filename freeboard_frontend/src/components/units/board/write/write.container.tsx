@@ -13,6 +13,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("")
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -91,6 +92,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
       setContentsError("");
     }
   };
+  // 유투브 input
+  const onChangeYoutube = (event) => {
+    setYoutubeUrl(event.target.value);
+  };
 
   // 등록하기 버튼
   const onClickSubmit = async () => {
@@ -102,10 +107,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
             password,
             title,
             contents,
+            youtubeUrl,
           },
         },
       });
-
+      console.log(result)
       if (writer === "") {
         setWriterError("작성자를 입력해주세요.");
       }
@@ -120,6 +126,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       }
       if (writer !== "" && password !== "" && title !== "" && contents !== "") {
         alert("게시물 등록 완료!");
+        console.log(result)
         router.push(`/boards/${result.data.createBoard._id}`);
       }
     } catch (error) {
@@ -161,6 +168,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
       onChangePassword={onChangePassword}
+      onChangeYoutube={onChangeYoutube}
       onClickSubmit={onClickSubmit}
       writerError={writerError}
       passwordError={passwordError}

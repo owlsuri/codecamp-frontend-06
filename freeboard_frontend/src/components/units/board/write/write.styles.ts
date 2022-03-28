@@ -81,6 +81,12 @@ export const InsertAddress = styled.input`
 `;
 export const YoutubeBox = styled.div`
   padding-top: 20px;
+`
+export const YoutubeURL = styled.input`
+  width: 996px;
+  height: 52px;
+  padding-top: 20px;
+  padding: 10px;
 `;
 export const AddPhotoBox = styled.div`
   padding-top: 30px;

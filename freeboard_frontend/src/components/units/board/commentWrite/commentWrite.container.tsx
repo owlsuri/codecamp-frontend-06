@@ -16,7 +16,11 @@ export default function CommentWrite(props:ICommentWriteProps) {
     const [writer, setWriter] = useState("");
     const [password, setPassword] = useState("");
     const [contents, setContents] = useState("");
-    const [rating, setRating] = useState(1);
+    const [value, setValue] = useState(0);
+
+    const handleChange = (value:number) => {
+        setValue(value);
+    };
 
     const [createBoardComment] = useMutation<Pick<IMutation,'createBoardComment'>,IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT);
     const [updateBoardComment] = useMutation<Pick<IMutation,'updateBoardComment'>,IMutationUpdateBoardCommentArgs>(UPDATE_BOARD_COMMENT);
@@ -52,7 +56,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
     };
 
     // 내용 input
-    const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setContents(event.target.value);
         if (writer && password && event.target.value) {
             setIsActive(true);
@@ -64,7 +68,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
 
     // 별점 input
     const onChangeRating = (event: ChangeEvent<HTMLInputElement>) => {
-        setRating(event.target.value);
+        setValue(event.target.value);
     };
 
     // 댓글 등록하기 버튼
@@ -77,14 +81,23 @@ export default function CommentWrite(props:ICommentWriteProps) {
                     writer,
                     password,
                     contents,
-                    rating,
+                    rating:value,
                     },
                     boardId: String(router.query.boardId),
+                },
+                refetchQueries: {
+                    query : FETCH_BOARD_COMMENTS,
+                    variables : { boardId : router.query.boardId },
                 },
                 });    
             alert("댓글 등록 완료!");
             router.push(`/boards/${router.query.boardId}`);
             
+            setWriter("")
+            setPassword("")
+            setContents("")
+            setValue(3)
+
         } catch(error){
                 alert(error.message)
             }
@@ -108,7 +121,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
             password
         }
         
-        if (!rating) myUpdateBoardCommentInput.rating = rating;
+        if (!value) myUpdateBoardCommentInput.rating = value;
         if (contents !== "") myUpdateBoardCommentInput.contents = contents;
         
         await updateBoardComment({
@@ -131,7 +144,12 @@ export default function CommentWrite(props:ICommentWriteProps) {
             onChangeRating={onChangeRating}
             isActive={isActive}
             isCommentEdit={props.isCommentEdit}
-            data={data}                    
+            data={data}    
+            writer={writer}
+            password={password}   
+            contents={contents}
+            value={value}   
+            handleChange={handleChange}        
         />
     )  
 }

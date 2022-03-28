@@ -6,21 +6,18 @@ import { faPencil, faX } from "@fortawesome/free-solid-svg-icons";
 import * as S from './commentRead.styles'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { ICommentReadUIProps } from './CommentRead.types'
-
-
-import Rating from '@material-ui/lab/Rating';
-import { useState } from "react";
-
+import { Rate } from 'antd';
 
 
 export default function CommentReadUI(props:ICommentReadUIProps){
+
 
 
     return(
         <div>
             {props.data?.fetchBoardComments
             .map((el:any) => (
-            <S.Container key={el._id}>        
+            <S.Container key={el._id} id={el.writer} onClick={props.onClickWhoWrite} >        
                 <S.CommentShowBox >                
                     <S.CommentUserImg>
                        <AccountCircleIcon fontSize="large" color="disabled" />
@@ -30,15 +27,9 @@ export default function CommentReadUI(props:ICommentReadUIProps){
                             <S.CommentUserProfile>
                             <S.CommentUserName>{el.writer}</S.CommentUserName>
                             {/* 별 */}
-                            <div style={{ display: 'block', paddingLeft: 10 }}>
-                                <Rating
-                                name="Rating Label"
-                                value={props.rating}
-                                onChange={(event, newValue) => {
-                                    props.setRating(Number(newValue));
-                                }}
-                                />
-                            </div>
+                            <S.CommentStar>
+                                <Rate onChange={props.handleChange} value={el.rating}></Rate>
+                            </S.CommentStar>
                             </S.CommentUserProfile>
                             <S.CommentIcon>
                             <FontAwesomeIcon onClick={props.onClickToEdit} icon={faPencil}  color="#BDBDBD" />

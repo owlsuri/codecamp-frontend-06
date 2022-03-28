@@ -16,6 +16,10 @@ export default function CommentRead(){
 
     const [deleteBoardComment] = useMutation<Pick<IMutation,'deleteBoardComment'>,IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT);
 
+    const onClickWhoWrite = (event) =>{        
+        alert(`${event.currentTarget.id}님이 작성한 댓글입니다.`)    
+    }
+
     // 댓글 수정하러가기 버튼
     const onClickToEdit = () => {
         router.push(`/boards/${router.query.boardId}/${router.query.boardCommentId}`)
@@ -40,5 +44,7 @@ export default function CommentRead(){
     return(<CommentReadUI 
     data={data}
     onClickToEdit={onClickToEdit}
-    onClickDelete={onClickDelete}/>)
+    onClickDelete={onClickDelete}
+    onClickWhoWrite={onClickWhoWrite}
+    />)
 }

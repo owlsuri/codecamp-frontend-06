@@ -2,18 +2,37 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardReadUI from "./read.presenter";
-import {DELETE_BOARD, FETCH_BOARD} from "./read.queries"
+import {DELETE_BOARD, FETCH_BOARD, LIKE_BOARD} from "./read.queries"
 import React from "react";
 import { IBoardReadProps } from './read.typescript'
+import { useState } from 'react';
 
 export default function BoardRead(props:IBoardReadProps){
     const router = useRouter();
+
+    const [like, setLike] = useState(0)
 
     const { data } = useQuery(FETCH_BOARD, {
         variables: { boardId: router.query.boardId },
     });
     
     const [deleteBoard] = useMutation(DELETE_BOARD);
+    const [likeBoard] = useMutation(LIKE_BOARD);
+
+    // 좋아요
+    const onClickLike = async () => {
+       try { await likeBoard({
+        variables: { boardId: router.query.boardId }})
+       } catch (error) {
+      alert(error.message);
+    }
+      setLike(+1)
+  }
+    
+    // 싫어요
+    const onClickDisLike = async () => {
+      
+    }
 
     // 수정하기로 페이지 이동(라우팅) 버튼 기능
     const onClickMoveEdit = () =>{          
@@ -40,11 +59,17 @@ export default function BoardRead(props:IBoardReadProps){
           router.push(`/boards/`);
         }
 
+    //
+
         return (
           <BoardReadUI
             data={data}
             onClickMoveEdit={onClickMoveEdit}
             onClickDelete={onClickDelete}
             onClickList={onClickList}
+            onClickLike={onClickLike}
+            onClickDisLike={onClickDisLike}
+
+
           />
         );};

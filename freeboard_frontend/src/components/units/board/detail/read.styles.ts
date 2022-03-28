@@ -1,6 +1,9 @@
+import  ReactPlayer from 'react-player';
 // 디테일 스타일
 
 import styled from "@emotion/styled";
+import {LikeOutlined, DislikeOutlined} from '@ant-design/icons'
+
 
 export const Container = styled.div`
   width: 1200px;
@@ -94,7 +97,7 @@ export const VideoBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
-export const Video = styled.iframe`
+export const Video = styled(ReactPlayer)`
   width: 486px;
   height: 240px;
 `;
@@ -112,9 +115,9 @@ export const Like = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const LikeIcon = styled.div`
-  width: 30px;
-  height: 30px;
+export const LikeIcon = styled(LikeOutlined)`
+  font-size:30px;
+  color:#FDD600;
 `;
 export const LikeNum = styled.div`
   padding-top: 5px;
@@ -133,9 +136,9 @@ export const DisLikeNum = styled.div`
   font-weight: 600;
   color: #828282;
 `;
-export const DisLikeIcon = styled.img`
-  width: 30px;
-  height: 30px;
+export const DisLikeIcon = styled(DislikeOutlined)`
+  font-size:30px;
+  color:#828282;
 `;
 export const MenuBox = styled.div`
   border-bottom: 1px solid #bdbdbd;

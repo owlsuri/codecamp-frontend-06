@@ -5,17 +5,11 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import * as S from './read.styles'
 import { getDate } from "../../../../commons/libraries/utils";
 import {IBoardReadUIProps} from './read.typescript'
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import { ThemeProvider } from '@mui/styles';
+import React from 'react'
+import ReactPlayer from "react-player";
 
 
 export default function BoardReadUI(props:IBoardReadUIProps) {
-
-  const theme = {
-    fontSize:'large',
-    color: '#FFD600'
-  }
 
   return (
     <S.Container>
@@ -56,23 +50,23 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
           </S.Title>
 
     {/* 게시물 이미지 */}
-          <S.BoardImg src="/owl-g0594f89d7_1920.jpg" />
+          <S.BoardImg src="" />
+
+    {/* 게시물 내용 */}
           <S.Contents>
             {props.data ? props.data.fetchBoard.contents : "loading..."}
           </S.Contents>
 
     {/* 게시물 동영상 */}
           <S.VideoBox>
-            <S.Video src="" />
+            <ReactPlayer url={String(props.data?.fetchBoard.youtubeUrl)} />
           </S.VideoBox>
         </S.BoardBox>
 
     {/* 좋아요 */}
         <S.LikeBox>
           <S.Like>
-            <ThemeProvider theme={theme}>
-              <ThumbUpOffAltIcon fontSize="large" />
-            </ThemeProvider>
+              <S.LikeIcon onClick={props.onClickLike}/>
             <S.LikeNum>
               {props.data ? props.data.fetchBoard.likeCount : "loading..."}
             </S.LikeNum>
@@ -80,7 +74,7 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
 
     {/* 싫어요 */}
           <S.DisLike>
-            <ThumbDownOffAltIcon fontSize="large" color="disabled" />
+            <S.DisLikeIcon onClick={props.onClickDisLike}/>
             <S.DisLikeNum>
               {props.data ? props.data.fetchBoard.dislikeCount : "loading..."}
             </S.DisLikeNum>
