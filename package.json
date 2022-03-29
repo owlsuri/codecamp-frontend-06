@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@graphql-codegen/cli": "^2.6.2"
+    "@graphql-codegen/cli": "^2.6.2",
+    "react-daum-postcode": "^3.0.1"
   }
 }

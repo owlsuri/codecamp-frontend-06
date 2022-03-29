@@ -17,7 +17,7 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
     {/* 주소 */}
         <S.LocationBox>
           <S.Box>
-            <S.Address>서울 구로구 구로동 패스트파이브 코드캠프 </S.Address>
+            <S.Address>{props.data?.fetchBoard?.boardAddress.address}</S.Address>
           </S.Box>
           <S.Tail></S.Tail>
         </S.LocationBox>

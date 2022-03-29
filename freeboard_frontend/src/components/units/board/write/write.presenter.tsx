@@ -2,6 +2,8 @@
 
 import * as S from './write.styles'
 import {IBoardWriteUIProps} from './write.typescript'
+import DaumPostcode from 'react-daum-postcode';
+import { Modal } from 'antd';
 
 export default function BoardWriteUI(props:IBoardWriteUIProps) {
   return (
@@ -55,11 +57,19 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
       <S.AddressBox>
         <S.PostNum>
           <S.ListName>주소</S.ListName>
-          <S.InsertPostNum placeholder="07250"></S.InsertPostNum>
-          <S.PostNumBtn>우편번호 검색</S.PostNumBtn>
+          <S.InsertPostNum placeholder="07250" defaultValue={props.zipcode}></S.InsertPostNum>
+          <S.PostNumBtn onClick={props.showModal}>우편번호 검색</S.PostNumBtn>
+              {props.isOpen && (<Modal title="주소를 검색해주세요" 
+                                visible={true} onOk={props.handleOk}  
+                                onCancel={props.handleCancel}>
+                          <DaumPostcode onComplete={props.handleComplete}/>
+                        </Modal>
+                           )}
+
+
         </S.PostNum>
-        <S.InsertAddress type={"text"}></S.InsertAddress>
-        <S.InsertAddress type={"text"}></S.InsertAddress>
+        <S.InsertAddress type={"text"} defaultValue={props.address}></S.InsertAddress>
+        <S.InsertAddress type={"text"} ></S.InsertAddress>
       </S.AddressBox>
 
       <S.YoutubeBox>

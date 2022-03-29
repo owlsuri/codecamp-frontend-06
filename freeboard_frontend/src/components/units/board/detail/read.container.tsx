@@ -2,9 +2,10 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardReadUI from "./read.presenter";
-import {DELETE_BOARD, FETCH_BOARD, LIKE_BOARD} from "./read.queries"
+import {DELETE_BOARD, FETCH_BOARD, LIKE_BOARD, DISLIKE_BOARD} from "./read.queries"
 import React from "react";
 import { IBoardReadProps } from './read.typescript'
+import { IMutation, IMutationDislikeBoardArgs, IMutationLikeBoardArgs } from "../../../../commons/types/generated/types";
 
 
 export default function BoardRead(props:IBoardReadProps){
@@ -15,26 +16,29 @@ export default function BoardRead(props:IBoardReadProps){
     });
     
     const [deleteBoard] = useMutation(DELETE_BOARD);
-    const [likeBoard] = useMutation(LIKE_BOARD);
+    const [likeBoard] = useMutation<Pick<IMutation,"likeBoard">,IMutationLikeBoardArgs>(LIKE_BOARD);
+    const [dislikeBoard] = useMutation<Pick<IMutation,"dislikeBoard">,IMutationDislikeBoardArgs>(DISLIKE_BOARD);
 
     // 좋아요
     const onClickLike = async () => {
-        try { 
-          const result = await likeBoard({
-          variables: { boardId: String(router.query.boardId) },
-        refetchQueries: [ 
-        { query: FETCH_BOARD, variables: { boardId: router.query.boardId } },]
-      },
-      )
-          console.log(result)
-        } catch (error) {
-        alert(error.message);
-      }
+      const result = await likeBoard({
+        variables:{boardId: String(router.query.boardId)},
+        refetchQueries:[
+          { query:FETCH_BOARD, variables:{boardId: String(router.query.boardId)}},
+        ],
+      })
+      console.log(result)
     }
     
     // 싫어요
     const onClickDisLike = async () => {
-      
+      const result2 = await dislikeBoard({
+        variables:{boardId: router.query.boardId},
+        refetchQueries:[
+          { query:FETCH_BOARD, variables:{boardId: router.query.boardId}},
+        ],
+      })
+      console.log(result2)
     }
 
     // 수정하기로 페이지 이동(라우팅) 버튼 기능
@@ -62,7 +66,6 @@ export default function BoardRead(props:IBoardReadProps){
           router.push(`/boards/`);
         }
 
-    //
 
         return (
           <BoardReadUI

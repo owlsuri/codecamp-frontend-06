@@ -53,6 +53,7 @@ export const InsertContent = styled.textarea`
 export const PostNum = styled.div`
   padding-top: 20px;
   margin-bottom: 10px;
+  
 `;
 export const AddressBox = styled.div`
   padding-top: 20px;

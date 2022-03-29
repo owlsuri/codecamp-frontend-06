@@ -22,7 +22,7 @@ export default function CommentRead(){
 
     // 댓글 수정하러가기 버튼
     const onClickToEdit = () => {
-        router.push(`/boards/${router.query.boardId}/${router.query.boardCommentId}`)
+        router.push(`/boards/${router.query.boardCommentId}`)
     }
 
     // 댓글 삭제하기 버튼

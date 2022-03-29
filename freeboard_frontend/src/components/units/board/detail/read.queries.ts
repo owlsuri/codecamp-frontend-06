@@ -13,6 +13,10 @@ export const FETCH_BOARD = gql`
       createdAt
       likeCount
       dislikeCount
+      boardAddress {
+          zipcode
+          address
+      }
     }
   }
 `;
@@ -37,7 +41,13 @@ export const CREATE_BOARD = gql`
 `;
 
 export const LIKE_BOARD = gql`
-  mutation likeBoard($BoardId: ID!) {
+  mutation likeBoard($boardId: ID!) {
     likeBoard(boardId: $boardId)
   }
 `;
+
+export const DISLIKE_BOARD = gql`
+  mutation dislikeBoard($boardId: ID!) {
+    dislikeBoard(boardId: $boardId)
+  }
+`

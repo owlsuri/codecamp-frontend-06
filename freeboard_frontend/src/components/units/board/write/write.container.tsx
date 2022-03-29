@@ -7,6 +7,8 @@ import { CREATE_BOARD, UPDATE_BOARD } from "./write.queries";
 import { FETCH_BOARD } from '../detail/read.queries'
 import BoardWriteUI from './write.presenter';
 import {IBoardWriteProps, IMyVariables, IMyUpdateBoardInput} from './write.typescript'
+import { Modal } from 'antd';
+import DaumPostcode from 'react-daum-postcode';
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const [writer, setWriter] = useState("");
@@ -14,11 +16,36 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("")
+  const [address, setAddress] = useState("")
+  const [zipcode, setZipcode] = useState("")
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
+
+  // 모달 주소입력
+  const [isOpen, setIsOpen] = useState(false);
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
+
+  const handleComplete = (address) =>{
+    console.log(address)
+    setIsOpen(false);
+    setZipcode(address.zonecode)
+    setAddress(address.address)
+
+  }
 
   // 버튼 활성화 여부 useState
   const [isActive, setIsActive] = useState(false);
@@ -97,6 +124,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setYoutubeUrl(event.target.value);
   };
 
+  // 주소 input
+  // const onChangeAddress = (event) => {
+  //   setBoardAddress(event.target.value);
+  // };
+
+
   // 등록하기 버튼
   const onClickSubmit = async () => {
     try {
@@ -108,6 +141,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
             title,
             contents,
             youtubeUrl,
+            boardAddress:{
+              zipcode,
+              address,
+              // boardAddress
+            },
           },
         },
       });
@@ -124,8 +162,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
         setContentsError("내용을 입력해주세요.");
       }
       if (writer !== "" && password !== "" && title !== "" && contents !== "") {
-        alert("게시물 등록 완료!");
-        console.log(result)
+
+        Modal.success({
+              content: '게시물 등록이 완료되었습니다!',
+        });
+
+          console.log(result)
         router.push(`/boards/${result.data.createBoard._id}`);
       }
     } catch (error) {
@@ -182,6 +224,17 @@ export default function BoardWrite(props: IBoardWriteProps) {
       isEdit={props.isEdit}
       onClickEdit={onClickEdit}
       data={data}
+
+      showModal={showModal}
+      handleOk={handleOk}
+      handleCancel={handleCancel}
+      handleComplete={handleComplete}
+      isOpen={isOpen}
+
+      address={address}
+      zipcode={zipcode}
+
+
     />
   );
 }

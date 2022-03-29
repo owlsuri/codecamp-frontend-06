@@ -97,7 +97,7 @@ export const VideoBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
-export const Video = styled(ReactPlayer)`
+export const Video = styled.div`
   width: 486px;
   height: 240px;
 `;
