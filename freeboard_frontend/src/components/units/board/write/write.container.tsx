@@ -142,6 +142,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if ((event.target as HTMLButtonElement).value !== "") {
       setPasswordError("");
     }
+    if(!title && !contents && !youtubeUrl){
+      alert("수정한 내용이 없습니다")
+      return;
+    }
   
     const myUpdateBoardInput: IMyUpdateBoardInput = {};
 
@@ -151,8 +155,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
       password
     };
 
-    if (title !== "") myUpdateBoardInput.title = title;
-    if (contents !== "") myUpdateBoardInput.contents = contents;
+    if (title) myUpdateBoardInput.title = title;
+    if (contents) myUpdateBoardInput.contents = contents;
+    if (youtubeUrl) myUpdateBoardInput.youtubeUrl = youtubeUrl;
 
     await updateBoard({
       variables: myVariables,

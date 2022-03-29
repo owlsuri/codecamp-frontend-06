@@ -28,7 +28,7 @@ export default function CommentReadUI(props:ICommentReadUIProps){
                             <S.CommentUserName>{el.writer}</S.CommentUserName>
                             {/* 별 */}
                             <S.CommentStar>
-                                <Rate onChange={props.handleChange} value={el.rating}></Rate>
+                                <Rate value={el?.rating} disabled></Rate>
                             </S.CommentStar>
                             </S.CommentUserProfile>
                             <S.CommentIcon>

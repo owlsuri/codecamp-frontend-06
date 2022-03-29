@@ -57,9 +57,10 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
             {props.data ? props.data.fetchBoard.contents : "loading..."}
           </S.Contents>
 
-    {/* 게시물 동영상 */}
+    {/* 유투브 */}
           <S.VideoBox>
-            <ReactPlayer url={String(props.data?.fetchBoard.youtubeUrl)} />
+            {props.data?.fetchBoard.youtubeUrl && (
+            <ReactPlayer url={String(props.data?.fetchBoard.youtubeUrl)} />)}
           </S.VideoBox>
         </S.BoardBox>
 

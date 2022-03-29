@@ -118,6 +118,7 @@ export const Like = styled.div`
 export const LikeIcon = styled(LikeOutlined)`
   font-size:30px;
   color:#FDD600;
+  cursor: pointer;
 `;
 export const LikeNum = styled.div`
   padding-top: 5px;
@@ -135,6 +136,7 @@ export const DisLikeNum = styled.div`
   padding-top: 5px;
   font-weight: 600;
   color: #828282;
+  cursor: pointer;
 `;
 export const DisLikeIcon = styled(DislikeOutlined)`
   font-size:30px;

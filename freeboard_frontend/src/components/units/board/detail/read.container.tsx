@@ -21,7 +21,11 @@ export default function BoardRead(props:IBoardReadProps){
     const onClickLike = async () => {
         try { 
           const result = await likeBoard({
-          variables: { boardId: router.query.boardId },})
+          variables: { boardId: String(router.query.boardId) },
+        refetchQueries: [ 
+        { query: FETCH_BOARD, variables: { boardId: router.query.boardId } },]
+      },
+      )
           console.log(result)
         } catch (error) {
         alert(error.message);

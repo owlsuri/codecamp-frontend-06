@@ -67,6 +67,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
         <S.YoutubeURL
           onChange={props.onChangeYoutube}
           placeholder="링크를 입력해주세요."
+          defaultValue={props.data?.fetchBoard.youtubeUrl || ""}
         ></S.YoutubeURL>
       </S.YoutubeBox>
 

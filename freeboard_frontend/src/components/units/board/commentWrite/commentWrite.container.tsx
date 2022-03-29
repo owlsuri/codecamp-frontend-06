@@ -18,10 +18,6 @@ export default function CommentWrite(props:ICommentWriteProps) {
     const [contents, setContents] = useState("");
     const [value, setValue] = useState(0);
 
-    const handleChange = (value:number) => {
-        setValue(value);
-    };
-
     const [createBoardComment] = useMutation<Pick<IMutation,'createBoardComment'>,IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT);
     const [updateBoardComment] = useMutation<Pick<IMutation,'updateBoardComment'>,IMutationUpdateBoardCommentArgs>(UPDATE_BOARD_COMMENT);
     const { data } = useQuery(FETCH_BOARD_COMMENTS, {
@@ -63,12 +59,11 @@ export default function CommentWrite(props:ICommentWriteProps) {
         } else {
             setIsActive(false);
         }
-
     };
 
     // 별점 input
-    const onChangeRating = (event: ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value);
+    const onChangeRating = (value:number) => {
+        setValue(value);
     };
 
     // 댓글 등록하기 버튼
@@ -141,7 +136,6 @@ export default function CommentWrite(props:ICommentWriteProps) {
             onChangeContents={onChangeContents}
             onClickComment={onClickComment}
             OnClickCommentEdit={OnClickCommentEdit}
-            onChangeRating={onChangeRating}
             isActive={isActive}
             isCommentEdit={props.isCommentEdit}
             data={data}    
@@ -149,7 +143,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
             password={password}   
             contents={contents}
             value={value}   
-            handleChange={handleChange}        
+            onChangeRating={onChangeRating}        
         />
     )  
 }
