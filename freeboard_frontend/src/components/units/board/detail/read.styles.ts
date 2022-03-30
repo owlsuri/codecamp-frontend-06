@@ -113,12 +113,14 @@ export const Like = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-export const LikeIcon = styled(LikeOutlined)`
-  font-size:30px;
-  color:#FDD600;
+  color: #ffd600;
   cursor: pointer;
 `;
+
+export const LikeIcon = styled(LikeOutlined)`
+  font-size:30px;
+`;
+
 export const LikeNum = styled.div`
   padding-top: 5px;
   font-weight: 600;
@@ -130,12 +132,12 @@ export const DisLike = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: #828282;
+  cursor: pointer;
 `;
 export const DisLikeNum = styled.div`
   padding-top: 5px;
   font-weight: 600;
-  color: #828282;
-  cursor: pointer;
 `;
 export const DisLikeIcon = styled(DislikeOutlined)`
   font-size:30px;

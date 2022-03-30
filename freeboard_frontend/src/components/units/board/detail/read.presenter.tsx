@@ -7,6 +7,7 @@ import { getDate } from "../../../../commons/libraries/utils";
 import {IBoardReadUIProps} from './read.typescript'
 import React from 'react'
 import ReactPlayer from "react-player";
+import { LikeOutlined } from "@ant-design/icons";
 
 
 export default function BoardReadUI(props:IBoardReadUIProps) {
@@ -67,8 +68,8 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
 
     {/* 좋아요 */}
         <S.LikeBox>
-          <S.Like>
-              <S.LikeIcon onClick={props.onClickLike}/>
+          <S.Like onClick={props.onClickLike}>
+              <S.LikeIcon />
             <S.LikeNum>
               {props.data ? props.data.fetchBoard.likeCount : "loading..."}
             </S.LikeNum>
