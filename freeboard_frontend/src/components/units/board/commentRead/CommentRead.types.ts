@@ -5,7 +5,7 @@ import { MouseEvent } from 'react';
 
 export interface ICommentReadUIProps{
     data:any
-    onClickToEdit:() => void
-    onClickDelete: () => void
-    onClickWhoWrite: (MouseEvent<>)=> void
+    onClickToEdit:(event:MouseEvent<HTMLButtonElement>) => void
+    onClickDelete: (event:MouseEvent<HTMLButtonElement>) => void
+    onClickWhoWrite: (event:MouseEvent<HTMLButtonElement>) => void
 }

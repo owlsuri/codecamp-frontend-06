@@ -11,6 +11,7 @@ export const CREATE_BOARD = gql`
       boardAddress  {
         zipcode
         address
+        addressDetail
       }
     }
   }

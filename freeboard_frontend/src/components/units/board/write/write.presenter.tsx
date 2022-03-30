@@ -57,8 +57,11 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
       <S.AddressBox>
         <S.PostNum>
           <S.ListName>주소</S.ListName>
-          <S.InsertPostNum placeholder="07250" defaultValue={props.zipcode}></S.InsertPostNum>
+          <S.InsertPostNum placeholder="07250" 
+                          value={props.zipcode ||
+                                  props.data?.fetchBoard.boardAddress?.zipcode || ""} readOnly></S.InsertPostNum>
           <S.PostNumBtn onClick={props.showModal}>우편번호 검색</S.PostNumBtn>
+            {/* 주소 모달창 */}
               {props.isOpen && (<Modal title="주소를 검색해주세요" 
                                 visible={true} onOk={props.handleOk}  
                                 onCancel={props.handleCancel}>
@@ -68,8 +71,8 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
 
 
         </S.PostNum>
-        <S.InsertAddress type={"text"} defaultValue={props.address}></S.InsertAddress>
-        <S.InsertAddress type={"text"} ></S.InsertAddress>
+        <S.InsertAddress type={"text"} value={props.address || props.data?.fetchBoard.boardAddress?.address || ""} readOnly></S.InsertAddress>
+        <S.InsertAddress onChange={props.onChangeAddressDetail} defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail || ""} type={"text"} ></S.InsertAddress>
       </S.AddressBox>
 
       <S.YoutubeBox>

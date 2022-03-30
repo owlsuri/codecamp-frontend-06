@@ -12,5 +12,7 @@ export interface IBoardReadUIProps {
     onClickList: () => void
     onClickMoveEdit: (event:MouseEvent<HTMLButtonElement>) => void
     onClickDelete:() => void
+    onClickLike: () => void
+    onClickDisLike: () => void
 }
 

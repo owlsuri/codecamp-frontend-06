@@ -1,4 +1,3 @@
-import  ReactPlayer from 'react-player';
 // 디테일 스타일
 
 import styled from "@emotion/styled";

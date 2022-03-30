@@ -20,7 +20,7 @@ export default function CommentReadUI(props:ICommentReadUIProps){
             <S.Container key={el._id} id={el.writer} onClick={props.onClickWhoWrite} >        
                 <S.CommentShowBox >                
                     <S.CommentUserImg>
-                       <AccountCircleIcon fontSize="large" color="disabled" />
+                        <AccountCircleIcon fontSize="large" color="disabled" />
                     </S.CommentUserImg>
                     <S.CommentDescBox>           
                         <S.CommentUserInfo>
@@ -33,7 +33,7 @@ export default function CommentReadUI(props:ICommentReadUIProps){
                             </S.CommentUserProfile>
                             <S.CommentIcon>
                             <FontAwesomeIcon onClick={props.onClickToEdit} icon={faPencil}  color="#BDBDBD" />
-                            <FontAwesomeIcon onClick={props.onClickDelete} icon={faX} color="#BDBDBD" />
+                            <FontAwesomeIcon id={el._id} onClick={props.onClickDelete} icon={faX} color="#BDBDBD" />
                             </S.CommentIcon>
                         </S.CommentUserInfo>
                         <S.CommentDesc>

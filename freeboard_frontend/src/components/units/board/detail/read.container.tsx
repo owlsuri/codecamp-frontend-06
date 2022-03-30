@@ -8,6 +8,7 @@ import { IBoardReadProps } from './read.typescript'
 import { IMutation, IMutationDislikeBoardArgs, IMutationLikeBoardArgs } from "../../../../commons/types/generated/types";
 
 
+
 export default function BoardRead(props:IBoardReadProps){
     const router = useRouter();
 
@@ -55,6 +56,7 @@ export default function BoardRead(props:IBoardReadProps){
         console.log(result);
         alert("삭제완료")
         router.push(`/boards`);
+        console.log(result)
 
       } catch (error) {
         alert(error.message);

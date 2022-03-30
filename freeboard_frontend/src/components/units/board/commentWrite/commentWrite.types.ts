@@ -23,6 +23,7 @@ export interface ICommentWriteUIProps{
     contents?: String
     rating: number
     handleChange : any
+    boardCommentId: any
 }
 
 export interface IMyVariables{

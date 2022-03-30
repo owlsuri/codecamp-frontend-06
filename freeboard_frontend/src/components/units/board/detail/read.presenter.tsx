@@ -17,7 +17,8 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
     {/* 주소 */}
         <S.LocationBox>
           <S.Box>
-            <S.Address>{props.data?.fetchBoard?.boardAddress.address}</S.Address>
+            <S.Address>{props.data?.fetchBoard.boardAddress.address}</S.Address>
+            <S.Address>{props.data?.fetchBoard.boardAddress.addressDetail}</S.Address>
           </S.Box>
           <S.Tail></S.Tail>
         </S.LocationBox>

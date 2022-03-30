@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
 import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from './commentRead.queries'
 import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types";
-
+import { MouseEvent } from 'react';
 
 export default function CommentRead(){
     const router = useRouter();
@@ -13,23 +13,24 @@ export default function CommentRead(){
     const { data } = useQuery<Pick<IQuery,'fetchBoardComments'>,IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
         variables: { boardId: String(router.query.boardId)},
     });
+    
 
     const [deleteBoardComment] = useMutation<Pick<IMutation,'deleteBoardComment'>,IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT);
 
-    const onClickWhoWrite = (event) =>{        
+    const onClickWhoWrite = (event:MouseEvent<HTMLButtonElement>) =>{        
         alert(`${event.currentTarget.id}님이 작성한 댓글입니다.`)    
     }
 
     // 댓글 수정하러가기 버튼
-    const onClickToEdit = () => {
+    const onClickToEdit = (event:MouseEvent<HTMLButtonElement>) => {
         router.push(`/boards/${router.query.boardCommentId}`)
     }
 
     // 댓글 삭제하기 버튼
-    const onClickDelete = async () =>{
+    const onClickDelete = async (event:MouseEvent<HTMLButtonElement>) =>{
         try {
             const result = await deleteBoardComment({
-            variables: { boardCommentId: router.query.boardCommentId },
+                variables: { boardCommentId: event.target.id, password:"123" }, 
             });
             console.log(result);
             alert("삭제완료")

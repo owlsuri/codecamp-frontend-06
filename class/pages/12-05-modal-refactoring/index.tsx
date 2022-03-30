@@ -18,7 +18,7 @@ const ModalAddressPage = () => {
 
   return (
     <>
-      <Button onClick={showModal}>주소검색</Button>
+      <Button onClick={onToggleModal}>주소검색</Button>
        {isOpen && (
        <Modal 
               visible={true} onOk={onToggleModal}  

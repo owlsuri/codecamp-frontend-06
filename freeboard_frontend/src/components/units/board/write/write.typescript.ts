@@ -32,6 +32,17 @@ export interface IBoardWriteUIProps{
     isActive: boolean
     isEdit: boolean
     data?: any
+    showModal: () => void
+    handleOk: () => void
+    handleCancel: () => void
+    handleComplete: () => void
+    isOpen:boolean
+    boardAddress?:{
+      address?: string
+      zipcode?: string
+      addressDetail?:string
+    }
+
 }
 
 // 스타일

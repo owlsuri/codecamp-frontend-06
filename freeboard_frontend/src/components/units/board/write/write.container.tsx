@@ -8,7 +8,7 @@ import { FETCH_BOARD } from '../detail/read.queries'
 import BoardWriteUI from './write.presenter';
 import {IBoardWriteProps, IMyVariables, IMyUpdateBoardInput} from './write.typescript'
 import { Modal } from 'antd';
-import DaumPostcode from 'react-daum-postcode';
+
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const [writer, setWriter] = useState("");
@@ -18,6 +18,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [youtubeUrl, setYoutubeUrl] = useState("")
   const [address, setAddress] = useState("")
   const [zipcode, setZipcode] = useState("")
+  const [addressDetail, setAddressDetail] = useState("")
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -39,7 +40,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setIsOpen(false);
   };
 
-  const handleComplete = (address) =>{
+  const handleComplete = (address:any) =>{
     console.log(address)
     setIsOpen(false);
     setZipcode(address.zonecode)
@@ -120,14 +121,14 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
   // 유투브 input
-  const onChangeYoutube = (event) => {
+  const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value);
   };
 
-  // 주소 input
-  // const onChangeAddress = (event) => {
-  //   setBoardAddress(event.target.value);
-  // };
+  // 주소디테일 input
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
 
 
   // 등록하기 버튼
@@ -144,7 +145,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
             boardAddress:{
               zipcode,
               address,
-              // boardAddress
+              addressDetail,
             },
           },
         },
@@ -215,6 +216,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeContents={onChangeContents}
       onChangePassword={onChangePassword}
       onChangeYoutube={onChangeYoutube}
+      onChangeAddressDetail={onChangeAddressDetail}
       onClickSubmit={onClickSubmit}
       writerError={writerError}
       passwordError={passwordError}
@@ -233,8 +235,6 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
       address={address}
       zipcode={zipcode}
-
-
     />
   );
 }
