@@ -9,7 +9,7 @@ import { MouseEvent } from "react";
 
 
 
-export default function BoardList(){
+export default function BoardList(props){
 
     const { data } = useQuery(FETCH_BOARDS)
     const router = useRouter();

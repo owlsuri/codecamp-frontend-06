@@ -6,7 +6,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from './commentRead.queries'
 import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types";
 import { MouseEvent, ChangeEvent, useState } from 'react';
-
+import { Modal } from 'antd';
 
 
 export default function CommentRead(){
@@ -24,7 +24,9 @@ export default function CommentRead(){
     const [deleteBoardComment] = useMutation<Pick<IMutation,'deleteBoardComment'>,IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT);
 
     const onClickWhoWrite = (event:MouseEvent<HTMLButtonElement>) =>{        
-        alert(`${event.currentTarget.id}님이 작성한 댓글입니다.`)    
+        Modal.info({
+                content: `${event.currentTarget.id}님이 작성한 댓글입니다.`,
+            });  
     }
 
     // 댓글 수정하러가기 버튼
@@ -48,11 +50,15 @@ export default function CommentRead(){
             setIsOpenModal(false)
             setBoardCommentId("")
 
-            alert("삭제완료")
+            Modal.success({
+                content: '댓글 삭제가 완료되었습니다!',
+            });
             router.push(`/boards/${router.query.boardId}`);
 
         } catch (error) {
-            alert(error.message);
+            Modal.error({
+                content: error.message,
+            });
         }
     }
 
@@ -67,12 +73,12 @@ export default function CommentRead(){
 
 
     return(<CommentReadUI 
-    data={data}
-    onClickToEdit={onClickToEdit}
-    onClickDelete={onClickDelete}
-    onClickWhoWrite={onClickWhoWrite}
-    onClickOpenModal={onClickOpenModal}
-    onChangeDeletePassword={onChangeDeletePassword}
-    isOpenModal={isOpenModal}
+        data={data}
+        onClickToEdit={onClickToEdit}
+        onClickDelete={onClickDelete}
+        onClickWhoWrite={onClickWhoWrite}
+        onClickOpenModal={onClickOpenModal}
+        onChangeDeletePassword={onChangeDeletePassword}
+        isOpenModal={isOpenModal}
     />)
 }

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
 import { ICommentWriteProps, IMyVariables, ImyUpdateBoardCommentInput } from './commentWrite.types'
 import { IMutation, IMutationCreateBoardCommentArgs, IMutationUpdateBoardCommentArgs } from "../../../../commons/types/generated/types";
-
+import { Modal } from 'antd';
 
 export default function CommentWrite(props:ICommentWriteProps) {
     const router = useRouter();
@@ -85,7 +85,9 @@ export default function CommentWrite(props:ICommentWriteProps) {
                     variables : { boardId : router.query.boardId },
                 },
                 });    
-            alert("댓글 등록 완료!");
+            Modal.success({
+                content: '댓글 등록이 완료되었습니다!',
+            });
             router.push(`/boards/${router.query.boardId}`);
             
             setWriter("")
@@ -94,14 +96,18 @@ export default function CommentWrite(props:ICommentWriteProps) {
             setValue(3)
 
         } catch(error){
-                alert(error.message)
+            Modal.error({
+                content: error.message,
+            });
             }
         }
     }
     // 댓글 수정 버튼
     const OnClickCommentEdit = async () =>{
         if (!password) {
-            alert("비밀번호를 입력하세요")
+            Modal.error({
+                content: '비밀번호를 입력하세요.',
+            });
             return;
         }
         
@@ -123,7 +129,9 @@ export default function CommentWrite(props:ICommentWriteProps) {
             variables: MyVariables,
         })
 
-        alert("댓글 수정 완료!")
+        Modal.success({
+            content: '댓글 수정이 완료되었습니다!',
+        });
         router.push(`/boards/${router.query.boardId}`);
     }
 

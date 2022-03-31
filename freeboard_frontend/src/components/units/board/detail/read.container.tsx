@@ -6,7 +6,7 @@ import {DELETE_BOARD, FETCH_BOARD, LIKE_BOARD, DISLIKE_BOARD} from "./read.queri
 import React from "react";
 import { IBoardReadProps } from './read.typescript'
 import { IMutation, IMutationDislikeBoardArgs, IMutationLikeBoardArgs } from "../../../../commons/types/generated/types";
-
+import { Modal } from 'antd';
 
 
 export default function BoardRead(props:IBoardReadProps){
@@ -54,12 +54,16 @@ export default function BoardRead(props:IBoardReadProps){
           variables: { boardId: router.query.boardId },
         });
         console.log(result);
-        alert("삭제완료")
+        Modal.success({
+              content: '삭제가 완료되었습니다!',
+        });
         router.push(`/boards`);
         console.log(result)
 
       } catch (error) {
-        alert(error.message);
+        Modal.error({
+          content: error.message,
+        });
       }
     }
 

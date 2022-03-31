@@ -172,12 +172,15 @@ export default function BoardWrite(props: IBoardWriteProps) {
         router.push(`/boards/${result.data.createBoard._id}`);
       }
     } catch (error) {
-      alert(error.message);
+       Modal.error({
+        content: error.message,
+      });
     }
   };
 
   // 게시글 수정 버튼
   const onClickEdit = async (event: MouseEvent<HTMLButtonElement>) => {
+    try {
     if (!password) {
       setPasswordError("비밀번호를 입력해주세요.")
       return;
@@ -186,7 +189,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
       setPasswordError("");
     }
     if(!title && !contents && !youtubeUrl){
-      alert("수정한 내용이 없습니다")
+       Modal.error({
+        content: "수정한 내용이 없습니다.",
+      });
       return;
     }
   
@@ -205,8 +210,15 @@ export default function BoardWrite(props: IBoardWriteProps) {
     await updateBoard({
       variables: myVariables,
     });
-    alert("게시글 수정 성공!");
+    Modal.success({
+        content: '게시물 수정이 완료되었습니다!',
+    });
     router.push(`/boards/${router.query.boardId}`);
+  } catch (error) {
+       Modal.error({
+        content: error.message,
+      });
+    }
   };
 
   return (

@@ -1,3 +1,4 @@
+import { Address } from './../detail/read.styles';
 import { gql } from "@apollo/client";
 
 export const CREATE_BOARD = gql`
@@ -21,6 +22,7 @@ export const UPDATE_BOARD = gql`
     updateBoard(updateBoardInput: $updateBoardInput, password:$password, boardId:$boardId) {
         title
         contents
+        boardAddress
     }
   }
 `;
