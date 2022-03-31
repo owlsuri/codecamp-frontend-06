@@ -25,6 +25,7 @@ export const Box = styled.div`
   height: 64px;
   background-color: #666666;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;

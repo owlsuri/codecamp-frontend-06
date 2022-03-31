@@ -6,7 +6,8 @@ import { faPencil, faX } from "@fortawesome/free-solid-svg-icons";
 import * as S from './commentRead.styles'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { ICommentReadUIProps } from './CommentRead.types'
-import { Rate } from 'antd';
+import { Rate, Modal } from 'antd';
+
 
 
 export default function CommentReadUI(props:ICommentReadUIProps){
@@ -15,6 +16,15 @@ export default function CommentReadUI(props:ICommentReadUIProps){
 
     return(
         <div>
+            {props.isOpenModal && (
+                <Modal visible={true} onOk={props.onClickDelete}>
+                <div>비밀번호 : </div>
+                <S.PasswordInput
+                    type="password"
+                    onChange={props.onChangeDeletePassword}
+                />
+                </Modal>
+            )}
             {props.data?.fetchBoardComments
             .map((el:any) => (
             <S.Container key={el._id} id={el.writer} onClick={props.onClickWhoWrite} >        
@@ -33,7 +43,7 @@ export default function CommentReadUI(props:ICommentReadUIProps){
                             </S.CommentUserProfile>
                             <S.CommentIcon>
                             <FontAwesomeIcon onClick={props.onClickToEdit} icon={faPencil}  color="#BDBDBD" />
-                            <FontAwesomeIcon id={el._id} onClick={props.onClickDelete} icon={faX} color="#BDBDBD" />
+                            <FontAwesomeIcon id={el._id} onClick={props.onClickOpenModal} icon={faX} color="#BDBDBD" />
                             </S.CommentIcon>
                         </S.CommentUserInfo>
                         <S.CommentDesc>

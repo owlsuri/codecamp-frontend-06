@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/units/board/14-lifiting-state-up/Child2tsx"  ],
   "exclude": [
     "node_modules"
   ]

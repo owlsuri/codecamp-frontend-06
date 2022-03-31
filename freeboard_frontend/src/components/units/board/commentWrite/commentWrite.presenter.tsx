@@ -34,7 +34,7 @@ export default function CommentUI(props:ICommentWriteUIProps){
                 <S.CommentInputBox>
                 <S.CommentInput maxlength={100} value={props.contents} onChange={props.onChangeContents} placeholder="개인정보를 공유 및 요청하거나 명예회손, 무단광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에대한 책임은 게시자에게 있습니다."/>
                 <S.CommentInputBottom>
-                    <S.CommentCount>0/100</S.CommentCount>
+                    <S.CommentCount>{props.contents.length}/100</S.CommentCount>
                     <S.CommentInputBtn onClick={props.isCommentEdit ? props.OnClickCommentEdit : props.onClickComment}
                                         isActive={props.isEdit ? true : props.isActive}>
                                         {props.isCommentEdit ? "수정" : "등록"}하기

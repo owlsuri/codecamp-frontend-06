@@ -5,6 +5,9 @@ export const Container= styled.div`
     width: 1200px;
     margin-left: 100px;
 `;
+export const PasswordInput = styled.input`
+  width: 200px;
+`;
 export const CommentShowBox= styled.div`
     width: 1200px;
     height: 200px;

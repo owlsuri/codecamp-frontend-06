@@ -7,7 +7,7 @@ import { getDate } from "../../../../commons/libraries/utils";
 import {IBoardReadUIProps} from './read.typescript'
 import React from 'react'
 import ReactPlayer from "react-player";
-import { LikeOutlined } from "@ant-design/icons";
+
 
 
 export default function BoardReadUI(props:IBoardReadUIProps) {
@@ -18,8 +18,8 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
     {/* 주소 */}
         <S.LocationBox>
           <S.Box>
-            <S.Address>{props.data?.fetchBoard.boardAddress.address}</S.Address>
-            <S.Address>{props.data?.fetchBoard.boardAddress.addressDetail}</S.Address>
+            <S.Address>{props.data?.fetchBoard?.boardAddress?.address}</S.Address>
+            <S.Address>{props.data?.fetchBoard?.boardAddress?.addressDetail}</S.Address>
           </S.Box>
           <S.Tail></S.Tail>
         </S.LocationBox>

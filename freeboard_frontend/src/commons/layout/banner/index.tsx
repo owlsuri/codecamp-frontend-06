@@ -7,12 +7,13 @@ import Slider from "react-slick";
 export default function LayoutBanner(){
 
     const Wrapper=styled.div`
-        height: 400px;
-        background-color: #ffe77c;
+        width: 1600px;
+        height: 300px;
+        background-color: #000000;
     `
 
         const Img=styled.img`
-        height: 400px;
+        height: 300px;
         background-color: #ffe77c;
     `
 
@@ -49,7 +50,21 @@ export default function LayoutBanner(){
                 <div>
                     <Img src="/images/mono5.jpg"/>
                 </div>
-                
+                <div>
+                    <Img src="/images/mono4.jpg"/>
+                </div>
+                <div>
+                    <Img src="/images/mono2.jpg"/>
+                </div>
+                <div>
+                    <Img src="/images/mono.jpg"/>
+                </div>
+                <div>
+                    <Img src="/images/mono3.jpg"/>
+                </div>
+                <div>
+                    <Img src="/images/mono4.jpg"/>
+                </div>
                 </Slider>
             </div>
         </Wrapper>

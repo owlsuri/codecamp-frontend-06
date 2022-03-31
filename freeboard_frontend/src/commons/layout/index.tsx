@@ -12,11 +12,10 @@ export default function Layout(props){
     `
 
     const Body=styled.div`
-        height: 1300px;
+
     `
     const LayoutSidebar=styled.div`
         width: 200px;
-        height: 1900px;
         background-color: #f8d894;
     `
 

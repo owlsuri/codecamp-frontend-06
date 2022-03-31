@@ -5,10 +5,16 @@ import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
 import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from './commentRead.queries'
 import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types";
-import { MouseEvent } from 'react';
+import { MouseEvent, ChangeEvent, useState } from 'react';
+
+
 
 export default function CommentRead(){
     const router = useRouter();
+
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [boardCommentId, setBoardCommentId] = useState("");
+    const [password, setPassword] = useState("");
 
     const { data } = useQuery<Pick<IQuery,'fetchBoardComments'>,IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
         variables: { boardId: String(router.query.boardId)},
@@ -27,12 +33,21 @@ export default function CommentRead(){
     }
 
     // 댓글 삭제하기 버튼
-    const onClickDelete = async (event:MouseEvent<HTMLButtonElement>) =>{
+    const onClickDelete = async () =>{
         try {
-            const result = await deleteBoardComment({
-                variables: { boardCommentId: event.target.id, password:"123" }, 
+            await deleteBoardComment({
+                variables: { boardCommentId, 
+                             password
+                            }, 
+                refetchQueries: [{
+                    query: FETCH_BOARD_COMMENTS,
+                    variables: { boardId: router.query.boardId },
+                    },
+                ],
             });
-            console.log(result);
+            setIsOpenModal(false)
+            setBoardCommentId("")
+
             alert("삭제완료")
             router.push(`/boards/${router.query.boardId}`);
 
@@ -41,11 +56,23 @@ export default function CommentRead(){
         }
     }
 
+    function onClickOpenModal(event: MouseEvent<HTMLImageElement>){
+        setIsOpenModal(true);
+        if(event.target instanceof Element) setBoardCommentId(event.target.id)
+    }
+
+    function onChangeDeletePassword(event: ChangeEvent<HTMLInputElement>){
+        setPassword(String(event.target.value))
+    }
+
 
     return(<CommentReadUI 
     data={data}
     onClickToEdit={onClickToEdit}
     onClickDelete={onClickDelete}
     onClickWhoWrite={onClickWhoWrite}
+    onClickOpenModal={onClickOpenModal}
+    onChangeDeletePassword={onChangeDeletePassword}
+    isOpenModal={isOpenModal}
     />)
 }

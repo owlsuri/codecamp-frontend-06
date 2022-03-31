@@ -4,13 +4,20 @@ import styled from "@emotion/styled"
 export default function LayoutHeader(){
 
     const Wrapper=styled.div`
-        height: 100px;
-        background-color: #f1d587;
+        width: 1600px;
+        height: 70px;
+        background-color: black;
+        font-weight: 600;
+        padding-left: 30px;
+        color: white;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
     `
 
     return(
         <Wrapper>
-            헤더
+            Suri의 게시판 입니다 :D
         </Wrapper>
     )
 }
