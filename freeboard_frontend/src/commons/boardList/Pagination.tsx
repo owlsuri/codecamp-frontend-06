@@ -1,15 +1,6 @@
-import styled from "@emotion/styled";
+import * as S from './pagination.style'
 import { useState } from 'react'
 
-const Pre = styled.button`
-  width: 40px;
-  height: 40px;
-`;
-
-const Next = styled.button`
-  width: 40px;
-  height: 40px;
-`;
 
 export default function Pagination(props) {
   const [startPage, setStartPage] = useState(1);
@@ -38,34 +29,34 @@ export default function Pagination(props) {
   };
 
   return (
-    <div>
-      <Pre onClick={onClickPrevPage} disabled={startPage === 1 ? true : false}>
+    <S.Wrapper>
+      <S.Pre onClick={onClickPrevPage} color={startPage === 1 ? "lightgray" : "black"}>
         ◀
-      </Pre>
+      </S.Pre>
 
       {new Array(10).fill(1).map(
         (_, index) =>
           index + startPage <= props.lastPage && (
-            <span
+            <S.PageNum
               key={index + startPage}
               onClick={onClickPage}
               id={String(index + startPage)}
               current={startPage + index === current}
               style={{
                 color: current === startPage + index ? "red" : "black",
+                fontWeight: current === startPage + index ? "700" : "400"
               }}
             >
-              {" "}
               {startPage + index}
-            </span>
+            </S.PageNum>
           )
       )}
-      <Next
+      <S.Next
         onClick={onClickNextPage}
-        disabled={startPage + 10 > props.lastPage ? true : false}
+        color={startPage + 10 > props.lastPage ? "lightgray" : "black"}
       >
         ▶
-      </Next>
-    </div>
+      </S.Next>
+    </S.Wrapper>
   );
 }

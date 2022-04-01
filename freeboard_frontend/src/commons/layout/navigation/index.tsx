@@ -1,16 +1,10 @@
 // Navigation
 import styled from "@emotion/styled"
 
-const NAVIGATION_MENUS = [
-  { name: "라이브게시판", page: "/boards" },
-  { name: "라이브상품", page: "/markets" },
-  { name: "마이페이지", page: "/mypages" },
-];
-
 export default function LayoutNavigation(){
 
 const Wrapper=styled.div`
-        width: 1600px;
+        width: 1400px;
         height: 70px;
         background-color: #181817;
         color: white;
@@ -23,15 +17,12 @@ const Wrapper=styled.div`
 
     return(
         <Wrapper>
-            <span>게시판</span>
+            <span>BOARD</span>
             <span>|</span>
-            <span>게시판</span>
+            <span>PRODUCTS</span>
             <span>|</span>
-            <span>게시판</span>
-            <span>|</span>
-            <span>게시판</span>
-            <span>|</span>
-            <span>게시판</span>
+            <span>MY PAGE</span>
+
         </Wrapper>
     )
 }

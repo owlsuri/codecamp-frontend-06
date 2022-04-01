@@ -3,20 +3,29 @@
 import * as S from './list.styles'
 import { getDate } from '../../../../../src/commons/libraries/utils';
 import {IBoardListUIProps} from './list.typescript'
+import  Pagination  from '../../../../commons/boardList/Pagination'
 
 export default function BoardListUI(props:IBoardListUIProps){
 
     return (
       <S.Wrap>
+        {/* 베스트 게시글 */}
+        <S.BoardTitle>베스트 게시글</S.BoardTitle>
+        <S.BestBoards>
          {props.dataBoardBest?.fetchBoardsOfTheBest.map((el) => (
         <S.BestBox key={el._id}>
-          <S.BestOne>             
-                  <div>{el.writer}</div>
-                  <div>{el.title}</div>
-                  <div>{el.contents}</div>
+            <S.BestImg src="/images/forest.jpg"/>             
+            <S.BestOne>
+              <S.BestTitle>{el.title}</S.BestTitle>
+              <S.BestWriterBox>
+                <S.BestWriterImg src="/profile-user.png"/>
+                <S.BestWriter>{el.writer}</S.BestWriter>
+              </S.BestWriterBox>
+              <S.BestCreatedAt>Date : {getDate(el.createdAt)}</S.BestCreatedAt>
           </S.BestOne>
         </S.BestBox>
          ))}
+         </S.BestBoards>
         <S.LineTop></S.LineTop>
         <S.Row>
           <S.ColumnNumberTH>번호</S.ColumnNumberTH>
@@ -40,6 +49,7 @@ export default function BoardListUI(props:IBoardListUIProps){
         </div>
         <S.LineBottom></S.LineBottom>
         <S.btnBox>
+          <Pagination data={props.data} refetch={props.refetch} lastPage={props.lastPage}/>
           <S.CreateBtn onClick={props.onClickList}>게시물 등록하기</S.CreateBtn>
         </S.btnBox>
       </S.Wrap>

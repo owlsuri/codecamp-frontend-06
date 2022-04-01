@@ -14,11 +14,6 @@ export default function Layout(props){
     const Body=styled.div`
 
     `
-    const LayoutSidebar=styled.div`
-        width: 200px;
-        background-color: #f8d894;
-    `
-
 
     return(
         <>
@@ -26,7 +21,6 @@ export default function Layout(props){
         <LayoutBanner />
         <LayoutNavigation />
         <BodyWrapper>
-            <LayoutSidebar> 사이드바</LayoutSidebar>
             <Body>{props.children}</Body>
         </BodyWrapper>
         <LayoutFooter />

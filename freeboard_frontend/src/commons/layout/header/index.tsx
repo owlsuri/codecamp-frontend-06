@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 export default function LayoutHeader(){
 
     const Wrapper=styled.div`
-        width: 1600px;
+        width: 1400px;
         height: 70px;
         background-color: black;
         font-weight: 600;

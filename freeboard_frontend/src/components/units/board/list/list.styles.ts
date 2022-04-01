@@ -6,11 +6,53 @@ export const Wrap = styled.div`
   width: 1200px;
   padding: 100px;
 `;
-export const BestBox = styled.div`
+export const BoardTitle = styled.div`
+font-size: 30px;
+font-weight: 600;
+padding: 0 0 30px 500px;
+`;
+export const BestCreatedAt = styled.div`
 
 `;
+export const BestBoards = styled.div`
+width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+`;
+export const BestBox = styled.div`
+  background: #FFFFFF;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+`;
+export const BestImg = styled.img`
+width: 220px;
+height: 110px;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+`;
 export const BestOne = styled.div`
-
+width: 220px;
+height: 110px;
+`;
+export const BestWriterImg = styled.img`
+width: 20px;
+height: 20px;
+`;
+export const BestWriterBox = styled.div`
+display: flex;
+align-items: center;
+`;
+export const BestWriter = styled.div`
+font-size: 16px;
+padding-left: 10px;
+`;
+export const BestTitle = styled.div`
+font-size: 18px;
+font-weight: 600;
 `;
 export const LineTop = styled.div`
 border-bottom: 1px solid black;
@@ -70,6 +112,7 @@ export const CreateBtn = styled.button`
   background-color: white;
   width: 171px;
   height: 52px;
+  border-radius: 15px;
 `;
 export const btnBox = styled.div`
   padding-top: 30px;

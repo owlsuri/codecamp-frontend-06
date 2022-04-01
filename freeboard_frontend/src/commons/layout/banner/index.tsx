@@ -7,7 +7,7 @@ import Slider from "react-slick";
 export default function LayoutBanner(){
 
     const Wrapper=styled.div`
-        width: 1600px;
+        width: 1400px;
         height: 300px;
         background-color: #000000;
     `

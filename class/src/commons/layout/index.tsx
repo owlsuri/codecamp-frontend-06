@@ -40,7 +40,6 @@ export default function Layout(props:ILayoutProps){
             <LayoutBanner />
             <LayoutNavigation />
             <BodyWrapper >
-                <LayoutSidebar>여기는 사이드바</LayoutSidebar>
                 <Body>{props.children}</Body>
             </BodyWrapper>   
             <LayoutFooter />     
