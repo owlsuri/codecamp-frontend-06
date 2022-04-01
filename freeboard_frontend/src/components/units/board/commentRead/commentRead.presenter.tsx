@@ -7,7 +7,7 @@ import * as S from './commentRead.styles'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { ICommentReadUIProps } from './CommentRead.types'
 import { Rate, Modal } from 'antd';
-
+import InfiniteScroll from "react-infinite-scroller";
 
 
 export default function CommentReadUI(props:ICommentReadUIProps){
@@ -15,7 +15,14 @@ export default function CommentReadUI(props:ICommentReadUIProps){
 
 
     return(
-        <div>
+
+        <div style={{height:"500px", overflow:"auto"}}>
+            <InfiniteScroll
+            pageStart={0}
+            loadMore={props.onLoadMore}
+            hasMore={true}
+            useWindow={false}
+            >
             {props.isOpenModal && (
                 <Modal visible={true} onOk={props.onClickDelete}>
                 <div>비밀번호 : </div>
@@ -54,6 +61,7 @@ export default function CommentReadUI(props:ICommentReadUIProps){
                 </S.CommentShowBox>               
             </S.Container>
             ))}
+        </InfiniteScroll>
         </div>
     )
 }

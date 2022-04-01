@@ -1,11 +1,16 @@
 // 게시물 리스트 스타일
-
 import styled from '@emotion/styled'
 
 
 export const Wrap = styled.div`
   width: 1200px;
   padding: 100px;
+`;
+export const BestBox = styled.div`
+
+`;
+export const BestOne = styled.div`
+
 `;
 export const LineTop = styled.div`
 border-bottom: 1px solid black;

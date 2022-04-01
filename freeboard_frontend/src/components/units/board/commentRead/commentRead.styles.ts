@@ -5,6 +5,21 @@ export const Container= styled.div`
     width: 1200px;
     margin-left: 100px;
 `;
+export const BestBox= styled.div`
+    width: 1200px;
+`;
+export const BestOne= styled.div`
+    width: 1200px;
+`;
+export const BestTwo= styled.div`
+    width: 1200px;
+`;
+export const BestThree= styled.div`
+    width: 1200px;
+`;
+export const BestFour= styled.div`
+    width: 1200px;
+`;
 export const PasswordInput = styled.input`
   width: 200px;
 `;

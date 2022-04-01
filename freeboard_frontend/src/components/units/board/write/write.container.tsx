@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./write.queries";
 import { FETCH_BOARD } from '../detail/read.queries'
 import BoardWriteUI from './write.presenter';
-import {IBoardWriteProps, IMyVariables, IMyUpdateBoardInput} from './write.typescript'
+import {IBoardWriteProps, IUpdateBoardInput} from './write.typescript'
 import { Modal } from 'antd';
 
 
@@ -172,15 +172,15 @@ export default function BoardWrite(props: IBoardWriteProps) {
         router.push(`/boards/${result.data.createBoard._id}`);
       }
     } catch (error) {
-       Modal.error({
-        content: error.message,
+        Modal.error({
+          content: error.message,
       });
     }
   };
 
   // 게시글 수정 버튼
   const onClickEdit = async (event: MouseEvent<HTMLButtonElement>) => {
-    try {
+  
     if (!password) {
       setPasswordError("비밀번호를 입력해주세요.")
       return;
@@ -188,38 +188,50 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if ((event.target as HTMLButtonElement).value !== "") {
       setPasswordError("");
     }
-    if(!title && !contents && !youtubeUrl){
-       Modal.error({
+    if (
+      !title &&
+      !contents &&
+      !youtubeUrl &&
+      !address &&
+      !addressDetail &&
+      !zipcode
+    ){
+      Modal.error({
         content: "수정한 내용이 없습니다.",
       });
       return;
     }
   
-    const myUpdateBoardInput: IMyUpdateBoardInput = {};
-
-    const myVariables:IMyVariables = {
-      updateBoardInput: myUpdateBoardInput,
-      boardId: router.query.boardId,
-      password
-    };
-
-    if (title) myUpdateBoardInput.title = title;
-    if (contents) myUpdateBoardInput.contents = contents;
-    if (youtubeUrl) myUpdateBoardInput.youtubeUrl = youtubeUrl;
-
-    await updateBoard({
-      variables: myVariables,
-    });
-    Modal.success({
-        content: '게시물 수정이 완료되었습니다!',
-    });
-    router.push(`/boards/${router.query.boardId}`);
-  } catch (error) {
-       Modal.error({
-        content: error.message,
-      });
+    const updateBoardInput: IUpdateBoardInput = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address) updateBoardInput.boardAddress.address = address;
+      if (addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
     }
-  };
+  
+ try {
+      await updateBoard({
+          variables: {
+            boardId: router.query.boardId,
+            password,
+            updateBoardInput,
+          },
+        });
+        Modal.success({
+            content: '게시물 수정이 완료되었습니다!',
+        });
+        router.push(`/boards/${router.query.boardId}`);
+        } catch (error) {
+            Modal.error({
+              content: error.message,
+            });
+          }
+        }
 
   return (
     <BoardWriteUI

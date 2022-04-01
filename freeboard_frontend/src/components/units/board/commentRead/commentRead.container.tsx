@@ -16,10 +16,29 @@ export default function CommentRead(){
     const [boardCommentId, setBoardCommentId] = useState("");
     const [password, setPassword] = useState("");
 
-    const { data } = useQuery<Pick<IQuery,'fetchBoardComments'>,IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
+    const { data, fetchMore } = useQuery<Pick<IQuery,'fetchBoardComments'>,IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
         variables: { boardId: String(router.query.boardId)},
     });
     
+
+    const onLoadMore = () => {
+        if (!data) return; // 처음엔 data가 존재하지 않기 때문에 return 요청
+
+        fetchMore({
+        variables: { page: Math.ceil(data.fetchBoardComments.length / 10) + 1 },
+        updateQuery: (prev, { fetchMoreResult }) => {
+            if (!fetchMoreResult?.fetchBoardComments)
+            return { fetchBoardComments: [...prev.fetchBoardComments] };
+
+            return {
+            fetchBoardComments: [
+                ...prev.fetchBoardComments,
+                ...fetchMoreResult.fetchBoardComments,
+            ],
+            };
+        },
+        });
+    };
 
     const [deleteBoardComment] = useMutation<Pick<IMutation,'deleteBoardComment'>,IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT);
 
@@ -80,5 +99,6 @@ export default function CommentRead(){
         onClickOpenModal={onClickOpenModal}
         onChangeDeletePassword={onChangeDeletePassword}
         isOpenModal={isOpenModal}
+        onLoadMore={onLoadMore}
     />)
 }

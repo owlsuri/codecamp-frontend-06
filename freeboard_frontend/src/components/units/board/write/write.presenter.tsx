@@ -69,7 +69,6 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
                         </Modal>
                            )}
 
-
         </S.PostNum>
         <S.InsertAddress type={"text"} value={props.address || props.data?.fetchBoard.boardAddress?.address || ""} readOnly></S.InsertAddress>
         <S.InsertAddress onChange={props.onChangeAddressDetail} defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail || ""} type={"text"} ></S.InsertAddress>

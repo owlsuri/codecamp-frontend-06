@@ -11,9 +11,15 @@ export interface IMyVariables {
   boardId: any
 }
 
-export interface IMyUpdateBoardInput {
+export interface IUpdateBoardInput {
   title?: string
   contents?: string
+  youtubeUrl?: string;
+  boardAddress?: {
+    zipcode?: string;
+    address?: string;
+    addressDetail?: string;
+  };
 }
 
 // 프리젠터

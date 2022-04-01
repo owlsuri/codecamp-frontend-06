@@ -8,6 +8,15 @@ export default function BoardListUI(props:IBoardListUIProps){
 
     return (
       <S.Wrap>
+         {props.dataBoardBest?.fetchBoardsOfTheBest.map((el) => (
+        <S.BestBox key={el._id}>
+          <S.BestOne>             
+                  <div>{el.writer}</div>
+                  <div>{el.title}</div>
+                  <div>{el.contents}</div>
+          </S.BestOne>
+        </S.BestBox>
+         ))}
         <S.LineTop></S.LineTop>
         <S.Row>
           <S.ColumnNumberTH>번호</S.ColumnNumberTH>

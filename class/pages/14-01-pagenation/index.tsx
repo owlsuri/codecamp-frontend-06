@@ -1,17 +1,16 @@
 //게시글 목록 - boards
-import { useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 import styled from '@emotion/styled'
 
 const FETCH_BOARDS = gql`
-  query fetchBoard($page: Int) {
-    fetchBoards(page: $page){
-      _id
-      writer
-      title
-      contents
+    query fetchBoard($page: Int) {
+        fetchBoards(page: $page){
+        _id
+        writer
+        title
+        contents
+        }
     }
-  }
 `;
 
 const MyRow = styled.div`

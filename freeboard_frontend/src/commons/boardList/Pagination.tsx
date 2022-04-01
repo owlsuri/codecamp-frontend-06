@@ -56,7 +56,7 @@ export default function Pagination(props) {
               }}
             >
               {" "}
-              {index + startPage}
+              {startPage + index}
             </span>
           )
       )}

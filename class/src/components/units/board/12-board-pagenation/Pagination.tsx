@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function Pagination(props){
 
-console.log(props)
+
 
     const [startPage, setStartPage] = useState(1)
 
