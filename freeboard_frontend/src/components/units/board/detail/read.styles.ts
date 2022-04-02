@@ -159,6 +159,8 @@ export const MenuBtn = styled.button`
   background-color: #ffffff;
   margin: 20px;
   border: 1px solid #bdbdbd;
-
-  cursor: pointer;
+    :hover{
+    background-color: #ffd600;
+    cursor: pointer;
+  }
 `;

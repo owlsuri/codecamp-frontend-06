@@ -7,7 +7,7 @@ import { FETCH_BOARD_COMMENTS } from "../commentRead/commentRead.queries";
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
 import { ICommentWriteProps, IMyVariables, ImyUpdateBoardCommentInput } from './commentWrite.types'
-import { IMutation, IMutationCreateBoardCommentArgs, IMutationUpdateBoardCommentArgs } from "../../../../commons/types/generated/types";
+import { IMutation, IQuery, IMutationCreateBoardCommentArgs, IMutationUpdateBoardCommentArgs,IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types";
 import { Modal } from 'antd';
 
 export default function CommentWrite(props:ICommentWriteProps) {
@@ -20,7 +20,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
 
     const [createBoardComment] = useMutation<Pick<IMutation,'createBoardComment'>,IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT);
     const [updateBoardComment] = useMutation<Pick<IMutation,'updateBoardComment'>,IMutationUpdateBoardCommentArgs>(UPDATE_BOARD_COMMENT);
-    const { data } = useQuery(FETCH_BOARD_COMMENTS, {
+    const { data } = useQuery<Pick<IQuery,'fetchBoardComments'>,IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
         variables: { boardCommentId: router.query.boardCommentId },
         });
     
@@ -96,6 +96,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
             setValue(3)
 
         } catch(error){
+            if (error instanceof Error)
             Modal.error({
                 content: error.message,
             });
@@ -110,21 +111,28 @@ export default function CommentWrite(props:ICommentWriteProps) {
             });
             return;
         }
+        if (!contents) {
+            Modal.error({
+                content: '수정한 내용이 없습니다.',
+            });
+            return;
+        }
         
         const myUpdateBoardCommentInput: ImyUpdateBoardCommentInput = {
             contents,
-            rating
+            rating:value,
         }
 
         const MyVariables : IMyVariables = {
             updateBoardCommentInput: myUpdateBoardCommentInput,
-            boardCommentId:router.query.boardCommentId,
+            boardCommentId:props.el?._id,
             password
         }
         
         if (!value) myUpdateBoardCommentInput.rating = value;
         if (contents !== "") myUpdateBoardCommentInput.contents = contents;
-        
+
+        try{
         await updateBoardComment({
             variables: MyVariables,
         })
@@ -132,7 +140,14 @@ export default function CommentWrite(props:ICommentWriteProps) {
         Modal.success({
             content: '댓글 수정이 완료되었습니다!',
         });
+        props.setIscommnetEdit?.(false)
         router.push(`/boards/${router.query.boardId}`);
+        } catch(error){
+            if(error instanceof Error)
+            Modal.error({
+                content: error.message,
+            });            
+        }
     }
 
 

@@ -30,7 +30,8 @@ export default function Pagination(props) {
 
   return (
     <S.Wrapper>
-      <S.Pre onClick={onClickPrevPage} color={startPage === 1 ? "lightgray" : "black"}>
+      <S.Pre onClick={onClickPrevPage} 
+      style={{ color: startPage === 1 ? "lightgray" : "black"}}>    
         ◀
       </S.Pre>
 
@@ -53,8 +54,7 @@ export default function Pagination(props) {
       )}
       <S.Next
         onClick={onClickNextPage}
-        color={startPage + 10 > props.lastPage ? "lightgray" : "black"}
-      >
+        style={{ color: startPage + 10 > props.lastPage ? "lightgray" : "black"}}>
         ▶
       </S.Next>
     </S.Wrapper>

@@ -5,14 +5,14 @@ import { useRouter } from "next/router";
 import { MouseEvent } from "react";
 import { FETCH_BOARDS_BEST, FETCH_BOARDS_COUNT, FETCH_BOARDS } from './list.queries'
 import { useQuery } from '@apollo/client';
-
+import { IQuery, IQueryFetchBoardsArgs, IQueryFetchBoardsCountArgs} from '../../../../commons/types/generated/types';
 
 
 export default function BoardList(){
     
     const { data, refetch } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(FETCH_BOARDS)
-    const { data:dataBoardsCount } = useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(FETCH_BOARDS_COUNT)
-    const { data: dataBoardBest } = useQuery(FETCH_BOARDS_BEST)
+    const { data: dataBoardsCount } = useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(FETCH_BOARDS_COUNT)
+    const { data: dataBoardBest } = useQuery<Pick<IQuery, "fetchBoardsOfTheBest">> (FETCH_BOARDS_BEST)
 
     const lastPage = Math.ceil(dataBoardsCount?.fetchBoardsCount / 10)
     
@@ -20,7 +20,7 @@ export default function BoardList(){
 
     const onClickDetail = (event:MouseEvent<HTMLDivElement>) =>{
       if (event.target instanceof Element)
-        router.push(`/boards/${event.target.id}`);
+        router.push(`/boards/${event.currentTarget.id}`);
     } 
 
     const onClickList = () =>{
@@ -34,7 +34,6 @@ export default function BoardList(){
         lastPage={lastPage}
         onClickList={onClickList}
         onClickDetail={onClickDetail}
-        id
         dataBoardBest={dataBoardBest}
         dataBoardsCount={dataBoardsCount}
       />

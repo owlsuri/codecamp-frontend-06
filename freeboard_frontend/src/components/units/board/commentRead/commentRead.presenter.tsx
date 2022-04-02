@@ -1,67 +1,34 @@
-// 댓글 보여주기 프레젠터
+// 코멘트 리스트 프레젠터
 
-import { getDate } from "../../../../commons/libraries/utils";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faX } from "@fortawesome/free-solid-svg-icons";
-import * as S from './commentRead.styles'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { ICommentReadUIProps } from './CommentRead.types'
-import { Rate, Modal } from 'antd';
+import CommentReadITem from './commentRead.presenterItem'
 import InfiniteScroll from "react-infinite-scroller";
-
+import {ICommentReadUIProps} from './CommentRead.types'
 
 export default function CommentReadUI(props:ICommentReadUIProps){
 
-
-
     return(
-
-        <div style={{height:"500px", overflow:"auto"}}>
-            <InfiniteScroll
-            pageStart={0}
-            loadMore={props.onLoadMore}
-            hasMore={true}
-            useWindow={false}
-            >
-            {props.isOpenModal && (
-                <Modal visible={true} onOk={props.onClickDelete}>
-                <div>비밀번호 : </div>
-                <S.PasswordInput
-                    type="password"
-                    onChange={props.onChangeDeletePassword}
+        <>
+            <div style={{height:"500px", overflow:"auto"}}>
+                <InfiniteScroll
+                    pageStart={0}
+                    onLoadMore={props.onLoadMore}
+                    hasMore={true}
+                    useWindow={false}
+                >
+            {props.data?.fetchBoardComments.map((el) => (
+                <CommentReadITem key={el._id} el={el} 
+                onClickWhoWrite={props.onClickWhoWrite}
+                FETCH_BOARD_COMMENTS={props.FETCH_BOARD_COMMENTS}
+                isOpenModal={props.isOpenModal}
+                onClickOpenModal={props.onClickOpenModal}
+                onChangeDeletePassword={props.onChangeDeletePassword}
+                onClickDelete={props.onClickDelete}
+                handleCancel={props.handleCancel}
+                deleteBoardComment={props.deleteBoardComment}
                 />
-                </Modal>
-            )}
-            {props.data?.fetchBoardComments
-            .map((el:any) => (
-            <S.Container key={el._id} id={el.writer} onClick={props.onClickWhoWrite} >        
-                <S.CommentShowBox >                
-                    <S.CommentUserImg>
-                        <AccountCircleIcon fontSize="large" color="disabled" />
-                    </S.CommentUserImg>
-                    <S.CommentDescBox>           
-                        <S.CommentUserInfo>
-                            <S.CommentUserProfile>
-                            <S.CommentUserName>{el.writer}</S.CommentUserName>
-                            {/* 별 */}
-                            <S.CommentStar>
-                                <Rate value={el?.rating} disabled></Rate>
-                            </S.CommentStar>
-                            </S.CommentUserProfile>
-                            <S.CommentIcon>
-                            <FontAwesomeIcon onClick={props.onClickToEdit} icon={faPencil}  color="#BDBDBD" />
-                            <FontAwesomeIcon id={el._id} onClick={props.onClickOpenModal} icon={faX} color="#BDBDBD" />
-                            </S.CommentIcon>
-                        </S.CommentUserInfo>
-                        <S.CommentDesc>
-                            <S.Comment>{el.contents}</S.Comment>
-                            <S.CommentDate>{getDate(el.createdAt)}</S.CommentDate>
-                        </S.CommentDesc>
-                    </S.CommentDescBox>                 
-                </S.CommentShowBox>               
-            </S.Container>
             ))}
-        </InfiniteScroll>
-        </div>
+            </InfiniteScroll>
+        </div> 
+        </>
     )
 }

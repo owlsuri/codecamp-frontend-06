@@ -1,4 +1,3 @@
-import { CreateAt } from './../detail/read.styles';
 import { gql } from '@apollo/client'
 
 export const FETCH_BOARDS = gql`
@@ -26,6 +25,7 @@ export const FETCH_BOARDS_BEST = gql`
     title
     contents
     createdAt
+    likeCount
   }
 }
 `;

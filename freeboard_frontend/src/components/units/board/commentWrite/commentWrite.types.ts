@@ -5,6 +5,7 @@ import { ChangeEvent } from "react";
 // 컨테이너
 export interface ICommentWriteProps{
     isCommentEdit: boolean
+    setIscommnetEdit:boolean
 }
 
 // 프리젠터
@@ -23,7 +24,10 @@ export interface ICommentWriteUIProps{
     contents?: String
     rating: number
     handleChange : any
-    boardCommentId: any
+    boardCommentId: string
+    value?:number
+    
+    
 }
 
 export interface IMyVariables{

@@ -1,6 +1,5 @@
 import { ChangeEvent, MouseEvent } from "react";
 
-// 컨테이너
 export interface IBoardWriteProps{
     isEdit:boolean
 }
@@ -29,6 +28,7 @@ export interface IBoardWriteUIProps{
     onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void
     onChangePassword:(event: ChangeEvent<HTMLInputElement>) => void
     onChangeYoutube:(event: ChangeEvent<HTMLInputElement>) => void
+    onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void
     onClickSubmit: () => void    
     onClickEdit:(event: MouseEvent<HTMLButtonElement>) => void
     writerError: string
@@ -43,11 +43,11 @@ export interface IBoardWriteUIProps{
     handleCancel: () => void
     handleComplete: () => void
     isOpen:boolean
-    boardAddress?:{
-      address?: string
-      zipcode?: string
-      addressDetail?:string
-    }
+    boardAddress?:any
+    address?: any
+    zipcode?: any
+    addressDetail?:string
+    
 
 }
 

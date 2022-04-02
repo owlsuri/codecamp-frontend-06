@@ -5,21 +5,6 @@ export const Container= styled.div`
     width: 1200px;
     margin-left: 100px;
 `;
-export const BestBox= styled.div`
-    width: 1200px;
-`;
-export const BestOne= styled.div`
-    width: 1200px;
-`;
-export const BestTwo= styled.div`
-    width: 1200px;
-`;
-export const BestThree= styled.div`
-    width: 1200px;
-`;
-export const BestFour= styled.div`
-    width: 1200px;
-`;
 export const PasswordInput = styled.input`
   width: 200px;
 `;
@@ -34,7 +19,6 @@ export const CommentShowBox= styled.div`
 `;
 export const CommentUserName= styled.div`
     font-weight: 600;
-
 `;
 export const CommentUserInfo= styled.div`
     display: flex;

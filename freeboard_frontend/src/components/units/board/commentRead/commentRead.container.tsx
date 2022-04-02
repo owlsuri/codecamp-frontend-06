@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
 import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from './commentRead.queries'
 import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "../../../../commons/types/generated/types";
-import { MouseEvent, ChangeEvent, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { Modal } from 'antd';
 
 
@@ -42,19 +42,15 @@ export default function CommentRead(){
 
     const [deleteBoardComment] = useMutation<Pick<IMutation,'deleteBoardComment'>,IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT);
 
-    const onClickWhoWrite = (event:MouseEvent<HTMLButtonElement>) =>{        
+    const onClickWhoWrite = (event:MouseEvent<HTMLDivElement>) =>{        
         Modal.info({
                 content: `${event.currentTarget.id}님이 작성한 댓글입니다.`,
             });  
     }
 
-    // 댓글 수정하러가기 버튼
-    const onClickToEdit = (event:MouseEvent<HTMLButtonElement>) => {
-        router.push(`/boards/${router.query.boardCommentId}`)
-    }
 
     // 댓글 삭제하기 버튼
-    const onClickDelete = async () =>{
+    const onClickDelete = async (event:MouseEvent<SVGSVGElement>) =>{
         try {
             await deleteBoardComment({
                 variables: { boardCommentId, 
@@ -75,6 +71,7 @@ export default function CommentRead(){
             router.push(`/boards/${router.query.boardId}`);
 
         } catch (error) {
+            if(error instanceof Error)
             Modal.error({
                 content: error.message,
             });
@@ -86,19 +83,23 @@ export default function CommentRead(){
         if(event.target instanceof Element) setBoardCommentId(event.target.id)
     }
 
-    function onChangeDeletePassword(event: ChangeEvent<HTMLInputElement>){
+    function onChangeDeletePassword(event:MouseEvent<SVGSVGElement>){
         setPassword(String(event.target.value))
     }
+    const handleCancel = (event:MouseEvent<HTMLButtonElement>) => {
+        setIsOpenModal(false);
+    };
 
 
     return(<CommentReadUI 
         data={data}
-        onClickToEdit={onClickToEdit}
-        onClickDelete={onClickDelete}
         onClickWhoWrite={onClickWhoWrite}
+        onLoadMore={onLoadMore}
+        deleteBoardComment={deleteBoardComment}
+        isOpenModal={isOpenModal}
         onClickOpenModal={onClickOpenModal}
         onChangeDeletePassword={onChangeDeletePassword}
-        isOpenModal={isOpenModal}
-        onLoadMore={onLoadMore}
+        onClickDelete={onClickDelete}
+        handleCancel={handleCancel}
     />)
 }

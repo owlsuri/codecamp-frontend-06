@@ -12,27 +12,35 @@ export default function BoardListUI(props:IBoardListUIProps){
         {/* 베스트 게시글 */}
         <S.BoardTitle>베스트 게시글</S.BoardTitle>
         <S.BestBoards>
-         {props.dataBoardBest?.fetchBoardsOfTheBest.map((el) => (
-        <S.BestBox key={el._id}>
+        {props.dataBoardBest?.fetchBoardsOfTheBest.map((el:any) => (
+        <S.BestBox key={el._id} id={el._id} onClick={props.onClickDetail} >
             <S.BestImg src="/images/forest.jpg"/>             
             <S.BestOne>
-              <S.BestTitle>{el.title}</S.BestTitle>
-              <S.BestWriterBox>
-                <S.BestWriterImg src="/profile-user.png"/>
-                <S.BestWriter>{el.writer}</S.BestWriter>
-              </S.BestWriterBox>
-              <S.BestCreatedAt>Date : {getDate(el.createdAt)}</S.BestCreatedAt>
+              <S.BestTitle>{el.title.slice(0,15)}</S.BestTitle>
+              <S.BestInfo>
+                <div>
+                  <S.BestWriterBox>
+                    <S.BestWriterImg src="/profile-user.png"/>
+                    <S.BestWriter>{el.writer}</S.BestWriter>
+                  </S.BestWriterBox>
+                  <S.BestCreatedAt>Date : {getDate(el.createdAt)}</S.BestCreatedAt>
+                </div>
+                <S.BestLike>
+                  <S.BestLikeIcon />
+                  <S.BestLikeNum>{el.likeCount}</S.BestLikeNum>
+                </S.BestLike>
+              </S.BestInfo>
           </S.BestOne>
         </S.BestBox>
-         ))}
-         </S.BestBoards>
+        ))}
+        </S.BestBoards>
         <S.LineTop></S.LineTop>
-        <S.Row>
+        <S.ThRow>
           <S.ColumnNumberTH>번호</S.ColumnNumberTH>
           <S.ColumnTitleTH>제목</S.ColumnTitleTH>
           <S.ColumnWriterTH>작성자</S.ColumnWriterTH>
           <S.ColumnDateTH>날짜</S.ColumnDateTH>
-        </S.Row>
+        </S.ThRow>
         
         <div>
           {props.data?.fetchBoards

@@ -61,6 +61,7 @@ export default function BoardRead(props:IBoardReadProps){
         console.log(result)
 
       } catch (error) {
+        if(error instanceof Error)
         Modal.error({
           content: error.message,
         });

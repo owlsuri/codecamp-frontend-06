@@ -172,6 +172,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
         router.push(`/boards/${result.data.createBoard._id}`);
       }
     } catch (error) {
+      if (error instanceof Error)
         Modal.error({
           content: error.message,
       });
@@ -227,10 +228,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
         });
         router.push(`/boards/${router.query.boardId}`);
         } catch (error) {
+          if (error instanceof Error)
             Modal.error({
               content: error.message,
-            });
-          }
+          });
+        }
         }
 
   return (

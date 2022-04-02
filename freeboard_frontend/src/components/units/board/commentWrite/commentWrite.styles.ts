@@ -1,5 +1,4 @@
-// 댓글보여주기 스타일
-
+// 댓글쓰기 스타일
 import styled from "@emotion/styled";
 
 
@@ -8,7 +7,7 @@ export const Container= styled.div`
     margin: 0px 100px 0px 100px;
 `;
 export const CommentBox= styled.div`
-    
+
 `;
 export const CommentTitleBox= styled.div`
     display: flex;

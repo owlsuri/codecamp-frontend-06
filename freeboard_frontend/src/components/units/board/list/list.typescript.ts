@@ -7,4 +7,8 @@ export interface IBoardListUIProps{
     onClickDetail: (event:MouseEvent<HTMLDivElement>) => void
     onClickList: () => void
     id?:any
+    refetch:any
+    lastPage:number
+    dataBoardBest:any
+    dataBoardsCount:any
 }

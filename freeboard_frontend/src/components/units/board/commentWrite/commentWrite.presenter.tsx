@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 import * as S from './commentWrite.styles'
 import {ICommentWriteUIProps} from './commentWrite.types'
-import React from 'react';
 import { Rate } from 'antd';
 
 
@@ -36,7 +35,7 @@ export default function CommentUI(props:ICommentWriteUIProps){
                 <S.CommentInputBottom>
                     <S.CommentCount>{props.contents.length}/100</S.CommentCount>
                     <S.CommentInputBtn onClick={props.isCommentEdit ? props.OnClickCommentEdit : props.onClickComment}
-                                        isActive={props.isEdit ? true : props.isActive}>
+                                        isActive={props.isCommentEdit ? true : props.isActive}>
                                         {props.isCommentEdit ? "수정" : "등록"}하기
                                         </S.CommentInputBtn>
                 </S.CommentInputBottom>          
