@@ -16,7 +16,7 @@ export default function BoardListUI(props:IBoardListUIProps){
         <S.BestBox key={el._id} id={el._id} onClick={props.onClickDetail} >
             <S.BestImg src="/images/forest.jpg"/>             
             <S.BestOne>
-              <S.BestTitle>{el.title.slice(0,15)}</S.BestTitle>
+              <S.BestTitle>{el.title}</S.BestTitle>
               <S.BestInfo>
                 <div>
                   <S.BestWriterBox>
@@ -34,6 +34,10 @@ export default function BoardListUI(props:IBoardListUIProps){
         </S.BestBox>
         ))}
         </S.BestBoards>
+        <S.Search>
+          <S.SearchBox placeholder='제목을 검색해주세요' />
+          <S.SearchBtn>검색하기</S.SearchBtn>
+        </S.Search>
         <S.LineTop></S.LineTop>
         <S.ThRow>
           <S.ColumnNumberTH>번호</S.ColumnNumberTH>
@@ -58,7 +62,7 @@ export default function BoardListUI(props:IBoardListUIProps){
         <S.LineBottom></S.LineBottom>
         <S.btnBox>
           <Pagination data={props.data} refetch={props.refetch} lastPage={props.lastPage}/>
-          <S.CreateBtn onClick={props.onClickList}>게시물 등록하기</S.CreateBtn>
+          <S.CreateBtn onClick={props.onClickWrite}>게시물 등록하기</S.CreateBtn>
         </S.btnBox>
       </S.Wrap>
     );

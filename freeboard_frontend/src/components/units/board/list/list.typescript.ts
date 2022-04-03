@@ -5,7 +5,7 @@ import { MouseEvent } from "react"
 export interface IBoardListUIProps{
     data:any
     onClickDetail: (event:MouseEvent<HTMLDivElement>) => void
-    onClickList: () => void
+    onClickWrite: () => void
     id?:any
     refetch:any
     lastPage:number

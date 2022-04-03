@@ -1,4 +1,5 @@
 // 게시물 리스트 스타일
+
 import styled from '@emotion/styled'
 import {LikeOutlined} from '@ant-design/icons'
 
@@ -33,12 +34,12 @@ export const BestBox = styled.div`
   cursor: pointer;
 `;
 export const BestInfo = styled.div`
- display: flex;
- justify-content: space-between;
- padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
 `;
 export const BestLike = styled.div`
-  color:#ffd600;
+  color:#6888B2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,6 +79,31 @@ export const BestTitle = styled.div`
   font-size: 16px;
   font-weight: 600;
   padding-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+export const Search = styled.div`
+  width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 30px;
+`;
+export const SearchBox = styled.input`
+  width: 776px;
+  height: 52px;
+  background-color: #F2F2F2;
+  border: none;
+  border-radius: 10px;
+  padding-left: 10px;
+`;
+export const SearchBtn = styled.button`
+  width: 94px;
+  height: 52px;
+  background-color: black;
+  color: white;
 `;
 export const LineTop = styled.div`
   border-bottom: 1px solid black;
@@ -107,6 +133,9 @@ export const ColumnTitle = styled.div`
   width: 500px;
   text-align: center;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const ColumnNumber = styled.div`
   width: 120px;
@@ -138,7 +167,7 @@ export const Row = styled.div`
 
   align-items: center;  
   :hover{
-    color: #ffd600;
+    color:#6888B2;
     cursor: pointer;
   }
 `;
@@ -149,10 +178,12 @@ export const LineBottom = styled.div`
 export const CreateBtn = styled.button`
   background-color: white;
   width: 171px;
-  height: 52px;
+  height: 50px;
   border-radius: 15px;
+  border: 1px solid gray;
   :hover{
-    background-color: #ffd600;
+    background-color: #6888B2;
+    color: white;
     cursor: pointer;
   }
 `;
@@ -161,4 +192,5 @@ export const btnBox = styled.div`
   width: 1200px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 `;

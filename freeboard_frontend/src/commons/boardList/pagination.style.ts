@@ -16,5 +16,6 @@ export const Next = styled.span`
   text-align: center;
 `;
 export const PageNum = styled.div`
-
+  font-size: 15px;
+  cursor: pointer;
 `;

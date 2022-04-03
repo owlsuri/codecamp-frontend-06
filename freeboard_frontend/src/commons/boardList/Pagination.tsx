@@ -44,7 +44,7 @@ export default function Pagination(props) {
               id={String(index + startPage)}
               current={startPage + index === current}
               style={{
-                color: current === startPage + index ? "red" : "black",
+                color: current === startPage + index ? "#6888B2" : "black",
                 fontWeight: current === startPage + index ? "700" : "400"
               }}
             >

@@ -15,7 +15,7 @@ export default function CommentUI(props:ICommentWriteUIProps){
         {/* 작성자 입력 부분 */}
             <S.CommentBox>
                 <S.CommentTitleBox>
-                <FontAwesomeIcon icon={faComment} color="#ffd600" />
+                <FontAwesomeIcon icon={faComment} color="#6888B2" />
                 <S.CommentTitle >{props.isCommentEdit ? "댓글수정" : "댓글"}</S.CommentTitle>
                 </S.CommentTitleBox>
                 <S.CommentUser>

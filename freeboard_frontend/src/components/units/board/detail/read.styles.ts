@@ -10,7 +10,7 @@ export const Container = styled.div`
 `;
 export const Wrapper = styled.div`
   width: 1200px;
-  padding: 30px 100px 60px 100px;
+  padding: 70px 100px 60px 100px;
   border: 1px solid #bdbdbd;
   box-shadow: 5px 3px 3px #bdbdbd;
 `;
@@ -31,6 +31,7 @@ export const Box = styled.div`
 `;
 export const Address = styled.div`
   color: #ffffff;
+  text-align: center;
 `;
 export const Tail = styled.div`
   width: 0px;
@@ -114,7 +115,7 @@ export const Like = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #ffd600;
+  color: #6888B2;
   cursor: pointer;
 `;
 
@@ -125,7 +126,7 @@ export const LikeIcon = styled(LikeOutlined)`
 export const LikeNum = styled.div`
   padding-top: 5px;
   font-weight: 600;
-  color: #ffd600;
+  color: #6888B2;
 `;
 export const DisLike = styled.div`
   margin-right: 50px;
@@ -160,7 +161,8 @@ export const MenuBtn = styled.button`
   margin: 20px;
   border: 1px solid #bdbdbd;
     :hover{
-    background-color: #ffd600;
+    background-color: #6888B2;
+    color:white;
     cursor: pointer;
   }
 `;

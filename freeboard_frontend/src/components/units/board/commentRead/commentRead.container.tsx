@@ -80,11 +80,11 @@ export default function CommentRead(){
 
     function onClickOpenModal(event: MouseEvent<HTMLImageElement>){
         setIsOpenModal(true);
-        if(event.target instanceof Element) setBoardCommentId(event.target.id)
+        if(event.currentTarget instanceof Element) setBoardCommentId(event.currentTarget.id)
     }
 
     function onChangeDeletePassword(event:MouseEvent<SVGSVGElement>){
-        setPassword(String(event.target.value))
+        setPassword(String(event.currentTarget.value))
     }
     const handleCancel = (event:MouseEvent<HTMLButtonElement>) => {
         setIsOpenModal(false);

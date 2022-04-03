@@ -131,8 +131,8 @@ export const MainRadio2 = styled.input`
 export const SubmitBtn = styled.button`
   width: 179px;
   height: 52px;
-  background-color: ${(props:IEditButtonProps) => (props.isActive ? "#ffd600" : "none")};
-  color: black;
+  background-color: ${(props:IEditButtonProps) => (props.isActive ? "#6888B2" : "none")};
+  color: ${(props:IEditButtonProps) => (props.isActive ? "white" : "black")};
   font-weight: 700;
   border: none;
   cursor: pointer;

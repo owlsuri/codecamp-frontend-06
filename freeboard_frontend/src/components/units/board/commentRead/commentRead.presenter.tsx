@@ -15,7 +15,7 @@ export default function CommentReadUI(props:ICommentReadUIProps){
                     hasMore={true}
                     useWindow={false}
                 >
-            {props.data?.fetchBoardComments.map((el) => (
+            {props.data?.fetchBoardComments.map((el:any) => (
                 <CommentReadITem key={el._id} el={el} 
                 onClickWhoWrite={props.onClickWhoWrite}
                 FETCH_BOARD_COMMENTS={props.FETCH_BOARD_COMMENTS}

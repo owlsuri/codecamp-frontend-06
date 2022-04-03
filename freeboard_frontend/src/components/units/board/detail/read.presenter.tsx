@@ -7,7 +7,7 @@ import { getDate } from "../../../../commons/libraries/utils";
 import {IBoardReadUIProps} from './read.typescript'
 import React from 'react'
 import ReactPlayer from "react-player";
-
+import { Tooltip } from 'antd';
 
 
 export default function BoardReadUI(props:IBoardReadUIProps) {
@@ -15,15 +15,6 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
   return (
     <S.Container>
       <S.Wrapper>
-    {/* 주소 */}
-        <S.LocationBox>
-          <S.Box>
-            <S.Address>{props.data?.fetchBoard?.boardAddress?.address}</S.Address>
-            <S.Address>{props.data?.fetchBoard?.boardAddress?.addressDetail}</S.Address>
-          </S.Box>
-          <S.Tail></S.Tail>
-        </S.LocationBox>
-
     {/* 작성자 정보 및 헤더 */}
         <S.WriterBox>
           <S.WriterSection>
@@ -40,8 +31,11 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
     
     {/* 왼쪽상단 아이콘 */}
           <S.Icons>
-            <S.Clip src="/clip.png" />
-            <S.Location src="/location.png" />
+            <S.Clip src="/movie.png" />
+            <Tooltip title={`${props.data?.fetchBoard?.boardAddress?.address}
+                    ${props.data?.fetchBoard?.boardAddress?.addressDetail}`}>                    
+            <S.Location src="/pin.png" />
+            </Tooltip>
           </S.Icons>
         </S.WriterBox>
 

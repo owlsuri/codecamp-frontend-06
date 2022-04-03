@@ -6,10 +6,10 @@ export default function LayoutHeader(){
     const Wrapper=styled.div`
         width: 1400px;
         height: 70px;
-        background-color: black;
+        background-color: white;
         font-weight: 600;
         padding-left: 30px;
-        color: white;
+        color: #6888B2;
         display: flex;
         align-items: center;
         font-size: 20px;
@@ -17,7 +17,7 @@ export default function LayoutHeader(){
 
     return(
         <Wrapper>
-            Suri의 게시판 입니다 :D
+            <img src="/owl.png"/>     
         </Wrapper>
     )
 }

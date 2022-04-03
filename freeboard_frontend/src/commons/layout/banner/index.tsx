@@ -8,8 +8,8 @@ export default function LayoutBanner(){
 
     const Wrapper=styled.div`
         width: 1400px;
-        height: 300px;
-        background-color: #000000;
+        height: 350px;
+        background-color:white;
     `
 
         const Img=styled.img`

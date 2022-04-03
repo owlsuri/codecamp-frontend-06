@@ -23,7 +23,7 @@ export default function BoardList(){
         router.push(`/boards/${event.currentTarget.id}`);
     } 
 
-    const onClickList = () =>{
+    const onClickWrite = () =>{
         router.push(`/boards/new`);
     }
 
@@ -32,7 +32,7 @@ export default function BoardList(){
         data={data}
         refetch={refetch}
         lastPage={lastPage}
-        onClickList={onClickList}
+        onClickWrite={onClickWrite}
         onClickDetail={onClickDetail}
         dataBoardBest={dataBoardBest}
         dataBoardsCount={dataBoardsCount}

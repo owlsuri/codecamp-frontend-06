@@ -6,10 +6,10 @@ import { faPencil, faX } from "@fortawesome/free-solid-svg-icons";
 import * as S from './commentRead.styles'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Rate, Modal } from 'antd';
-import { useState } from "react";
+import { useState, MouseEvent  } from "react";
 import CommentWrite from "../commentWrite/commentWrite.container";
 import {ICommentReadItemProps} from './CommentRead.types'
-import { MouseEvent } from "react";
+
 
 
 export default function CommentReadItem(props:ICommentReadItemProps){

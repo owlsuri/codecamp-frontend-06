@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 import LayoutBanner from "./banner";
 import LayoutHeader from "./header";
 import LayoutFooter from "./footer";
-import LayoutNavigation from "./navigation";
+import LayoutNavigation from "./navigation/navigation.container";
 
 export default function Layout(props){
 
