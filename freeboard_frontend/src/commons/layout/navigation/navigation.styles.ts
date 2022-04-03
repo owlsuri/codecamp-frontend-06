@@ -15,4 +15,7 @@ export const Wrapper=styled.div`
 
 export const MenuItem=styled.div`
     cursor: pointer;
+    :hover{
+        color:black;
+    }
     `

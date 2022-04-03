@@ -168,6 +168,7 @@ export const Row = styled.div`
   align-items: center;  
   :hover{
     color:#6888B2;
+    font-weight: 600;
     cursor: pointer;
   }
 `;
