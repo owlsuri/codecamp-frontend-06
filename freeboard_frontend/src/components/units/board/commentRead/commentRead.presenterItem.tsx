@@ -32,6 +32,7 @@ export default function CommentReadItem(props:ICommentReadItemProps){
                 />
                 </Modal>
             )}
+        {/* isCommentEdit={false} */}
         {!isCommentEdit && (                
                 <S.Container key={props.el?._id} id={props.el?.writer} onClick={props.onClickWhoWrite} >        
                     <S.CommentShowBox >                
@@ -58,9 +59,9 @@ export default function CommentReadItem(props:ICommentReadItemProps){
                             </S.CommentDesc>
                         </S.CommentDescBox>                 
                     </S.CommentShowBox>               
-                </S.Container>    
- 
-            )}          
+                </S.Container>     
+            )}
+            {/* isCommentEdit={true} */}          
             {isCommentEdit && (
                 <CommentWrite isCommentEdit={true} setIsCommentEdit={setIsCommentEdit} el={props.el} />
             )}

@@ -166,7 +166,8 @@ export default function CommentWrite(props:ICommentWriteProps) {
             password={password}   
             contents={contents}
             value={value}   
-            onChangeRating={onChangeRating}        
+            onChangeRating={onChangeRating}
+            el={props.el}        
         />
     )  
 }

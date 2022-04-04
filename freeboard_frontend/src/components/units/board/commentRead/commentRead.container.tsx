@@ -22,14 +22,13 @@ export default function CommentRead(){
     
 
     const onLoadMore = () => {
-        if (!data) return; // 처음엔 data가 존재하지 않기 때문에 return 요청
+        if (!data) return;
 
         fetchMore({
-        variables: { page: Math.ceil(data.fetchBoardComments.length / 10) + 1 },
+        variables: { page: Math.ceil(data?.fetchBoardComments.length / 10) + 1 },
         updateQuery: (prev, { fetchMoreResult }) => {
             if (!fetchMoreResult?.fetchBoardComments)
             return { fetchBoardComments: [...prev.fetchBoardComments] };
-
             return {
             fetchBoardComments: [
                 ...prev.fetchBoardComments,

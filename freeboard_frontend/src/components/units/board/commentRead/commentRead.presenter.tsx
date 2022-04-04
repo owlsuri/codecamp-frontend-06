@@ -11,7 +11,7 @@ export default function CommentReadUI(props:ICommentReadUIProps){
             <div style={{height:"500px", overflow:"auto"}}>
                 <InfiniteScroll
                     pageStart={0}
-                    onLoadMore={props.onLoadMore}
+                    loadMore={props.onLoadMore}
                     hasMore={true}
                     useWindow={false}
                 >
