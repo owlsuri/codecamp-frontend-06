@@ -26,19 +26,6 @@ export default function BoardWrite(props: IBoardWriteProps) {
     addressDetail:""
   });
 
-  // const [writer, setWriter] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [title, setTitle] = useState("");
-  // const [contents, setContents] = useState("");
-  // const [youtubeUrl, setYoutubeUrl] = useState("")
-  // const [address, setAddress] = useState("")
-  // const [zipcode, setZipcode] = useState("")
-  // const [addressDetail, setAddressDetail] = useState("")
-
-  const [writerError, setWriterError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [titleError, setTitleError] = useState("");
-  const [contentsError, setContentsError] = useState("");
 
   // 모달 주소입력
   const [isOpen, setIsOpen] = useState(false);
@@ -55,18 +42,18 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setIsOpen(false);
   };
 
-  const handleComplete = (address:any) =>{
-    console.log(address)
+  const handleComplete = (data:any) =>{
+    console.log(data.zonecode)
     setIsOpen(false);
-    setAddressInputs(address.zonecode)
-    setAddressInputs(address.address)
+    
+    setAddressInputs({...addressInputs, address:data.address, zipcode:data.zonecode})
   }
 
   // 버튼 활성화 여부 useState
   const [isActive, setIsActive] = useState(false);
 
   const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
+  // const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const router = useRouter();
 
@@ -80,181 +67,119 @@ export default function BoardWrite(props: IBoardWriteProps) {
       ...inputs,
       [event.target.id]: event.target.value,
     })
+    if(inputs){
+      setIsActive(true)
+    } else{
+      setIsActive(false)
+    } 
   };
 
-  // // 작성자 input
-  // const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setWriter(event.target.value);
-
-  //   if (event.target.value && password && title && contents) {
-  //     setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-
-  //   if (event.target.value !== "") {
-  //     setWriterError("");
-  //   }
-  // };
-
-  // // 패스워드 input
-  // const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-  //   if ((props.isEdit === true && event.target.value !=="") || 
-  //   (writer && event.target.value && title && contents)) {
-  //     setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-  //   setPassword(event.target.value);
-
-  //   if (event.target.value !== "") {
-  //     setPasswordError("");
-  //   }
-    
-  // };
-
-  // // 제목 input
-  // const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setTitle(event.target.value);
-
-  //   if (writer && password && event.target.value && contents) {
-  //     setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-
-  //   if (event.target.value !== "") {
-  //     setTitleError("");
-  //   }
-  // };
-
-  // // 내용 input
-  // const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
-  //   setContents(event.target.value);
-
-  //   if (writer && password && title && event.target.value) {
-  //     setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-
-  //   if (event.target.value !== "") {
-  //     setContentsError("");
-  //   }
-  // };
-  // // 유투브 input
-  // const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setYoutubeUrl(event.target.value);
-  // };
 
   // 주소디테일 input
   const onChangeAddressInputs = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddressInputs.addressDetail(event.target.value);
+    setAddressInputs({ ...addressInputs, addressDetail : event.target.value });
   };
 
 
   // 등록하기 버튼
   const onClickSubmit = async () => {
+   
     try {
       const result = await createBoard({
         variables: {
-          createBoardInput: {
-            // writer,
-            // password,
-            // title,
-            // contents,
-            // youtubeUrl,
-            ...inputs,
-            boardAddress:{
-              ...addressInputs
-            },
+          createBoardInput:{...inputs,
+          boardAddress :{...addressInputs},       
           },
         },
-      });
-      if (writer === "") {
+
+      })
+        router.push(`/boards/${result.data.createBoard._id}`);
+    
+      if (inputs.writer === "") {
         setWriterError("작성자를 입력해주세요.");
       }
-      if (password === "") {
+      if (inputs.password === "") {
         setPasswordError("비밀번호를 입력해주세요.");
       }
-      if (title === "") {
+      if (inputs.title === "") {
         setTitleError("제목을 입력해주세요.");
       }
-      if (contents === "") {
+      if (inputs.contents === "") {
         setContentsError("내용을 입력해주세요.");
       }
-      if (writer !== "" && password !== "" && title !== "" && contents !== "") {
+      if (inputs.writer !== "" && inputs.password !== "" && inputs.title !== "" && inputs.contents !== "") {
 
         Modal.success({
               content: '게시물 등록이 완료되었습니다!',
         });
-
-          console.log(result)
-        router.push(`/boards/${result.data.createBoard._id}`);
       }
     } catch (error) {
-      if (error instanceof Error)
+      if (error instanceof Error){
         Modal.error({
           content: error.message,
+          
       });
+
+      console.log(addressInputs)
     }
+  }
   };
 
   // 게시글 수정 버튼
-  const onClickEdit = async (event: MouseEvent<HTMLButtonElement>) => {
+  // const onClickEdit = async (event: MouseEvent<HTMLButtonElement>) => {
   
-    if (!password) {
-      setPasswordError("비밀번호를 입력해주세요.")
-      return;
-    }
-    if ((event.target as HTMLButtonElement).value !== "") {
-      setPasswordError("");
-    }
-    if (
-      !title &&
-      !contents &&
-      !youtubeUrl &&
-      !address &&
-      !addressDetail &&
-      !zipcode
-    ){
-      Modal.error({
-        content: "수정한 내용이 없습니다.",
-      });
-      return;
-    }
+  //   if (!password) {
+  //     setPasswordError("비밀번호를 입력해주세요.")
+  //     return;
+  //   }
+  //   if ((event.target as HTMLButtonElement).value !== "") {
+  //     setPasswordError("");
+  //   }
+  //   if (
+  //     !title &&
+  //     !contents &&
+  //     !youtubeUrl &&
+  //     !address &&
+  //     !addressDetail &&
+  //     !zipcode
+  //   ){
+  //     Modal.error({
+  //       content: "수정한 내용이 없습니다.",
+  //     });
+  //     return;
+  //   }
   
-    const updateBoardInput: IUpdateBoardInput = {};
-    if (title) updateBoardInput.title = title;
-    if (contents) updateBoardInput.contents = contents;
-    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
-    if (zipcode || address || addressDetail) {
-      updateBoardInput.boardAddress = {};
-      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
-      if (address) updateBoardInput.boardAddress.address = address;
-      if (addressDetail)
-        updateBoardInput.boardAddress.addressDetail = addressDetail;
-    }
+    // const updateBoardInput: IUpdateBoardInput = {};
+    // if (title) updateBoardInput.title = title;
+    // if (contents) updateBoardInput.contents = contents;
+    // if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+    // if (zipcode || address || addressDetail) {
+    //   updateBoardInput.boardAddress = {};
+    //   if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+    //   if (address) updateBoardInput.boardAddress.address = address;
+    //   if (addressDetail)
+    //     updateBoardInput.boardAddress.addressDetail = addressDetail;
+    // }
   
- try {
-      await updateBoard({
-          variables: {
-            boardId: router.query.boardId,
-            password,
-            updateBoardInput,
-          },
-        });
-        Modal.success({
-            content: '게시물 수정이 완료되었습니다!',
-        });
-        router.push(`/boards/${router.query.boardId}`);
-        } catch (error) {
-          if (error instanceof Error)
-            Modal.error({
-              content: error.message,
-          });
-        }
-        }
+//  try {
+//       await updateBoard({
+//           variables: {
+//             boardId: router.query.boardId,
+//             password,
+//             updateBoardInput,
+//           },
+//         });
+//         Modal.success({
+//             content: '게시물 수정이 완료되었습니다!',
+//         });
+//         router.push(`/boards/${router.query.boardId}`);
+//         } catch (error) {
+//           if (error instanceof Error)
+//             Modal.error({
+//               content: error.message,
+//           });
+//         }
+//         }
 
   return (
     <BoardWriteUI
@@ -265,13 +190,13 @@ export default function BoardWrite(props: IBoardWriteProps) {
       // onChangeYoutube={onChangeYoutube}
       // onChangeAddressDetail={onChangeAddressDetail}
       onClickSubmit={onClickSubmit}
-      writerError={writerError}
-      passwordError={passwordError}
-      contentsError={contentsError}
-      titleError={titleError}
+      // writerError={writerError}
+      // passwordError={passwordError}
+      // contentsError={contentsError}
+      // titleError={titleError}
       isActive={isActive}
-      isEdit={props.isEdit}
-      onClickEdit={onClickEdit}
+      // isEdit={props.isEdit}
+      // onClickEdit={onClickEdit}
       data={data}
 
       showModal={showModal}
@@ -280,8 +205,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
       handleComplete={handleComplete}
       isOpen={isOpen}
 
-      // addressInputs.address={address}
-      // addressInputs.zipcode={zipcode}
+      address={addressInputs.address}
+      zipcode={addressInputs.zipcode}
 
       onChangeInputs={onChangeInputs}
       onChangeAddressInputs={onChangeAddressInputs}

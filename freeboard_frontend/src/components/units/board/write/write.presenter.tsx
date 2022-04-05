@@ -6,6 +6,7 @@ import DaumPostcode from 'react-daum-postcode';
 import { Modal } from 'antd';
 
 export default function BoardWriteUI(props:IBoardWriteUIProps) {
+  console.log(props)
   return (
     <S.Wrapper>
       <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
@@ -63,7 +64,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
           <S.ListName>주소</S.ListName>
           <S.InsertPostNum  id="zipcode" placeholder="07250" 
                           value={props.zipcode ||
-                                  props.data?.fetchBoard.boardAddress?.zipcode || ""} readOnly></S.InsertPostNum>
+                                  props.data?.fetchBoard?.boardAddress?.zipcode || ""} readOnly></S.InsertPostNum>
           <S.PostNumBtn onClick={props.showModal}>우편번호 검색</S.PostNumBtn>
             {/* 주소 모달창 */}
               {props.isOpen && (<Modal title="주소를 검색해주세요" 
@@ -75,7 +76,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
 
         </S.PostNum>
         <S.InsertAddress type={"text"}  id="address" value={props.address || props.data?.fetchBoard.boardAddress?.address || ""} readOnly></S.InsertAddress>
-        <S.InsertAddress id="addressDetail" onChange={props.addressInputs} defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail || ""} type={"text"} ></S.InsertAddress>
+        <S.InsertAddress id="addressDetail" onChange={props.onChangeAddressInputs} defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail || ""} type={"text"} ></S.InsertAddress>
       </S.AddressBox>
 
       <S.YoutubeBox>

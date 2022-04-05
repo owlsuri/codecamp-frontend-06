@@ -1,6 +1,7 @@
 // Header
 import styled from "@emotion/styled"
 import { useRouter } from "next/router"
+// import WeatherAPI from '../../weather/index'
 
 export default function LayoutHeader(){
 
@@ -12,6 +13,7 @@ export default function LayoutHeader(){
         padding-left: 30px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         font-size: 20px;
     `
     const Owl=styled.img`
@@ -21,6 +23,10 @@ export default function LayoutHeader(){
         padding-left: 5px;
         color: black;
     `
+    const Logo=styled.div`
+        cursor: pointer;
+    `
+    
     const router = useRouter();
 
     const onClickToMain = () =>{
@@ -29,8 +35,11 @@ export default function LayoutHeader(){
 
     return(
         <Wrapper>
-            <Owl src="/owl.png" onClick={onClickToMain} />  
-            <Main>OwlSuri</Main>   
+            <Logo>
+                <Owl src="/owl.png" onClick={onClickToMain} />  
+                <Main>OwlSuri</Main>  
+            </Logo>
+            
         </Wrapper>
     )
 }
