@@ -11,14 +11,29 @@ import { Modal } from 'antd';
 
 
 export default function BoardWrite(props: IBoardWriteProps) {
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("")
-  const [address, setAddress] = useState("")
-  const [zipcode, setZipcode] = useState("")
-  const [addressDetail, setAddressDetail] = useState("")
+
+  const [inputs, setInputs] = useState({
+    writer:"",
+    password:"",
+    title:"",
+    contents:"",
+    youtubeUrl:"",
+  });
+
+  const [addressInputs, setAddressInputs] = useState({
+    address:"",
+    zipcode:"",
+    addressDetail:""
+  });
+
+  // const [writer, setWriter] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [contents, setContents] = useState("");
+  // const [youtubeUrl, setYoutubeUrl] = useState("")
+  // const [address, setAddress] = useState("")
+  // const [zipcode, setZipcode] = useState("")
+  // const [addressDetail, setAddressDetail] = useState("")
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -43,9 +58,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const handleComplete = (address:any) =>{
     console.log(address)
     setIsOpen(false);
-    setZipcode(address.zonecode)
-    setAddress(address.address)
-
+    setAddressInputs(address.zonecode)
+    setAddressInputs(address.address)
   }
 
   // 버튼 활성화 여부 useState
@@ -60,74 +74,82 @@ export default function BoardWrite(props: IBoardWriteProps) {
     variables: { boardId: router.query.boardId },
   });
 
-  // 작성자 input
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setWriter(event.target.value);
-
-    if (event.target.value && password && title && contents) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-
-    if (event.target.value !== "") {
-      setWriterError("");
-    }
+  // inputs
+  const onChangeInputs = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputs({
+      ...inputs,
+      [event.target.id]: event.target.value,
+    })
   };
 
-  // 패스워드 input
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    if ((props.isEdit === true && event.target.value !=="") || 
-    (writer && event.target.value && title && contents)) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-    setPassword(event.target.value);
+  // // 작성자 input
+  // const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setWriter(event.target.value);
 
-    if (event.target.value !== "") {
-      setPasswordError("");
-    }
+  //   if (event.target.value && password && title && contents) {
+  //     setIsActive(true);
+  //   } else {
+  //     setIsActive(false);
+  //   }
+
+  //   if (event.target.value !== "") {
+  //     setWriterError("");
+  //   }
+  // };
+
+  // // 패스워드 input
+  // const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  //   if ((props.isEdit === true && event.target.value !=="") || 
+  //   (writer && event.target.value && title && contents)) {
+  //     setIsActive(true);
+  //   } else {
+  //     setIsActive(false);
+  //   }
+  //   setPassword(event.target.value);
+
+  //   if (event.target.value !== "") {
+  //     setPasswordError("");
+  //   }
     
-  };
+  // };
 
-  // 제목 input
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
+  // // 제목 input
+  // const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setTitle(event.target.value);
 
-    if (writer && password && event.target.value && contents) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
+  //   if (writer && password && event.target.value && contents) {
+  //     setIsActive(true);
+  //   } else {
+  //     setIsActive(false);
+  //   }
 
-    if (event.target.value !== "") {
-      setTitleError("");
-    }
-  };
+  //   if (event.target.value !== "") {
+  //     setTitleError("");
+  //   }
+  // };
 
-  // 내용 input
-  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContents(event.target.value);
+  // // 내용 input
+  // const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  //   setContents(event.target.value);
 
-    if (writer && password && title && event.target.value) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
+  //   if (writer && password && title && event.target.value) {
+  //     setIsActive(true);
+  //   } else {
+  //     setIsActive(false);
+  //   }
 
-    if (event.target.value !== "") {
-      setContentsError("");
-    }
-  };
-  // 유투브 input
-  const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
-    setYoutubeUrl(event.target.value);
-  };
+  //   if (event.target.value !== "") {
+  //     setContentsError("");
+  //   }
+  // };
+  // // 유투브 input
+  // const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setYoutubeUrl(event.target.value);
+  // };
 
   // 주소디테일 input
-  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddressDetail(event.target.value);
+  const onChangeAddressInputs = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressInputs.addressDetail(event.target.value);
   };
 
 
@@ -137,15 +159,14 @@ export default function BoardWrite(props: IBoardWriteProps) {
       const result = await createBoard({
         variables: {
           createBoardInput: {
-            writer,
-            password,
-            title,
-            contents,
-            youtubeUrl,
+            // writer,
+            // password,
+            // title,
+            // contents,
+            // youtubeUrl,
+            ...inputs,
             boardAddress:{
-              zipcode,
-              address,
-              addressDetail,
+              ...addressInputs
             },
           },
         },
@@ -237,12 +258,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   return (
     <BoardWriteUI
-      onChangeWriter={onChangeWriter}
-      onChangeTitle={onChangeTitle}
-      onChangeContents={onChangeContents}
-      onChangePassword={onChangePassword}
-      onChangeYoutube={onChangeYoutube}
-      onChangeAddressDetail={onChangeAddressDetail}
+      // onChangeWriter={onChangeWriter}
+      // onChangeTitle={onChangeTitle}
+      // onChangeContents={onChangeContents}
+      // onChangePassword={onChangePassword}
+      // onChangeYoutube={onChangeYoutube}
+      // onChangeAddressDetail={onChangeAddressDetail}
       onClickSubmit={onClickSubmit}
       writerError={writerError}
       passwordError={passwordError}
@@ -259,8 +280,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
       handleComplete={handleComplete}
       isOpen={isOpen}
 
-      address={address}
-      zipcode={zipcode}
+      // addressInputs.address={address}
+      // addressInputs.zipcode={zipcode}
+
+      onChangeInputs={onChangeInputs}
+      onChangeAddressInputs={onChangeAddressInputs}
     />
   );
 }

@@ -11,9 +11,10 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
       <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
       <S.UserBox>
         <S.User>
-          <S.ListName>작성자</S.ListName>
+          <S.ListName >작성자</S.ListName>
           <S.Insert
-            onChange={props.onChangeWriter}
+            id="writer"
+            onChange={props.onChangeInputs}
             type={"text"}
             placeholder="이름을 적어주세요."
             defaultValue={props.data?.fetchBoard.writer}
@@ -25,7 +26,8 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
         <S.User>
           <S.ListName>비밀번호</S.ListName>
           <S.Insert
-            onChange={props.onChangePassword}
+          id="password"
+            onChange={props.onChangeInputs}
             type={"password"}
             placeholder="비밀번호를 입력해주세요."
           ></S.Insert>
@@ -36,7 +38,8 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
       <S.TitleBox>
         <S.ListName>제목</S.ListName>
         <S.InsertTitle
-          onChange={props.onChangeTitle}
+          id="title"
+          onChange={props.onChangeInputs}
           type={"text"}
           placeholder="제목을 작성해주세요."
           defaultValue={props.data?.fetchBoard.title}
@@ -47,7 +50,8 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
       <S.ContentBox>
         <S.ListName>내용</S.ListName>
         <S.InsertContent
-          onChange={props.onChangeContents}
+          id="contents"
+          onChange={props.onChangeInputs}
           placeholder="내용을 작성해주세요."
           defaultValue={props.data?.fetchBoard.contents}
         ></S.InsertContent>
@@ -57,7 +61,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
       <S.AddressBox>
         <S.PostNum>
           <S.ListName>주소</S.ListName>
-          <S.InsertPostNum placeholder="07250" 
+          <S.InsertPostNum  id="zipcode" placeholder="07250" 
                           value={props.zipcode ||
                                   props.data?.fetchBoard.boardAddress?.zipcode || ""} readOnly></S.InsertPostNum>
           <S.PostNumBtn onClick={props.showModal}>우편번호 검색</S.PostNumBtn>
@@ -70,16 +74,17 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
                            )}
 
         </S.PostNum>
-        <S.InsertAddress type={"text"} value={props.address || props.data?.fetchBoard.boardAddress?.address || ""} readOnly></S.InsertAddress>
-        <S.InsertAddress onChange={props.onChangeAddressDetail} defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail || ""} type={"text"} ></S.InsertAddress>
+        <S.InsertAddress type={"text"}  id="address" value={props.address || props.data?.fetchBoard.boardAddress?.address || ""} readOnly></S.InsertAddress>
+        <S.InsertAddress id="addressDetail" onChange={props.addressInputs} defaultValue={props.data?.fetchBoard.boardAddress?.addressDetail || ""} type={"text"} ></S.InsertAddress>
       </S.AddressBox>
 
       <S.YoutubeBox>
         <S.ListName>유투브</S.ListName>
         <S.YoutubeURL
-          onChange={props.onChangeYoutube}
+          onChange={props.onChangeInputs}
           placeholder="링크를 입력해주세요."
           defaultValue={props.data?.fetchBoard.youtubeUrl || ""}
+          id="youtubeUrl"
         ></S.YoutubeURL>
       </S.YoutubeBox>
 
