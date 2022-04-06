@@ -26,6 +26,13 @@ export default function BoardWrite(props: IBoardWriteProps) {
     addressDetail:""
   });
 
+  const [inputError, setInputError] = useState({
+    writer:"",
+    password:"",
+    title:"",
+    contents:"",
+  })
+
 
   // 모달 주소입력
   const [isOpen, setIsOpen] = useState(false);
@@ -82,7 +89,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
 
   // 등록하기 버튼
-  const onClickSubmit = async () => {
+  const onClickSubmit = async (event) => {
    
     try {
       const result = await createBoard({
@@ -95,24 +102,27 @@ export default function BoardWrite(props: IBoardWriteProps) {
       })
         router.push(`/boards/${result.data.createBoard._id}`);
     
-      if (inputs.writer === "") {
-        setWriterError("작성자를 입력해주세요.");
+      if (event.target.value){
+        setInputError((prev) => ({ ...prev, [event.target.id]: "" }));
       }
-      if (inputs.password === "") {
-        setPasswordError("비밀번호를 입력해주세요.");
-      }
-      if (inputs.title === "") {
-        setTitleError("제목을 입력해주세요.");
-      }
-      if (inputs.contents === "") {
-        setContentsError("내용을 입력해주세요.");
-      }
-      if (inputs.writer !== "" && inputs.password !== "" && inputs.title !== "" && inputs.contents !== "") {
+      // if (inputs.writer === "") {
+      //   setWriterError("작성자를 입력해주세요.");
+      // }
+      // if (inputs.password === "") {
+      //   setPasswordError("비밀번호를 입력해주세요.");
+      // }
+      // if (inputs.title === "") {
+      //   setTitleError("제목을 입력해주세요.");
+      // }
+      // if (inputs.contents === "") {
+      //   setContentsError("내용을 입력해주세요.");
+      // }
+      // if (inputs.writer !== "" && inputs.password !== "" && inputs.title !== "" && inputs.contents !== "") {
 
         Modal.success({
               content: '게시물 등록이 완료되었습니다!',
         });
-      }
+      
     } catch (error) {
       if (error instanceof Error){
         Modal.error({

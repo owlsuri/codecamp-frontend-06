@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
-export class Board {
+export class Board extends BaseEntity {
     @PrimaryGeneratedColumn("increment")
     number!: number
 
@@ -12,5 +12,5 @@ export class Board {
     title!: string
     
     @Column({ type:"text" })
-    Contents!: string
+    contents!: string
 }
