@@ -1,4 +1,4 @@
-import FirebasePage from "../../src/components/units/board/fireBase/firebase.container";
+import FirebasePage from "../../src/components/units/board/fireBaseWrite/firebase.container";
 export default function Firebase() {
 
 

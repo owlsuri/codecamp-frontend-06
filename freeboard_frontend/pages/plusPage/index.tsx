@@ -14,7 +14,7 @@ export default function OpenapiWithUseEffectPage() {
 
   return (
     <div>
-      <div>오픈API 연습!!!</div>
+      <div>강아지보기</div>
       <img src={dogUrl} />
     </div>
   );
