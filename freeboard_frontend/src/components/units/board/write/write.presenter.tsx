@@ -91,7 +91,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
 
       <S.AddPhotoBox>
         <S.ListName>사진 첨부</S.ListName>
-        <S.UploadBoxes>
+        <S.UploadBoxes onClick={props.onClickImg}>
           <S.UploadBox>
             <S.UploadPlus>+</S.UploadPlus>
             <S.Upload>Upload</S.Upload>
@@ -106,7 +106,8 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
           </S.UploadBox>
         </S.UploadBoxes>
       </S.AddPhotoBox>
-
+            <input style={{display:"none"}} type="file" onChange={props.onChangeFile} ref={props.fileRef} multiple/>
+            <img width="300px" src={`https://storage.googleapis.com/${props.imageUrl}`} />
       <S.MainBox>
         <S.ListName>메인설정</S.ListName>
         <S.MainRadio1 type={"radio"} name="main" /> 유투브

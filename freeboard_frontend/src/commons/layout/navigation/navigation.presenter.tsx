@@ -8,7 +8,8 @@ export default function LayoutNavigationUI(props:ILayoutUI){
     const NAVIGATION_MEMUS = [
         { name: "BOARDS", page: "/boards"},
         { name: "PRODUCTS", page: "/markets"},
-        { name: "MY PAGE", page: "/mypage"},       
+        { name: "FireBase", page: "/fireBase"},       
+        { name: "MY PAGE", page: "/mypage"}, 
     ]
 
     return(

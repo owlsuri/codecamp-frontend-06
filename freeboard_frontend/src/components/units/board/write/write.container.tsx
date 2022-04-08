@@ -1,13 +1,14 @@
 // 게시물 등록하기 & 수정하기 페이지 컨테이너
 
-import { ChangeEvent, MouseEvent, useState } from 'react'
+import { ChangeEvent, MouseEvent, useState, useRef } from 'react'
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CREATE_BOARD, UPDATE_BOARD } from "./write.queries";
+import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./write.queries";
 import { FETCH_BOARD } from '../detail/read.queries'
 import BoardWriteUI from './write.presenter';
 import {IBoardWriteProps, IUpdateBoardInput} from './write.typescript'
 import { Modal } from 'antd';
+import {CheckFileValidation} from '../../../../libraries/validation'
 
 
 export default function BoardWrite(props: IBoardWriteProps) {
@@ -32,7 +33,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
     title:"",
     contents:"",
   })
+  const [imageUrl, setImageUrl] = useState<string | undefined>("")
 
+  const [uploadFile] = useMutation(UPLOAD_FILE)
+  const fileRef = useRef<HTMLInputElement>(null)
 
   // 모달 주소입력
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +64,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [isActive, setIsActive] = useState(false);
 
   const [createBoard] = useMutation(CREATE_BOARD);
-  // const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const router = useRouter();
 
@@ -95,6 +99,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       const result = await createBoard({
         variables: {
           createBoardInput:{...inputs,
+          images: [imageUrl],
           boardAddress :{...addressInputs},       
           },
         },
@@ -134,62 +139,93 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   }
   };
+  
+  // 이미지 등록하기
+  const onClickImg = () => {
+      fileRef.current?.click()
+  }
+
+  const onChangeFile = async (event:ChangeEvent<HTMLInputElement>) =>{
+      const file = event.target.files?.[0]
+      console.log(file)
+
+      const isValid = CheckFileValidation(file) 
+      if(!isValid) return;
+
+
+      try{
+          const result = await uploadFile({
+              variables:{file}
+          })
+  
+          console.log(result.data?.uploadFile.url)
+  
+          setImageUrl(result.data?.uploadFile.url)
+
+      } catch(error){
+          Modal.error({
+              content: error.message
+          });
+          
+      }
+  }
 
   // 게시글 수정 버튼
-  // const onClickEdit = async (event: MouseEvent<HTMLButtonElement>) => {
+  const onClickEdit = async (event: MouseEvent<HTMLButtonElement>) => {
   
-  //   if (!password) {
-  //     setPasswordError("비밀번호를 입력해주세요.")
-  //     return;
-  //   }
-  //   if ((event.target as HTMLButtonElement).value !== "") {
-  //     setPasswordError("");
-  //   }
-  //   if (
-  //     !title &&
-  //     !contents &&
-  //     !youtubeUrl &&
-  //     !address &&
-  //     !addressDetail &&
-  //     !zipcode
-  //   ){
-  //     Modal.error({
-  //       content: "수정한 내용이 없습니다.",
-  //     });
-  //     return;
-  //   }
-  
-    // const updateBoardInput: IUpdateBoardInput = {};
-    // if (title) updateBoardInput.title = title;
-    // if (contents) updateBoardInput.contents = contents;
-    // if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
-    // if (zipcode || address || addressDetail) {
-    //   updateBoardInput.boardAddress = {};
-    //   if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
-    //   if (address) updateBoardInput.boardAddress.address = address;
-    //   if (addressDetail)
-    //     updateBoardInput.boardAddress.addressDetail = addressDetail;
+    // if (!password) {
+    //   setPasswordError("비밀번호를 입력해주세요.")
+    //   return;
     // }
+    // if ((event.target as HTMLButtonElement).value !== "") {
+    //   setPasswordError("");
+    // }
+    if (
+      !inputs.title &&
+      !inputs.contents &&
+      !inputs.youtubeUrl &&
+      !addressInputs.address &&
+      !addressInputs.addressDetail &&
+      !addressInputs.zipcode
+    ){
+      Modal.error({
+        content: "수정한 내용이 없습니다.",
+      });
+      return;
+    }
   
-//  try {
-//       await updateBoard({
-//           variables: {
-//             boardId: router.query.boardId,
-//             password,
-//             updateBoardInput,
-//           },
-//         });
-//         Modal.success({
-//             content: '게시물 수정이 완료되었습니다!',
-//         });
-//         router.push(`/boards/${router.query.boardId}`);
-//         } catch (error) {
-//           if (error instanceof Error)
-//             Modal.error({
-//               content: error.message,
-//           });
-//         }
-//         }
+    const updateBoardInput: IUpdateBoardInput = {};
+    if (inputs.title) updateBoardInput.title = inputs.title;
+    if (inputs.contents) updateBoardInput.contents = inputs.contents;
+    if (inputs.youtubeUrl) updateBoardInput.youtubeUrl = inputs.youtubeUrl;
+    if (imageUrl) updateBoardInput.imageUrl= imageUrl;
+    if (inputs.zipcode || addressInputs.address || addressInputs.addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (addressInputs.zipcode) updateBoardInput.boardAddress.zipcode = addressInputs.zipcode;
+      if (addressInputs.address) updateBoardInput.boardAddress.address = addressInputs.address;
+      if (addressInputs.addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressInputs.addressDetail;
+    }
+  
+ try {
+      await updateBoard({
+          variables: {
+            boardId: router.query.boardId,
+            password:inputs.password,
+            updateBoardInput,
+          },
+        });
+        Modal.success({
+            content: '게시물 수정이 완료되었습니다!',
+        });
+        router.push(`/boards/${router.query.boardId}`);
+  } catch (error) {
+          if (error instanceof Error)
+            Modal.error({
+              content: error.message,
+          });
+        }
+}
 
   return (
     <BoardWriteUI
@@ -205,8 +241,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
       // contentsError={contentsError}
       // titleError={titleError}
       isActive={isActive}
-      // isEdit={props.isEdit}
-      // onClickEdit={onClickEdit}
+      isEdit={props.isEdit}
+      onClickEdit={onClickEdit}
       data={data}
 
       showModal={showModal}
@@ -220,7 +256,13 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
       onChangeInputs={onChangeInputs}
       onChangeAddressInputs={onChangeAddressInputs}
+      onClickImg={onClickImg}
+      onChangeFile={onChangeFile}
+      fileRef={fileRef}
+      imageUrl={imageUrl}
     />
   );
-}
+
+  }
+
 
