@@ -1,5 +1,3 @@
-import { Image } from 'next/image';
-import { Address } from './../detail/read.styles';
 import { gql } from "@apollo/client";
 
 export const CREATE_BOARD = gql`
@@ -49,10 +47,3 @@ export const FETCH_BOARD = gql`
   }
 `;
 
-export const UPLOAD_FILE = gql`
-    mutation uploadFile($file:Upload!){
-        uploadFile(file:$file){
-            url
-        }
-    }
-`

@@ -6,9 +6,10 @@ import {
   InMemoryCache,
   ApolloLink,
 } from "@apollo/client";
-import Layout from '../src/commons/layout/index.tsx'
+import Layout from '../src/commons/layout/index'
 import { createUploadLink } from "apollo-upload-client";
 import { initializeApp } from "firebase/app";
+import { AppProps } from "next/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -25,8 +26,7 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 
 
-
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   const uploadLink = createUploadLink({
     uri: "http://backend06.codebootcamp.co.kr/graphql",
   });

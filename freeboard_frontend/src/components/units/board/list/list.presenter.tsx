@@ -5,6 +5,7 @@ import { getDate } from '../../../../../src/commons/libraries/utils';
 import {IBoardListUIProps} from './list.typescript'
 import  Pagination  from '../../../../commons/boardList/Pagination'
 import { DatePicker, Space } from 'antd';
+import {v4 as uuidv4} from 'uuid'
 
 export default function BoardListUI(props:IBoardListUIProps){
 
@@ -38,10 +39,9 @@ export default function BoardListUI(props:IBoardListUIProps){
         ))}
         </S.BestBoards>
         <S.Search>
-          <S.SearchBox placeholder='제목을 검색해주세요' />
+          <S.SearchBox type="text" onChange={props.onChangeSearch} placeholder='제목을 검색해주세요' />
           <Space direction="vertical" size={12} />
           <RangePicker style={{ width:"244px", height:"52px" }} />
-          <S.SearchBtn>검색하기</S.SearchBtn>
         </S.Search>
         <S.LineTop></S.LineTop>
         <S.ThRow>
@@ -57,7 +57,8 @@ export default function BoardListUI(props:IBoardListUIProps){
               <S.Row key={el._id}>
                 <S.ColumnNumber>{10 - index}</S.ColumnNumber>
                 <S.ColumnTitle id={el._id} onClick={props.onClickDetail}>
-                  {el.title}
+                  {el.title.replaceAll(props.keyword, `#$%${props.keyword}#$%`)
+                           .split("#$%").map((el:any)=>(<S.Word key={uuidv4()} isMatched={ props.keyword === el}>{el}</S.Word>))}
                 </S.ColumnTitle>
                 <S.ColumnWriter>{el.writer}</S.ColumnWriter>
                 <S.ColumnDate>{getDate(el.createdAt)}</S.ColumnDate>

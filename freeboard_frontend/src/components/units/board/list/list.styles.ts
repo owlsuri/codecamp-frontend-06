@@ -92,19 +92,20 @@ export const Search = styled.div`
   padding-bottom: 30px;
 `;
 export const SearchBox = styled.input`
-  width: 776px;
+  width: 930px;
   height: 52px;
   background-color: #F2F2F2;
   border: none;
   border-radius: 10px;
-  padding-left: 10px;
+  padding-left: 45px;
+  background-image: url(/search.png);
+  background-repeat: no-repeat;
+  background-size : 22px;
+  background-position:10px center;
 `;
-export const SearchBtn = styled.button`
-  width: 94px;
-  height: 52px;
-  background-color: black;
-  color: white;
-`;
+export const Word = styled.span`
+    color: ${(props) => (props.isMatched ? "orange" : "black")};
+`
 export const LineTop = styled.div`
   border-bottom: 1px solid black;
   width: 1200px;

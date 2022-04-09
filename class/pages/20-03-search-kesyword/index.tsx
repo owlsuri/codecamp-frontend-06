@@ -20,6 +20,13 @@ const FETCH_BOARDS = gql`
 const MyRow = styled.div`
     display: flex;
 `
+const Search = styled.input`
+background-image: url('/ic-58-main-search-black@3x.png');
+background-size : 25px;
+background-repeat: no-repeat;
+padding-left: 30px;
+    display: flex;
+`
 
 const MyColumn = styled.div`
     width: 300px;
@@ -51,14 +58,14 @@ export default function MapBoardPage(){
     }
       const onClickPage = (event) => {
     refetch({page: Number(event.target.id)})
-    
   }
 
 
     return (
         <div>
-            검색어 입력 : <input type="text" onChange={onChangeSearch}/>
+            <Search type="text" onChange={onChangeSearch} placeholder="검색어를 입력하세요" />
             {/* <button onClick={onClickSearch}>검색하기</button> */}
+
             {data?.fetchBoards.map((el:any) => (
                 <MyRow key={el._id}>
                     <MyColumn>{el.writer}</MyColumn>
