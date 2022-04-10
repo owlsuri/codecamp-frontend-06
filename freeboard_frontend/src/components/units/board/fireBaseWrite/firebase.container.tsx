@@ -2,8 +2,8 @@ import { collection, getFirestore, addDoc, getDocs} from "firebase/firestore/lit
 import { useState } from "react";
 import { firebaseApp } from "../../../../../pages/_app";
 import FirebaseUIPage from "./firebase.presenter";
-
-
+import { Modal } from "antd";
+import { useRouter } from "next/router";
 
 export default function FirebasePage() {
 
@@ -11,6 +11,7 @@ export default function FirebasePage() {
   const [ title, setTitle ] = useState("")
   const [ contents, setContents ] = useState("")
 
+  const router = useRouter(); 
 
   function onChangeWriter(event: ChangeEvent<HTMLInputElement>) {
     setWriter(event.target.value);
@@ -29,20 +30,17 @@ export default function FirebasePage() {
       title,
       contents
     });
-    alert("등록이 완료되었습니다.")
-  };
+    Modal.success({
+        content: '등록 완료!',
+    });
 
-  const onClickFetch = async () => {
-    const board = collection(getFirestore(firebaseApp), "board");
-    const result = await getDocs(board);
-    const datas = result.docs.map((el) => el.data());
-    console.log(datas);
-  };
+    router.push('/fireBase')
+
+};
 
   return (
     <FirebaseUIPage 
     onClickSubmit={onClickSubmit}
-    onClickFetch={onClickFetch}
     onChangeWriter={onChangeWriter}
     onChangeTitle={onChangeTitle}
     onChangeContents={onChangeContents}    

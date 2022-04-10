@@ -1,16 +1,21 @@
+import FirebaseList from '../fireBaseList/firebaseList.container';
 import * as S from './firebase.style'
 
 export default function FirebaseUIPage(props) {
   
 
   return (
+    <>
     <S.Wrapper>
-      <h2>한줄평입력하기</h2>
-      <S.Writer type="text" onChange={props.onChangeWriter} placeholder="작성자를 입력해주세요" />
-      <S.Title type="text" onChange={props.onChangeTitle} placeholder= "제목을 입력해주세요" />
-      <S.Contents type="text" onChange={props.onChangeContents} placeholder= "내용을 입력해주세요" />
-      <button onClick={props.onClickSubmit}>등록하기</button>
-      <button onClick={props.onClickFetch}>조회하기</button>
+      <S.Main>이 책은 한마디로?</S.Main>
+      <S.Inputs>
+        <S.Writer type="text" onChange={props.onChangeWriter} placeholder="작성자" />
+        <S.Title type="text" onChange={props.onChangeTitle} placeholder= "제목" />
+        <S.Contents type="text" onChange={props.onChangeContents} placeholder= "한줄평" />
+        <S.Btn onClick={props.onClickSubmit}>등록하기</S.Btn>
+    </S.Inputs>
     </S.Wrapper>
+    <FirebaseList />
+    </>
   );
 }

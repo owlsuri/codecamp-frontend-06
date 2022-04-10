@@ -93,14 +93,14 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
 
       <S.AddPhotoBox>
         <S.ListName>사진 첨부</S.ListName>
-        {props.fileUrls.map((el, index) => (
-                    <Uploads01
-                      key={uuidv4()}
-                      index={index}
-                      fileUrl={el}
-                      onChangeFileUrls={props.onChangeFileUrls}
-                    />
-                  ))}
+          {props.fileUrls.map((el, index) => (
+            <Uploads01
+              key={uuidv4()}
+              index={index}
+              fileUrl={el}
+              onChangeFileUrls={props.onChangeFileUrls}
+            />
+          ))}
       </S.AddPhotoBox>
       <S.MainBox>
         <S.ListName>메인설정</S.ListName>

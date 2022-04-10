@@ -26,6 +26,7 @@ export const FETCH_BOARDS_BEST = gql`
     contents
     createdAt
     likeCount
+    images
   }
 }
 `;

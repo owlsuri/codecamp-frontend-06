@@ -92,28 +92,28 @@ export const YoutubeURL = styled.input`
 export const AddPhotoBox = styled.div`
   padding-top: 30px;
 `;
-export const UploadBox = styled.div`
-  width: 78px;
-  height: 78px;
-  background-color: #bdbdbd;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 20px;
-  cursor: pointer;
-`;
-export const Upload = styled.div`
-  font-size: 12px;
-`;
-export const UploadPlus = styled.div`
-  font-size: 30px;
-  padding-bottom: 0;
-`;
-export const UploadBoxes = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+// export const UploadBox = styled.div`
+//   width: 78px;
+//   height: 78px;
+//   background-color: #bdbdbd;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   margin-right: 20px;
+//   cursor: pointer;
+// `;
+// export const Upload = styled.div`
+//   font-size: 12px;
+// `;
+// export const UploadPlus = styled.div`
+//   font-size: 30px;
+//   padding-bottom: 0;
+// `;
+// export const UploadBoxes = styled.div`
+//   display: flex;
+//   flex-direction: row;
+// `;
 export const MainBox = styled.div`
   padding-top: 30px;
 `;

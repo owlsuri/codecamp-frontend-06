@@ -18,7 +18,13 @@ export default function BoardListUI(props:IBoardListUIProps){
         <S.BestBoards>
         {props.dataBoardBest?.fetchBoardsOfTheBest.map((el:any) => (
         <S.BestBox key={el._id} id={el._id} onClick={props.onClickDetail} >
-            <S.BestImg src="/images/forest.jpg"/>             
+        <S.BestImg
+                  src={
+                    el.images[0]
+                      ? `https://storage.googleapis.com/${el.images?.[0]}`
+                      : `/images/leaves.png`
+                  }
+                />  
             <S.BestOne>
               <S.BestTitle>{el.title}</S.BestTitle>
               <S.BestInfo>
@@ -58,7 +64,8 @@ export default function BoardListUI(props:IBoardListUIProps){
                 <S.ColumnNumber>{10 - index}</S.ColumnNumber>
                 <S.ColumnTitle id={el._id} onClick={props.onClickDetail}>
                   {el.title.replaceAll(props.keyword, `#$%${props.keyword}#$%`)
-                           .split("#$%").map((el:any)=>(<S.Word key={uuidv4()} isMatched={ props.keyword === el}>{el}</S.Word>))}
+                           .split("#$%").map((el:any)=>(<S.Word key={uuidv4()} 
+                           isMatched={ props.keyword === el}>{el}</S.Word>))}
                 </S.ColumnTitle>
                 <S.ColumnWriter>{el.writer}</S.ColumnWriter>
                 <S.ColumnDate>{getDate(el.createdAt)}</S.ColumnDate>

@@ -46,10 +46,15 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
           </S.Title>
 
     {/* 게시물 이미지 */}
-          <S.BoardImg src={`https://storage.googleapis.com/${props.data?.fetchBoard?.images}`} />
-            
+            {props.data?.fetchBoard.images
+              ?.filter((el: string) => el)
+              .map((el: string) => (
+                <S.BoardImg
+                  key={el}
+                  src={`https://storage.googleapis.com/${el}`}
+                />
+              ))}      
           
-
     {/* 게시물 내용 */}
           <S.Contents>
             {props.data ? props.data.fetchBoard.contents : "loading..."}

@@ -23,7 +23,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [inputs, setInputs] = useState(initialInputs);
   const [youtubeUrl, setYoutubeUrl] = useState("")
   const [inputErrors, setInputErrors] = useState(initialInputs);
-  const [fileUrls, setFileUrls] = useState(["", "", ""])
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [addressInputs, setAddressInputs] = useState({
     address:"",
@@ -97,9 +97,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
    // 이미지 등록하기
   const onChangeFileUrls = (fileUrl: string, index: number) => {
-    const newImageUrl = [...fileUrls];
-    newImageUrl[index] = fileUrl;
-    setFileUrls(newImageUrl);
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   };
 
   // 등록하기 버튼
@@ -128,7 +128,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       });
         router.push(`/boards/${result.data.createBoard._id}`);
         console.log(result)
-    
+    // 에러메시지
       if (event.target.value){
         setInputErrors((prev) => ({ ...prev, [event.target.id]: "" }));
       }
@@ -172,7 +172,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if (inputs.title) updateBoardInput.title = inputs.title;
     if (inputs.contents) updateBoardInput.contents = inputs.contents;
     if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
-    if (isChangedFiles) updateBoardInput.images= fileUrls;
+    if (isChangedFiles) updateBoardInput.images = fileUrls;
     if (inputs.zipcode || addressInputs.address || addressInputs.addressDetail) {
       updateBoardInput.boardAddress = {};
       if (addressInputs.zipcode) updateBoardInput.boardAddress.zipcode = addressInputs.zipcode;
@@ -205,12 +205,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if (data?.fetchBoard.images?.length) {
       setFileUrls([...data?.fetchBoard.images]);
     }
-  }, [data]);
+  }, [props.data]);
 
 
   return (
     <BoardWriteUI
-
       onChangeYoutubeUrl={onChangeYoutubeUrl}
       onClickSubmit={onClickSubmit}
       isActive={isActive}
