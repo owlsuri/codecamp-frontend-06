@@ -6,10 +6,10 @@ import { ILayoutUI } from './navigation.typse'
 export default function LayoutNavigationUI(props:ILayoutUI){
 
     const NAVIGATION_MEMUS = [
-        { name: "BOARDS", page: "/boards"},
-        { name: "PRODUCTS", page: "/markets"},
-        { name: "FireBase", page: "/fireBase"},
-        { name: "Public API", page: "/plusPage"},        
+        { name: "수다방", page: "/boards"},
+        { name: "중고거래", page: "/markets"},
+        { name: "한줄맛집", page: "/fireBase"},
+        { name: "따릉이", page: "/plusPage"},        
         { name: "MY PAGE", page: "/mypage"}, 
     ]
 

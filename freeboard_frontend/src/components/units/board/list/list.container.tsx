@@ -12,7 +12,7 @@ import _  from 'lodash'
 export default function BoardList(){
     
     const { data, refetch } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(FETCH_BOARDS)
-    const { data: dataBoardsCount } = useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(FETCH_BOARDS_COUNT)
+    const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(FETCH_BOARDS_COUNT)
     const { data: dataBoardBest } = useQuery<Pick<IQuery, "fetchBoardsOfTheBest">> (FETCH_BOARDS_BEST)
 
     const lastPage = Math.ceil(dataBoardsCount?.fetchBoardsCount / 10)
@@ -23,6 +23,7 @@ export default function BoardList(){
 
     const getDebounce = _.debounce((data:any)=>{
         refetch({ search: data, page : 1 })
+        refetchBoardsCount({ search: data });
         setKeyword(data)
     }, 200)
 
@@ -50,6 +51,7 @@ export default function BoardList(){
         dataBoardsCount={dataBoardsCount}
         onChangeSearch={onChangeSearch}
         keyword={keyword}
+        refetchBoardsCount={refetchBoardsCount}
       />
     );
 } 

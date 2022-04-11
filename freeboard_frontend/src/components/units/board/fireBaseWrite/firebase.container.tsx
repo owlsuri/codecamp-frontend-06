@@ -30,6 +30,7 @@ export default function FirebasePage() {
       title,
       contents
     });
+    
     Modal.success({
         content: '등록 완료!',
     });

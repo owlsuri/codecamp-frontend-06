@@ -104,7 +104,7 @@ export const SearchBox = styled.input`
   background-position:10px center;
 `;
 export const Word = styled.span`
-    color: ${(props) => (props.isMatched ? "orange" : "black")};
+    color: ${(props) => (props.isMatched ? "orange" : "")};
 `
 export const LineTop = styled.div`
   border-bottom: 1px solid black;

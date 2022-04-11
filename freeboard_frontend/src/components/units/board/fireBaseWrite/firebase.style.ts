@@ -20,26 +20,30 @@ export const Inputs=styled.div`
 export const Writer=styled.input`
     padding-left: 10px;
     width: 200px;
-    margin-right: 30px;
+    margin-right: 20px;
     border: 1px solid #828282;
+    border-radius: 5px;
 `
 export const Title=styled.input`
     padding-left: 10px;
     width: 200px;
-    margin-right: 30px;
+    margin-right: 20px;
     border: 1px solid #828282;
+    border-radius: 5px;
 `
 export const Contents=styled.input`
     padding-left: 10px;
     width: 450px;
-    margin-right: 30px;
+    margin-right: 20px;
     border: 1px solid #828282;
+    border-radius: 5px;
 `
 export const Btn=styled.button`
     width: 100px;
     height: 52px;
     border: none;
     background-color: #6888B2;
+    border-radius: 5px;
     color: white;
     font-weight: 600;
 `
