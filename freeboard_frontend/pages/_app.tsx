@@ -1,15 +1,10 @@
 import "antd/dist/antd.css";
 import "../styles/globals.css";
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  ApolloLink,
-} from "@apollo/client";
 import Layout from '../src/commons/layout/index'
-import { createUploadLink } from "apollo-upload-client";
 import { initializeApp } from "firebase/app";
 import { AppProps } from "next/app";
+import { RecoilRoot} from 'recoil';
+import ApolloSetting from "../src/commons/apollo";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -27,21 +22,16 @@ export const firebaseApp = initializeApp(firebaseConfig);
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const uploadLink = createUploadLink({
-    uri: "http://backend06.codebootcamp.co.kr/graphql",
-  });
 
-  const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink]),
-    cache: new InMemoryCache(),
-  });
 
   return (
-    <ApolloProvider client={client}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <RecoilRoot>
+        <ApolloSetting>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+      </ApolloSetting>
+    </RecoilRoot>
   );
 }
 

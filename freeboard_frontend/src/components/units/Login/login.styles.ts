@@ -45,7 +45,7 @@ export const LoginBtn = styled.button`
     width: 384px;
     height: 64px;
     border-radius: 10px;
-    background-color: #4F4F4F;
+    background-color: ${(props) => (props.isActive ? "#6888B2" : "#828282")};
     border: none;
     color: white;
     cursor: pointer;
