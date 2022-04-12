@@ -26,11 +26,19 @@ export default function LayoutHeader(){
     const Logo=styled.div`
         cursor: pointer;
     `
+    const Login=styled.div`
+        cursor: pointer;
+        padding-right: 30px;
+    `
     
     const router = useRouter();
 
     const onClickToMain = () =>{
         router.push("/boards")
+    }
+
+    const onClickToLogin = () =>{
+        router.push("/login")
     }
 
     return(
@@ -39,7 +47,7 @@ export default function LayoutHeader(){
                 <Owl src="/owl.png" onClick={onClickToMain} />  
                 <Main>OwlSuri</Main>  
             </Logo>
-            
+            <Login onClick={onClickToLogin}>Login</Login>
         </Wrapper>
     )
 }

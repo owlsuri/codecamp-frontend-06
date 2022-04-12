@@ -28,20 +28,8 @@ export const Input = styled.input`
     border: none;
     border-bottom: 1px solid lightgray;
 ` 
-export const CheckBox = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-bottom: 10px;
-    
-` 
-export const CheckText = styled.div`
-    padding-left: 10px;
-` 
-export const Check = styled.input`
-    padding-right: 5px;
-` 
-export const LoginBtn = styled.button`
+
+export const JoinBtn = styled.button`
     width: 384px;
     height: 64px;
     border-radius: 10px;
@@ -49,13 +37,4 @@ export const LoginBtn = styled.button`
     border: none;
     color: white;
     cursor: pointer;
-` 
-export const MenuBox = styled.div`
-    width: 384px;
-    display: flex;
-    justify-content: space-around;
-    padding-top: 30px;
-` 
-export const Menu = styled.span`
-    
 ` 
