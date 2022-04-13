@@ -16,7 +16,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
     const [writer, setWriter] = useState("");
     const [password, setPassword] = useState("");
     const [contents, setContents] = useState("");
-    const [value, setValue] = useState(0);
+    const [rating, setRating] = useState(0);
 
     const [createBoardComment] = useMutation<Pick<IMutation,'createBoardComment'>,IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT);
     const [updateBoardComment] = useMutation<Pick<IMutation,'updateBoardComment'>,IMutationUpdateBoardCommentArgs>(UPDATE_BOARD_COMMENT);
@@ -63,7 +63,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
 
     // 별점 input
     const onChangeRating = (value:number) => {
-        setValue(value);
+        setRating(value);
     };
 
     // 댓글 등록하기 버튼
@@ -76,7 +76,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
                     writer,
                     password,
                     contents,
-                    rating:value,
+                    rating,
                     },
                     boardId: String(router.query.boardId),
                 },
@@ -93,7 +93,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
             setWriter("")
             setPassword("")
             setContents("")
-            setValue(3)
+            setRating(0)
 
         } catch(error){
             if (error instanceof Error)
@@ -120,7 +120,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
         
         const myUpdateBoardCommentInput: ImyUpdateBoardCommentInput = {
             contents,
-            rating:value,
+            rating:rating,
         }
 
         const MyVariables : IMyVariables = {
@@ -129,7 +129,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
             password
         }
         
-        if (!value) myUpdateBoardCommentInput.rating = value;
+        if (!rating) myUpdateBoardCommentInput.rating = rating;
         if (contents !== "") myUpdateBoardCommentInput.contents = contents;
 
         try{
@@ -165,7 +165,7 @@ export default function CommentWrite(props:ICommentWriteProps) {
             writer={writer}
             password={password}   
             contents={contents}
-            value={value}   
+            rating={rating}   
             onChangeRating={onChangeRating}
             el={props.el}        
         />

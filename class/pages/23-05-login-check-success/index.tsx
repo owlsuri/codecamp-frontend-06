@@ -1,6 +1,4 @@
 import { gql, useQuery } from "@apollo/client"
-import { useRouter } from "next/router"
-import { useEffect } from "react"
 import { withAuth } from "../../src/components/commons/hocs/withAuth"
 
     const FETCH_USER_LOGGED_IN = gql`

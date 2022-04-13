@@ -20,17 +20,17 @@ export default function CommentUI(props:ICommentWriteUIProps){
                 </S.CommentTitleBox>
                 <S.CommentUser>
                 <S.CommentWriter onChange={props.onChangeWriter} type="text" placeholder="작성자" 
-                                defaultValue={props.el?.writer || ""} 
-                                readOnly={!!props.el?.writer}/>
-                <S.CommentPassword value={props.password} onChange={props.onChangePassword} type="password" placeholder="비밀번호" />
+                                value={props.writer || props.el?.writer || ""} 
+                                />
+                <S.CommentPassword value={props.password || props.el?.password || ""}  onChange={props.onChangePassword} type="password" placeholder="비밀번호" />
                 {/* 별 */}
                     <S.Star>
-                        <Rate onChange={props.onChangeRating} defaultValue={props.el?.rating || 0}></Rate>
+                        <Rate onChange={props.onChangeRating} value={props.rating || props.el?.rating || ""}></Rate>
                     </S.Star>
                 </S.CommentUser>  
         {/* 내용 입력 부분 */}
                 <S.CommentInputBox>
-                <S.CommentInput maxlength={100} defaultValue={props.el?.contents || ""} onChange={props.onChangeContents} placeholder="개인정보를 공유 및 요청하거나 명예회손, 무단광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에대한 책임은 게시자에게 있습니다."/>
+                <S.CommentInput maxlength={100} value={props.contents || props.el?.contents || ""} onChange={props.onChangeContents} placeholder="개인정보를 공유 및 요청하거나 명예회손, 무단광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에대한 책임은 게시자에게 있습니다."/>
                 <S.CommentInputBottom>
                     <S.CommentCount>{props.contents.length}/100</S.CommentCount>
                     <S.CommentInputBtn onClick={props.isCommentEdit ? props.OnClickCommentEdit : props.onClickComment}
@@ -39,6 +39,7 @@ export default function CommentUI(props:ICommentWriteUIProps){
                                         </S.CommentInputBtn>
                 </S.CommentInputBottom>          
                 </S.CommentInputBox>
+
             </S.CommentBox>
         </S.Container>
     )

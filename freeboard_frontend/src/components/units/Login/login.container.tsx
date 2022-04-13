@@ -48,6 +48,7 @@ export default function Login(){
         },
       });
        const accessToken = result.data.loginUser.accessToken;
+       localStorage.setItem("accessToken", accessToken);
 
         let check = true
         const emailRule = /^\w+@\w+\.\w+/
