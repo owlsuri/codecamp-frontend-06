@@ -3,6 +3,10 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
 
 ` 
+export const Error = styled.div`
+    font-size: 10px;
+    color: red;
+` 
 export const Container = styled.div`
     width: 1400px;
     height: 1080px;

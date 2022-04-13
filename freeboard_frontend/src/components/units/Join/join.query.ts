@@ -2,11 +2,10 @@
 import { gql } from "@apollo/client";
 
 
-export const FETCH_USER_LOGGED_IN = gql`
-  query fetchUserLoggedIn {
-    fetchUserLoggedIn {
+export const CREATE_USER = gql`
+  mutation createUser($createUserInput: CreateUserInput!) {
+    createUser(createUserInput: $createUserInput) {
       email
-      password
       name
     }
   }

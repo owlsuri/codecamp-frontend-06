@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/store";
 import JoinUI from "./join.presenter";
-import { FETCH_USER_LOGGED_IN } from "./join.query"; 
+import { CREATE_USER } from "./join.query"; 
 
 export default function Join(){
 
@@ -15,9 +15,15 @@ export default function Join(){
     const [password, setPassword] = useState("")
     const [passwordAgain, setPasswordAgain] = useState("")
     const [name, setName] = useState("")
+    const [inputErrors, setInputErrors] = useState({
+        email:"",
+        password:"",
+        passwordAgain:"",
+        name:""        
+    });
 
     const router = useRouter()
-    const { data } = useQuery(FETCH_USER_LOGGED_IN);
+    const [createUser] = useMutation(CREATE_USER);
 
     const onChangeEmail = (event) =>{
         setEmail(event.target.value)
@@ -34,10 +40,29 @@ export default function Join(){
         setName(event.target.value);
     };   
 
-    const onClickJoin=()=>{        
+    const onClickJoin = async() => {     
+    setInputErrors({
+      email: email ? "" : "이메일을 입력해주세요.",
+      password: password ? "" : "비밀번호를 입력해주세요.",
+      passwordAgain: passwordAgain ? "" : "비밀번호를 다시 입력해주세요.",
+      name: name ? "" : "이름을 입력해주세요.",
+    });  
+    try{
+       const result =  await createUser({
+            variables: { 
+                createUserInput: {
+                email,
+                password,
+                name,
+            },
+        },
+        })
+        
+
+
         let check = true
         const emailRule = /^\w+@\w+\.\w+/
-    try{
+    
         if(!emailRule.test(email)){
             Modal.error({
                 content: "이메일이 올바르지 않습니다.", 
@@ -61,9 +86,9 @@ export default function Join(){
         if(check === true){
             setAccessToken(accessToken);
             Modal.success({
-                content: `${name}님의 회원가입을 환영합니다!`,
+                content: `회원가입을 환영합니다!`,
             });
-            router.push("/boards")
+            router.push("/login")
         }
     } catch(error){
         if(error instanceof Error)
@@ -80,6 +105,7 @@ export default function Join(){
         onChangePasswordAgain={onChangePasswordAgain}
         onChangeName={onChangeName}
         onClickJoin={onClickJoin}
+        inputErrors={inputErrors}
         />
     )
 }

@@ -24,6 +24,7 @@ export default function Login(){
         } else {
             setIsActive(false);
         }
+        console.log(email)
         
     }
 
@@ -70,7 +71,7 @@ export default function Login(){
             Modal.success({
                 content: '웰컴!',
             });
-            router.push("/boards")
+            router.push("/mypage")
         }
     } catch(error){
         if(error instanceof Error)
