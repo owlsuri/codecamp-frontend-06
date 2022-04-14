@@ -1,8 +1,8 @@
-import { useMutation, gql } from "@apollo/client"
+import { useMutation, gql, useApolloClient } from "@apollo/client"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { useRecoilState } from "recoil"
-import { accessTokenState } from "../../src/commons/store"
+import { accessTokenState, userInfoState } from "../../src/commons/store"
 
 const LOGIN_USER = gql`
     mutation loginUser($email:String!, $password:String!){
@@ -11,14 +11,25 @@ const LOGIN_USER = gql`
         }
     }
 `
+const FETCH_USER_LOGGED_IN = gql`
+    query fetchUserLoggedIn{
+            fetchUserLoggedIn{
+                email
+                name
+            }
+    }
+`
 
 export default function LoginPage(){
     const [accessToken, setAccesstoken] = useRecoilState(accessTokenState)
+    const [userInfo, setUsertInfo] = useRecoilState(userInfoState)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loginUser] = useMutation(LOGIN_USER)
     const router = useRouter()
+
+    const client = useApolloClient()
 
     const onChangeEmail =(event)=>{
         setEmail(event.target.value)
@@ -39,15 +50,30 @@ export default function LoginPage(){
         console.log(accessToken)
 
         // 2. 유저정보 받아오기
-        
+        const resultUserInfo = await client.query({
+            query : FETCH_USER_LOGGED_IN,
+            // 특정 http 보내고 싶을때
+            context:{
+                headers:{
+                    Authorization : `Bearer ${accessToken}`
+                },
+            },
+        })
+
+        const userInfo = resultUserInfo.data.fetchUserLoggedIn
+        console.log(userInfo)
 
         // 3. 글로벌 스테이트에 저장하기
         setAccesstoken(accessToken)
+        setUsertInfo(userInfo)
         localStorage.setItem("accessToken",accessToken)
+        localStorage.setItem("userInfo", JSON.stringify(userInfo))
+                                        // 객체를 문자로 바꿔서 저장 
+
         
         // 4. 로그인 성공페이지도 이동하기
                 alert("로그인성공")        
-                router.push("/23-05-login-check-success")
+                router.push("/24-02-login-use-apollo-client-success")
         
     }
 
