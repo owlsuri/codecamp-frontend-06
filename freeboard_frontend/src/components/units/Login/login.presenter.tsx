@@ -2,7 +2,7 @@ import * as S from './login.styles'
 
 export default function LoginUI(props){
 
-
+console.log(props.isActive)
     return(
         <S.Wrapper>
             <S.Container>
@@ -15,14 +15,15 @@ export default function LoginUI(props){
                         <S.CheckText>로그인상태 유지</S.CheckText>
                     </S.CheckBox>
                 </S.InputBox>
-                <S.LoginBtn onClick={props.onClickLogin}>로그인하기</S.LoginBtn>
                 <S.MenuBox>
                     <S.Menu>이메일찾기</S.Menu>
                     <S.Menu>|</S.Menu>
                     <S.Menu>비밀번호찾기</S.Menu>
                     <S.Menu>|</S.Menu>
-                    <S.Menu onClick={props.onClickToJoin} isActive={props.isActive}>회원가입</S.Menu>
+                    <S.Menu>회원가입</S.Menu>
                 </S.MenuBox>
+                    <S.LoginBtn onClick={props.onClickToJoin} isActive={props.isActive}>회원가입</S.LoginBtn>
+                
             </S.Container>
         </S.Wrapper>        
     )

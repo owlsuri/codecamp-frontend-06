@@ -45,7 +45,7 @@ export const LoginBtn = styled.button`
     width: 384px;
     height: 64px;
     border-radius: 10px;
-    background-color: ${(props) => (props.isActive ? "#6888B2" : "#828282")};
+    background-color: ${(props) => (props.isActive ? "#6888B2" : "")};
     border: none;
     color: white;
     cursor: pointer;
@@ -54,7 +54,7 @@ export const MenuBox = styled.div`
     width: 384px;
     display: flex;
     justify-content: space-around;
-    padding-top: 30px;
+    padding-bottom: 20px;
 ` 
 export const Menu = styled.span`
     

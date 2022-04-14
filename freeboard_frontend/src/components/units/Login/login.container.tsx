@@ -25,7 +25,7 @@ export default function Login(){
             setIsActive(false);
         }
         console.log(email)
-        
+        console.log(isActive)
     }
 
     const onChangePassword = (event) => {
@@ -36,10 +36,11 @@ export default function Login(){
         } else {
             setIsActive(false);
         }
+                console.log(isActive)
+
     };    
 
     const onClickLogin = async() => {
-
       try{
       const result = await loginUser({
         variables: {
