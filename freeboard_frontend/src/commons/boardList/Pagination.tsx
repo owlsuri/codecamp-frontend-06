@@ -1,3 +1,4 @@
+// 페이지네이션
 import * as S from './pagination.style'
 import { useState } from 'react'
 

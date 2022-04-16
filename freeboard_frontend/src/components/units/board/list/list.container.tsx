@@ -14,11 +14,11 @@ export default function BoardList(){
     const { data, refetch } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(FETCH_BOARDS)
     const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(FETCH_BOARDS_COUNT)
     const { data: dataBoardBest } = useQuery<Pick<IQuery, "fetchBoardsOfTheBest">> (FETCH_BOARDS_BEST)
-
+    // 페이지네이션 라스트페이지
     const lastPage = Math.ceil(dataBoardsCount?.fetchBoardsCount / 10)
     
     const router = useRouter();
-
+    // 검색
     const [keyword, setKeyword] = useState("")
 
     const getDebounce = _.debounce((data:any)=>{

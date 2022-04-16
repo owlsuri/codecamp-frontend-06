@@ -39,10 +39,9 @@ export default function MapBoardPage(){
     const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
         getDebounce(event.target.value)
     }
-      const onClickPage = (event) => {
-    refetch({page: Number(event.target.id)})
-    
-  }
+    const onClickPage = (event) => {
+        refetch({page: Number(event.target.id)})
+    }
 
     return (
         <div>
@@ -54,7 +53,7 @@ export default function MapBoardPage(){
                     <MyColumn>{el.title}</MyColumn>
                 </MyRow>
             ))}
-                       {
+        {
             new Array(10).fill(1).map((_, index) => (
                 <span key={index+1} onClick={onClickPage} id={String(index+1)}>{index+1}</span>
             ))

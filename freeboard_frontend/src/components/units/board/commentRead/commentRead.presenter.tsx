@@ -8,6 +8,7 @@ export default function CommentReadUI(props:ICommentReadUIProps){
 
     return(
         <>
+        {/* 무한스크롤 */}
             <div style={{height:"500px", overflow:"auto"}}>
                 <InfiniteScroll
                     pageStart={0}

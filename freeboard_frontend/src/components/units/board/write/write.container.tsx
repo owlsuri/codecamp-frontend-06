@@ -149,6 +149,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   // 게시글 수정 버튼
   const onClickEdit = async () => {
+    // 이미지 수정
     const currentFiles = JSON.stringify(fileUrls);
     const defaultFiles = JSON.stringify(data.fetchBoard.images);
     const isChangedFiles = currentFiles !== defaultFiles;
@@ -186,6 +187,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
           variables: {
             boardId: router.query.boardId,
             password:inputs.password,
+            image: fileUrls,
             updateBoardInput,
           },
         });
@@ -199,8 +201,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
               content: error.message,
           });
         }
+        console.log(fileUrls)
 }
 
+// 이미지
   useEffect(() => {
     if (data?.fetchBoard.images?.length) {
       setFileUrls([...data?.fetchBoard.images]);

@@ -74,6 +74,7 @@ export default function BoardListUI(props:IBoardListUIProps){
         </div>
         <S.LineBottom></S.LineBottom>
         <S.btnBox>
+          {/* 페이지네이션 */}
           <Pagination data={props.data} refetch={props.refetch} lastPage={props.lastPage}/>
           <S.CreateBtn onClick={props.onClickWrite}>게시물 등록하기</S.CreateBtn>
         </S.btnBox>

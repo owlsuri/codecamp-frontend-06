@@ -25,7 +25,7 @@ export default function CommentUI(props:ICommentWriteUIProps){
                 <S.CommentPassword value={props.password || props.el?.password || ""}  onChange={props.onChangePassword} type="password" placeholder="비밀번호" />
                 {/* 별 */}
                     <S.Star>
-                        <Rate onChange={props.onChangeRating} value={props.rating || props.el?.rating || ""}></Rate>
+                        <Rate onChange={props.onChangeRating} value={props.rating || props.el?.rating || 0}></Rate>
                     </S.Star>
                 </S.CommentUser>  
         {/* 내용 입력 부분 */}

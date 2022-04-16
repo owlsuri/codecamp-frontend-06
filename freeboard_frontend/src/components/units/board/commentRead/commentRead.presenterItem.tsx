@@ -16,7 +16,7 @@ export default function CommentReadItem(props:ICommentReadItemProps){
 
     const [isCommentEdit, setIsCommentEdit] = useState(false)
 
-    // 댓글 수정하기 버튼
+    // 댓글 수정하러가기 버튼
     const onClickToEdit = (event:MouseEvent<SVGSVGElement>) => {
         setIsCommentEdit(true);
     }
@@ -32,7 +32,7 @@ export default function CommentReadItem(props:ICommentReadItemProps){
                 />
                 </Modal>
             )}
-        {/* isCommentEdit={false} */}
+        {/* isCommentEdit={false}  등록하기 */}
         {!isCommentEdit && (                
                 <S.Container key={props.el?._id} id={props.el?.writer} onClick={props.onClickWhoWrite} >        
                     <S.CommentShowBox >                
@@ -61,7 +61,7 @@ export default function CommentReadItem(props:ICommentReadItemProps){
                     </S.CommentShowBox>               
                 </S.Container>     
             )}
-            {/* isCommentEdit={true} */}          
+            {/* isCommentEdit={true} 수정하기 */}          
             {isCommentEdit && (
                 <CommentWrite isCommentEdit={true} setIsCommentEdit={setIsCommentEdit} el={props.el} />
             )}

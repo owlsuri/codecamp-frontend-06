@@ -73,7 +73,7 @@ export default function BoardWriteUI(props:IBoardWriteUIProps) {
                                 onCancel={props.handleCancel}>
                           <DaumPostcode onComplete={props.handleComplete}/>
                         </Modal>
-                           )}
+                        )}
 
         </S.PostNum>
         <S.InsertAddress type={"text"}  id="address" value={props.address || props.data?.fetchBoard.boardAddress?.address || ""} readOnly></S.InsertAddress>

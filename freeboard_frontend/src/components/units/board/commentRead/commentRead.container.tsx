@@ -20,7 +20,7 @@ export default function CommentRead(){
         variables: { boardId: String(router.query.boardId)},
     });
     
-
+    // 무한스크롤
     const onLoadMore = () => {
         if (!data) return;
 
@@ -53,7 +53,7 @@ export default function CommentRead(){
         try {
             await deleteBoardComment({
                 variables: { boardCommentId, 
-                             password
+                            password
                             }, 
                 refetchQueries: [{
                     query: FETCH_BOARD_COMMENTS,
