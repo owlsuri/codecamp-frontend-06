@@ -27,6 +27,11 @@ export const ColumnHeaderBasic = styled.div`
   text-align: center;
   font-weight: 600;
 `;
+export const ColumnHeaderWriter= styled.div`
+  width: 20%;
+  text-align: center;
+  font-weight: 600;
+`;
 export const ColumnHeaderTitle = styled.div`
   width: 30%;
   text-align: center;
@@ -38,9 +43,12 @@ export const ColumnHeaderContents = styled.div`
   text-align: center;
   font-weight: 600;
 `;
-
 export const ColumnBasic = styled.div`
   width: 10%;
+  text-align: center;
+`;
+export const ColumnWriter = styled.div`
+  width: 20%;
   text-align: center;
 `;
 export const ColumnTitle = styled.div`

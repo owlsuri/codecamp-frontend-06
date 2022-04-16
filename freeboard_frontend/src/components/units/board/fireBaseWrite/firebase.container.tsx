@@ -23,20 +23,35 @@ export default function FirebasePage() {
     setContents(event.target.value);
   }
 
+
   const onClickSubmit = async () => {
+    if(writer && title && contents){
     const board = collection(getFirestore(firebaseApp), "board");
-    await addDoc(board, {
-      writer,
-      title,
-      contents
-    });
-    
-    Modal.success({
-        content: '등록 완료!',
-    });
-
-    router.push('/fireBase')
-
+    try{
+        await addDoc(board, {
+          writer,
+          title,
+          contents,
+          timestamp: new Date()
+        },
+        );
+        Modal.success({
+          content: '등록 완료!',
+        },
+        );
+        
+        setWriter("")
+        setContents("")
+        setTitle("")
+        
+      } catch(error){
+          if (error instanceof Error)
+          Modal.error({
+              content: error.message,
+          });    
+  }
+}
+window.location.reload()
 };
 
   return (
@@ -44,7 +59,7 @@ export default function FirebasePage() {
     onClickSubmit={onClickSubmit}
     onChangeWriter={onChangeWriter}
     onChangeTitle={onChangeTitle}
-    onChangeContents={onChangeContents}    
+    onChangeContents={onChangeContents}
     />
   );
 }
