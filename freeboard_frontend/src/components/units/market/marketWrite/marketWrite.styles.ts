@@ -57,3 +57,6 @@ margin-bottom: 10px;
 export const AddressBox= styled.div`
 margin-bottom: 50px;
 `
+export const ImageBox= styled.div`
+margin-bottom: 50px;
+`
