@@ -22,7 +22,7 @@ console.log(props.isActive)
                     <S.Menu>|</S.Menu>
                     <S.Menu>회원가입</S.Menu>
                 </S.MenuBox>
-                    <S.LoginBtn onClick={props.onClickToJoin} isActive={props.isActive}>회원가입</S.LoginBtn>
+                    <S.LoginBtn onClick={props.onClickLogin} isActive={props.isActive}>로그인하기</S.LoginBtn>
                 
             </S.Container>
         </S.Wrapper>        

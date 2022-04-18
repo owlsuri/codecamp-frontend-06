@@ -18,7 +18,7 @@ export default function MarketWriteUI(props){
             <S.Error>{props.formState.errors.item?.message}</S.Error>
             
             <S.Label>상품설명</S.Label>
-            <Input02 mytype="textarea" register={props.register("itemDesc")} placeholder="상품을 설명해주세요." />
+            <Input02 mytype="textArea" register={props.register("itemDesc")} placeholder="상품을 설명해주세요." />
             <S.Error>{props.formState.errors.itemDesc?.message}</S.Error>
             
             <S.Label>판매가격</S.Label>
@@ -37,8 +37,8 @@ export default function MarketWriteUI(props){
                 <S.AddressBox>
                     <S.GpsBox>
                         <S.Label>GPS</S.Label>
-                        <S.Gps type="text" placeholder="위도(LAT)" register={props.register("lat")}/>
-                        <S.Gps type="text" placeholder="경도(LNG)" register={props.register("lng")}/>
+                        <S.Gps type="text" placeholder="위도(LAT)" />
+                        <S.Gps type="text" placeholder="경도(LNG)" />
                     </S.GpsBox>
                     <div>
                         <S.Label>주소</S.Label>
