@@ -43,8 +43,40 @@ export const Location = styled.img`
   width: 30px;
 `;
 export const TitleBox = styled.div`
-  width: 30px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding-right: 20px;
+height: 80px;
+padding-top: 20px;
 `;
 export const Remarks = styled.div`
-  width: 30px;
+font-size: 18px;
+color: #BDBDBD;
+`;
+export const Name = styled.div`
+font-weight: 600;
+font-size: 24px;
+`;
+export const Heart = styled.div`
+    color: red;
+    font-size: larger;
+`;
+export const HeartNum = styled.div`
+
+`;
+export const Price = styled.div`
+    font-size: 36px;
+    font-weight: 700;
+`;
+export const Images = styled.div`
+
+`;
+export const Contents = styled.div`
+font-size: 18px;
+color: #4F4F4F;
+`;
+export const Tags = styled.div`
+font-size: 16px;
+color: #BDBDBD;
 `;

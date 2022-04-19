@@ -7,7 +7,7 @@ export default function LayoutNavigationUI(props:ILayoutUI){
 
     const NAVIGATION_MEMUS = [
         { name: "수다방", page: "/boards"},
-        { name: "중고거래", page: "/market"},
+        { name: "중고마켓", page: "/market"},
         { name: "한줄맛집", page: "/fireBase"},
         { name: "따릉이", page: "/plusPage"},        
         { name: "MY PAGE", page: "/mypage"}, 

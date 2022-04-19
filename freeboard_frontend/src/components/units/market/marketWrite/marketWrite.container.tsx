@@ -28,13 +28,13 @@ export default function MarketWrite(){
         mode:"onChange"
   });
 
-  const [createUsedItem] = useMutation(CREATE_USED_ITEM)
+  const [createUseditem] = useMutation(CREATE_USED_ITEM)
   const router = useRouter()
 
   const onClickSubmit = async(data) => {
 
     try{
-    const result = await createUsedItem({
+    const result = await createUseditem({
       variables:{ 
         createUseditemInput:{
           name: data.name,

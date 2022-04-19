@@ -1,10 +1,12 @@
+import { HeartFilled } from '@ant-design/icons'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Tooltip } from 'antd'
+import { getDate } from '../../../../commons/libraries/utils'
 import * as S from './marketRead.styles'
 
-export default function UsedItemReadUI(){
-
+export default function UsedItemReadUI(props){
+console.log(props.data)
     return(
         <S.Wrapper>
             <S.WriterBox>
@@ -15,7 +17,7 @@ export default function UsedItemReadUI(){
                 판매자
               </S.Writer>
               <S.CreateAt>
-                2022.04.18
+                {getDate(props.data ? props.data.fetchUseditem.createdAt : "loading...")}
               </S.CreateAt>
             </S.WriterInfo>
           </S.WriterSection>
@@ -30,9 +32,19 @@ export default function UsedItemReadUI(){
         </S.WriterBox>
 
         <S.TitleBox>
-            <S.Remarks>2019 LTE 32G</S.Remarks>
+            <div>
+            <S.Remarks>{props.data ? props.data.fetchUseditem.remarks : "loading..."}</S.Remarks>
+            <S.Name>{props.data ? props.data.fetchUseditem.name : "loading..."}</S.Name>
+            </div>
+            <S.Heart>
+                <HeartFilled />
+                <S.HeartNum>20</S.HeartNum>
+            </S.Heart>
         </S.TitleBox>
-
+        <S.Price>{props.data ? props.data.fetchUseditem.price : "loading..."}</S.Price>
+        <S.Images></S.Images>
+        <S.Contents>{props.data ? props.data.fetchUseditem.contents : "loading..."}</S.Contents>
+        <S.Tags>{props.data ? props.data.fetchUseditem.tags : "loading..."}</S.Tags>
 
         </S.Wrapper>
     )

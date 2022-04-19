@@ -19,7 +19,7 @@ export default function BoardReadUI(props:IBoardReadUIProps) {
         <S.WriterBox>
           <S.WriterSection>
             <FontAwesomeIcon icon={faCircleUser} size="3x" color="#BDBDBD" />
-            <S.WriterInfo>
+            <S.WritecdrInfo>
               <S.Writer>
                 {props.data ? props.data.fetchBoard.writer : "loading..."}
               </S.Writer>
