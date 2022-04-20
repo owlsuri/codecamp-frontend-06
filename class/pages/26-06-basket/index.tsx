@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { IBoard } from "../../src/commons/types/generated/types";
 
 const FETCH_BOARDS = gql`
-  query fetchBoard {
+  query fetchBoards {
     fetchBoards{
       _id
       writer

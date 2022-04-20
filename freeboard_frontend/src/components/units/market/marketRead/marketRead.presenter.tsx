@@ -45,6 +45,12 @@ console.log(props.data)
         <S.Images></S.Images>
         <S.Contents>{props.data ? props.data.fetchUseditem.contents : "loading..."}</S.Contents>
         <S.Tags>{props.data ? props.data.fetchUseditem.tags : "loading..."}</S.Tags>
+            {/* 하단 버튼 메뉴 박스 */}
+      <S.MenuBox>
+        <S.MenuBtn onClick={props.onClickList}>목록으로</S.MenuBtn>
+        <S.MenuBtn onClick={props.onClickMoveEdit}>수정하기</S.MenuBtn>
+        <S.MenuBtn onClick={props.onClickDelete}>삭제하기</S.MenuBtn>
+      </S.MenuBox>
 
         </S.Wrapper>
     )

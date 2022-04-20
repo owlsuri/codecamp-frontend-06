@@ -11,11 +11,27 @@ export default function UsedItemRead(){
         variables: { useditemId : router.query.useditemId },
     });
 
+    const onClickList = () => {
+        router.push("/market")
+    }
+
+    const onClickDelete = () => {
+        
+    }
+
+    const onClickMoveEdit = () => {
+        
+    }
+
+
 
 
     return(
         <UsedItemReadUI
-        data={data} />
+        data={data}
+        onClickList={onClickList}
+        onClickDelete={onClickDelete}
+        onClickMoveEdit={onClickMoveEdit} />
     )
 
 }

@@ -80,3 +80,24 @@ export const Tags = styled.div`
 font-size: 16px;
 color: #BDBDBD;
 `;
+export const MenuBox = styled.div`
+  border-bottom: 1px solid #bdbdbd;
+  padding: 70px 0 70px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const MenuBtn = styled.button`
+  width: 179px;
+  height: 45px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #ffffff;
+  margin: 20px;
+  border: 1px solid #bdbdbd;
+    :hover{
+    background-color: #6888B2;
+    color:white;
+    cursor: pointer;
+  }
+`;

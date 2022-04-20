@@ -11,23 +11,23 @@ export default function MarketWriteUI(props){
             <form onSubmit={props.handleSubmit(props.onClickSubmit)}>
             <S.Label>상품명 </S.Label>
             <Input01 mytype="text" register={props.register("name")} placeholder="상품명을 작성해주세요." />
-            <S.Error>{props.formState.errors.itemName?.message}</S.Error>
+            <S.Error>{props.formState.errors.name?.message}</S.Error>
 
             <S.Label>한줄요약</S.Label>
             <Input01 mytype="text" register={props.register("remarks")} placeholder="상품을 한줄로 요약해서 작성해주세요." />
-            <S.Error>{props.formState.errors.item?.message}</S.Error>
+            <S.Error>{props.formState.errors.remarks?.message}</S.Error>
             
             <S.Label>상품설명</S.Label>
             <Input02 mytype="textArea" register={props.register("contents")} placeholder="상품을 설명해주세요." />
-            <S.Error>{props.formState.errors.itemDesc?.message}</S.Error>
+            <S.Error>{props.formState.errors.contents?.message}</S.Error>
             
             <S.Label>판매가격</S.Label>
             <Input01 mytype="text" register={props.register("price")} placeholder="판매가격을 입력주세요." />
-            <S.Error>{props.formState.errors.contents?.message}</S.Error>
+            <S.Error>{props.formState.errors.price?.message}</S.Error>
 
             <S.Label>태그입력</S.Label>
             <Input01 mytype="text" register={props.register("tags")} placeholder="판매가격을 입력주세요." />
-            <S.Error>{props.formState.errors.contents?.message}</S.Error>
+            <S.Error>{props.formState.errors.tags?.message}</S.Error>
 
             <S.LocationBox>
                 <S.Location>
