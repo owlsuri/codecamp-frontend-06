@@ -24,7 +24,7 @@ const schema = yup.object({
   tags: yup.string().required("필수 입력 사항입니다.")
 });
 
-export default function MarketWrite(){
+export default function MarketWrite(props){
 
   useAuth()
   const router = useRouter()
@@ -90,7 +90,7 @@ export default function MarketWrite(){
   const onClickUpdate = async() =>{
     // 이미지 수정
     const currentFiles = JSON.stringify(fileUrls);
-    const defaultFiles = JSON.stringify(data.fetchBoard.images);
+    const defaultFiles = JSON.stringify(data.fetchUseditem.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
         if (
@@ -160,5 +160,6 @@ export default function MarketWrite(){
     onChangeFileUrls={onChangeFileUrls}
     fileUrls={fileUrls}
     onClickUpdate={onClickUpdate}
+    isEdit={props.isEdit}
     />)
 }

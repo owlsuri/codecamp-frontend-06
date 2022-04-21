@@ -11,6 +11,7 @@ export const FETCH_USED_ITEM = gql`
                 price
                 tags
                 createdAt
+                images
         }
     }
 `

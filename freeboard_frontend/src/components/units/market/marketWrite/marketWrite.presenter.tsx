@@ -8,8 +8,8 @@ export default function MarketWriteUI(props){
 
     return(
         <S.Wrapper>
-            <S.Main>상품 등록하기</S.Main>
-            <form onSubmit={props.handleSubmit(props.onClickSubmit)}>
+            <S.Main>{props.isEdit ? "상품 수정하기" : "상품 등록하기"}</S.Main>
+            <form onSubmit={props.handleSubmit(props.isEdit ? props.onClickUpdate : props.onClickSubmit)}>
             <S.Label>상품명 </S.Label>
             <Input01 mytype="text" register={props.register("name")} placeholder="상품명을 작성해주세요." />
             <S.Error>{props.formState.errors.name?.message}</S.Error>
@@ -63,7 +63,7 @@ export default function MarketWriteUI(props){
                 </S.ImageBox>
 
 
-            <Button01 isActive={props.formState.isValid} title="등록하기" />
+            <Button01 isActive={props.formState.isValid} title={props.isEdit ? "수정하기" : "등록하기"} />
             </form>
     </S.Wrapper>
     )

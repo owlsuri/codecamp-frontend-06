@@ -43,7 +43,14 @@ console.log(props.data)
             </S.Heart>
         </S.TitleBox>
         <S.Price>{props.data ? props.data.fetchUseditem.price : "loading..."}</S.Price>
-        <S.Images></S.Images>
+        <S.Images>{props.data?.fetchUseditem.images
+              ?.filter((el: string) => el)
+              .map((el: string) => (
+                <img
+                  key={el}
+                  src={`https://storage.googleapis.com/${el}`}
+                />
+              ))}      </S.Images>
                     {typeof window !== "undefined" && (<S.Contents dangerouslySetInnerHTML={{
                 __html: Dompurify.sanitize(props.data?.fetchUseditem.contents),
             }}></S.Contents>)}
