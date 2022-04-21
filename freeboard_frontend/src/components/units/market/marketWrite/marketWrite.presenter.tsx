@@ -1,7 +1,8 @@
 import Button01 from '../../../../commons/button/01'
 import Input01 from '../../../../commons/inputs/01'
-import Input02 from '../../../../commons/inputs/02'
+import Uploads01 from '../../../../commons/uploads/01/Uploads01.container'
 import * as S from './marketWrite.styles'
+import {v4 as uuidv4} from 'uuid'
 
 export default function MarketWriteUI(props){
 
@@ -18,7 +19,7 @@ export default function MarketWriteUI(props){
             <S.Error>{props.formState.errors.remarks?.message}</S.Error>
             
             <S.Label>상품설명</S.Label>
-            <Input02 mytype="textArea" register={props.register("contents")} placeholder="상품을 설명해주세요." />
+            <props.ReactQuill onChange={props.onChangeContents} />
             <S.Error>{props.formState.errors.contents?.message}</S.Error>
             
             <S.Label>판매가격</S.Label>
@@ -48,6 +49,15 @@ export default function MarketWriteUI(props){
                 </S.AddressBox>
             </S.LocationBox>
                 <S.Label>사진첨부</S.Label>
+                          {props.fileUrls.map((el, index) => (
+                            <Uploads01
+                            type="button"
+                            key={uuidv4()}
+                            index={index}
+                            fileUrl={el}
+                            onChangeFileUrls={props.onChangeFileUrls}
+                            />
+                        ))}
                 <S.ImageBox>
                     
                 </S.ImageBox>

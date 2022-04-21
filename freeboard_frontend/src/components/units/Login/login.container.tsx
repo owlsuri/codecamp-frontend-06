@@ -73,7 +73,7 @@ export default function Login(){
             Modal.success({
                 content: '웰컴!',
             });
-            router.push("/mypage")
+            router.back()
         }
     } catch(error){
         if(error instanceof Error)

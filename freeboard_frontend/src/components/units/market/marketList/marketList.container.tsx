@@ -1,11 +1,13 @@
 import { useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 import MarketListUI from "./marketList.presenter";
-import { FETCH_USED_ITEMS } from "./marketList.queries";
+import { FETCH_USED_ITEMS, FETCH_USED_ITEMS_BEST } from "./marketList.queries";
 
 export default function MarketList(){
 
     const { data, fetchMore } = useQuery(FETCH_USED_ITEMS)
-    console.log(data)
+    const { data: dataUseditemBest } = useQuery(FETCH_USED_ITEMS_BEST)
+    const router = useRouter()
 
 
     // 무한스크롤
@@ -27,10 +29,17 @@ export default function MarketList(){
     });
 };
 
+const onClickToDetail = (event) => {
+    router.push(`/market/${event.currentTarget.id}`)
+}
+
 
     return(
         <MarketListUI 
         data={data}
-        onLoadMore={onLoadMore}/>
+        onLoadMore={onLoadMore}
+        onClickToDetail={onClickToDetail}
+        dataUseditemBest={dataUseditemBest}
+        />
     )
 }

@@ -20,7 +20,7 @@ export default function UsedItemRead(){
     }
 
     const onClickMoveEdit = () => {
-        
+        router.push(`/market/${router.query.useditemId}/edit`)
     }
 
 

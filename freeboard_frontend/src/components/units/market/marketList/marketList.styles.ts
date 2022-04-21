@@ -5,11 +5,24 @@ display: flex;
 justify-content: center;
 align-items: center;
 width: 1200px;
-margin: 110px;
+margin: 50px 0 0 110px;
+`;
+export const BestBox = styled.div`
+display: grid;
+grid-template-columns: 300px 300px 300px 300px;
+border-bottom: 1px dashed #BDBDBD; 
+padding-bottom: 40px;
 `;
 export const Container = styled.div`
 display: grid;
 grid-template-columns: 300px 300px 300px 300px;
+`;
+export const Main = styled.div`
+font-size: 25px;
+font-weight: 700;
+width: 1200px;
+margin: 50px 0 0 100px;
+text-align: center;
 `;
 export const Row = styled.div`
 margin: 20px;
@@ -17,11 +30,13 @@ background: #FFFFFF;
 :hover{
     box-shadow: 5px 5px 30px 5px rgba(0, 0, 0, 0.1);
 }
-border-bottom-left-radius: 10px;
-border-bottom-right-radius: 10px;
+border: 1px solid rgba(0, 0, 0, 0.1) ;
+border-radius: 5px;
 display: flex;
 justify-content: center;
 padding: 5px;
+cursor: pointer;
+
 `;
 export const Img = styled.img`
 width: 240px;

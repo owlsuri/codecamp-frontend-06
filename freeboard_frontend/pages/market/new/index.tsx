@@ -5,6 +5,6 @@ export default function marketPage(){
 
 
     return(
-        <MarketWrite />
+        <MarketWrite isEdit={false}/>
     )
 }

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Tooltip } from 'antd'
 import { getDate } from '../../../../commons/libraries/utils'
 import * as S from './marketRead.styles'
+import Dompurify from 'dompurify'
 
 export default function UsedItemReadUI(props){
 console.log(props.data)
@@ -43,7 +44,9 @@ console.log(props.data)
         </S.TitleBox>
         <S.Price>{props.data ? props.data.fetchUseditem.price : "loading..."}</S.Price>
         <S.Images></S.Images>
-        <S.Contents>{props.data ? props.data.fetchUseditem.contents : "loading..."}</S.Contents>
+                    {typeof window !== "undefined" && (<S.Contents dangerouslySetInnerHTML={{
+                __html: Dompurify.sanitize(props.data?.fetchUseditem.contents),
+            }}></S.Contents>)}
         <S.Tags>{props.data ? props.data.fetchUseditem.tags : "loading..."}</S.Tags>
             {/* 하단 버튼 메뉴 박스 */}
       <S.MenuBox>
