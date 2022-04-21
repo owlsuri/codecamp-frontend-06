@@ -1,36 +1,77 @@
 import styled from "@emotion/styled";
 
-export const ColumnTitle = styled.div`
-  width: 500px;
-  text-align: center;
-  cursor: pointer;
+export const Wrapper = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+width: 1200px;
+margin: 110px;
+`;
+export const Container = styled.div`
+display: grid;
+grid-template-columns: 300px 300px 300px 300px;
+`;
+export const Row = styled.div`
+margin: 20px;
+background: #FFFFFF;
+:hover{
+    box-shadow: 5px 5px 30px 5px rgba(0, 0, 0, 0.1);
+}
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+display: flex;
+justify-content: center;
+padding: 5px;
+`;
+export const Img = styled.img`
+width: 240px;
+height: 220px;
+margin-bottom: 10px;
+`;
+export const Info = styled.div`
+padding: 5px;
+display: flex;
+flex-direction: row;
+`;
+export const Name = styled.div`
+font-size: 19px;
+font-weight: 700;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-export const ColumnNumber = styled.div`
-  width: 120px;
-  text-align: center;
-`;
-export const ColumnWriter = styled.div`
-  width: 300px;
-  text-align: center;
-`;
-export const ColumnDate = styled.div`
-  width: 200px;
-  text-align: center;
-`;
-export const Row = styled.div`
-  height: 30px;
-  width: 1200px;
-  
-  display: flex;
-  border-bottom: 1px solid #bdbdbd;
+export const Remarks = styled.div`
+font-size: 12px;
+color: gray;
 
-  align-items: center;  
-  :hover{
-    color:#6888B2;
-    font-weight: 600;
-    cursor: pointer;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+export const Price = styled.div`
+font-size: 17px;
+font-weight: 600;
+
+`;
+export const Tags = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+export const Heart = styled.div`
+color: red;
+width: 30px;
+text-align: center;
+font-size: 20px;
+padding-top: 5px;
+`;
+export const HeartNum = styled.div`
+color: red;
+font-size: 15px;
+`;
+export const ItemInfo = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
 `;

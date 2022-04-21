@@ -5,11 +5,11 @@ import dynamic from 'next/dynamic';
 
 import { useForm } from 'react-hook-form'; 
 import { gql, useMutation } from '@apollo/client';
-import { MacCommandFilled } from '@ant-design/icons';
 import { Modal } from 'antd';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 const ReactQuill = dynamic(()=> import("react-quill"), {ssr : false})
+                                                    // 서버사이트렌더링 false -> 브라우저에서만 그리겠다
 
 const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput:CreateBoardInput!){
@@ -18,7 +18,6 @@ const CREATE_BOARD = gql`
         }
     }
 `
-                                                       // 서버사이트렌더링 false -> 브라우저에서만 그리겠다
 
 export default function WebEditorHookFormPage(){
 
