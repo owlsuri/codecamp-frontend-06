@@ -51,15 +51,20 @@ flex-direction: row;
 export const Name = styled.div`
 font-size: 19px;
 font-weight: 700;
+width: 210px;
 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+export const Word = styled.div`
+
+`;
 export const Remarks = styled.div`
 font-size: 12px;
 color: gray;
 
+ width: 210px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -70,6 +75,7 @@ font-weight: 600;
 
 `;
 export const Tags = styled.div`
+  width: 210px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -4,12 +4,11 @@ import * as S from './list.styles'
 import { getDate } from '../../../../../src/commons/libraries/utils';
 import {IBoardListUIProps} from './list.typescript'
 import  Pagination  from '../../../../commons/boardList/Pagination'
-import { DatePicker, Space } from 'antd';
 import {v4 as uuidv4} from 'uuid'
+import SearchBars01 from '../../../../searchBars/01/searchBars01.container';
 
 export default function BoardListUI(props:IBoardListUIProps){
 
-  const { RangePicker } = DatePicker;
 
     return (
       <S.Wrap>
@@ -44,11 +43,10 @@ export default function BoardListUI(props:IBoardListUIProps){
         </S.BestBox>
         ))}
         </S.BestBoards>
-        <S.Search>
-          <S.SearchBox type="text" onChange={props.onChangeSearch} placeholder='제목을 검색해주세요' />
-          <Space direction="vertical" size={12} />
-          <RangePicker style={{ width:"244px", height:"52px" }} />
-        </S.Search>
+        <SearchBars01         
+              refetch={props.refetch}
+              refetchBoardsCount={props.refetchBoardsCount}
+              onChangeKeyword={props.onChangeKeyword}/>
         <S.LineTop></S.LineTop>
         <S.ThRow>
           <S.ColumnNumberTH>번호</S.ColumnNumberTH>

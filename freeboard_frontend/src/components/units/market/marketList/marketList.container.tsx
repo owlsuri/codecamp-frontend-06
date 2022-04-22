@@ -1,13 +1,16 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import MarketListUI from "./marketList.presenter";
 import { FETCH_USED_ITEMS, FETCH_USED_ITEMS_BEST } from "./marketList.queries";
 
 export default function MarketList(){
 
-    const { data, fetchMore } = useQuery(FETCH_USED_ITEMS)
+    const { data, fetchMore, refetch } = useQuery(FETCH_USED_ITEMS)
     const { data: dataUseditemBest } = useQuery(FETCH_USED_ITEMS_BEST)
     const router = useRouter()
+
+    const [keyword, setKeyword] = useState("")
 
 
     // 무한스크롤
@@ -29,9 +32,13 @@ export default function MarketList(){
     });
 };
 
-const onClickToDetail = (event) => {
-    router.push(`/market/${event.currentTarget.id}`)
-}
+    const onClickToDetail = (event) => {
+        router.push(`/market/${event.currentTarget.id}`)
+    }
+
+    const onChangeKeyword = (value: string) => {
+        setKeyword(value);
+    }
 
 
     return(
@@ -40,6 +47,9 @@ const onClickToDetail = (event) => {
         onLoadMore={onLoadMore}
         onClickToDetail={onClickToDetail}
         dataUseditemBest={dataUseditemBest}
+        onChangeKeyword={onChangeKeyword}
+        refetch={refetch}
+        keyword={keyword}
         />
     )
 }
