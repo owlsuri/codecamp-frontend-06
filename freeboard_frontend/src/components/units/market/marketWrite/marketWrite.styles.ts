@@ -27,12 +27,8 @@ padding-bottom: 10px;
 `
 export const LocationBox= styled.div`
 display: flex;
+margin-bottom: 30px;
 
-`
-export const LocationImg= styled.div`
-width: 384px;
-height: 252px;
-background-color: lightgray;
 `
 export const Location= styled.div`
 margin-right: 20px;
@@ -45,10 +41,11 @@ padding: 10px;
 margin-right: 10px;
 `
 export const GpsBox= styled.div`
-margin-bottom: 50px;
+margin: 40px 0 50px 0;
+
 `
 export const Address= styled.input`
-width: 588px;
+width: 480px;
 height: 52px;
 border: 1px solid #BDBDBD;
 padding: 10px;

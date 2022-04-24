@@ -7,81 +7,100 @@ export const Wrapper = styled.div`
   box-shadow: 5px 3px 3px #bdbdbd;
   margin: 100px;
 `;
-export const WriterBox = styled.div`
-  border-bottom: 1px solid #bdbdbd;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 30px;
+export const Container = styled.div`
+display: flex;
+flex-direction: row;
+margin-bottom: 70px;
 `;
-export const WriterSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+export const Images = styled.div`
+width: 500px;
+border-radius: 10px;
 `;
-export const WriterInfo = styled.div`
-  padding-left: 15px;
+export const Info = styled.div`
+padding-top: 30px;
+margin-left: 30px;
 `;
-export const Writer = styled.div`
-  font-size: 24px;
-  font-weight: 600;
-`;
-export const CreateAt = styled.div`
-  font-size: 16px;
-  color: #828282;
-`;
-export const Icons = styled.div`
-  display: flex;
-  align-items: center;
-`;
-export const Clip = styled.img`
-  width: 30px;
-  margin-right: 20px;
-`;
-export const Location = styled.img`
-  width: 30px;
-`;
-export const TitleBox = styled.div`
+export const Infos = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-padding-right: 20px;
-height: 80px;
-padding-top: 20px;
 `;
 export const Remarks = styled.div`
-font-size: 18px;
-color: #BDBDBD;
+color: gray;
 `;
 export const Name = styled.div`
+font-size: 22px;
 font-weight: 600;
-font-size: 24px;
-`;
-export const Heart = styled.div`
-    color: red;
-    font-size: larger;
-`;
-export const HeartNum = styled.div`
-
 `;
 export const Price = styled.div`
-    font-size: 36px;
-    font-weight: 700;
-`;
-export const Images = styled.div`
-
+font-size: 25px;
+font-weight: 700;
 `;
 export const Contents = styled.div`
 font-size: 18px;
-color: #4F4F4F;
+padding-top: 20px;
+height: 270px;
+width: 500px;
+
 `;
 export const Tags = styled.div`
 font-size: 16px;
 color: #BDBDBD;
+padding-top: 10px;
 `;
+export const Buttons = styled.div`
+font-weight: 700;
+`
+export const Btn = styled.button`
+margin-top: 30px;
+font-weight: 700;
+width: 150px;
+height: 52px;
+border: none;
+margin-right: 30px;
+cursor: pointer;
+:hover{
+  background-color: #6888B2;
+  color:white;
+}
+`;
+export const DetailBox = styled.div`
+
+`;
+
+export const Heart = styled.div`
+color: red;
+width: 30px;
+text-align: center;
+font-size: 20px;
+padding-right: 5px;
+`;
+export const HeartNum = styled.div`
+color: red;
+font-size: 15px;
+`;
+export const Detail = styled.button`
+width: 497px;
+height: 52px;
+font-weight: 600;
+border: none;
+margin-bottom: 30px;
+    :hover{
+    background-color: #6888B2;
+    color:white;
+    cursor: pointer;
+  }
+`;
+export const ContentsDetail = styled.div`
+
+`;
+export const Qna = styled.div`
+
+`;
+
+
 export const MenuBox = styled.div`
-  border-bottom: 1px solid #bdbdbd;
+  border-top: 1px solid #bdbdbd;
   padding: 70px 0 70px 0;
   display: flex;
   justify-content: center;
@@ -100,4 +119,4 @@ export const MenuBtn = styled.button`
     color:white;
     cursor: pointer;
   }
-`;
+  `

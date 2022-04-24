@@ -53,12 +53,10 @@ export default function BoardRead(props:IBoardReadProps){
         const result = await deleteBoard({
           variables: { boardId: router.query.boardId },
         });
-        console.log(result);
         Modal.success({
               content: '삭제가 완료되었습니다!',
         });
         router.push(`/boards`);
-        console.log(result)
 
       } catch (error) {
         if(error instanceof Error)

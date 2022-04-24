@@ -3,23 +3,30 @@ import Input01 from '../../../../commons/inputs/01'
 import Uploads01 from '../../../../commons/uploads/01/Uploads01.container'
 import * as S from './marketWrite.styles'
 import {v4 as uuidv4} from 'uuid'
+import KakaoMap from '../../../../commons/kakaoMap/kakaoMap'
 
 export default function MarketWriteUI(props){
-
+console.log(props.data?.fetchUseditem.name)
     return(
         <S.Wrapper>
-            <S.Main>{props.isEdit ? "상품 수정하기" : "상품 등록하기"}</S.Main>
-            <form onSubmit={props.handleSubmit(props.isEdit ? props.onClickUpdate : props.onClickSubmit)}>
+            <S.Main >{props.isEdit ? "상품 수정하기" : "상품 등록하기"}</S.Main>
+            <form onSubmit={props.handleSubmit(props.isEdit ? props.onClickUpdate : props.onClickSubmit)} >
             <S.Label>상품명 </S.Label>
-            <Input01 mytype="text" register={props.register("name")} placeholder="상품명을 작성해주세요." />
+            <Input01 
+            mytype="text" register={props.register("name")} placeholder="상품명을 작성해주세요." />
             <S.Error>{props.formState.errors.name?.message}</S.Error>
 
             <S.Label>한줄요약</S.Label>
-            <Input01 mytype="text" register={props.register("remarks")} placeholder="상품을 한줄로 요약해서 작성해주세요." />
+            <Input01 mytype="text" register={props.register("remarks")} placeholder="상품을 한줄로 요약해서 작성해주세요." defaultValues={props.data?.fetchUseditem.remarks}/>
             <S.Error>{props.formState.errors.remarks?.message}</S.Error>
             
             <S.Label>상품설명</S.Label>
-            <props.ReactQuill onChange={props.onChangeContents} />
+            <div style={{height : "200px"}}>
+            <props.ReactQuill 
+            style ={{height:"75%"}}
+            onChange={props.onChangeContents}  value={props.getValues("contents") || ""}/>
+            </div>
+
             <S.Error>{props.formState.errors.contents?.message}</S.Error>
             
             <S.Label>판매가격</S.Label>
@@ -33,7 +40,7 @@ export default function MarketWriteUI(props){
             <S.LocationBox>
                 <S.Location>
                     <S.Label>거래위치</S.Label>
-                    <S.LocationImg></S.LocationImg>
+                    <KakaoMap />
                 </S.Location>
                 <S.AddressBox>
                     <S.GpsBox>

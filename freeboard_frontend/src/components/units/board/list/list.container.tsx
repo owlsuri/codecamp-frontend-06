@@ -2,11 +2,11 @@
 
 import BoardListUI from './list.presenter'
 import { useRouter } from "next/router";
-import { MouseEvent } from "react";
+import { MouseEvent, useState  } from "react";
 import { FETCH_BOARDS_BEST, FETCH_BOARDS_COUNT, FETCH_BOARDS } from './list.queries'
 import { useQuery } from '@apollo/client';
 import { IQuery, IQueryFetchBoardsArgs, IQueryFetchBoardsCountArgs} from '../../../../commons/types/generated/types';
-import { useState } from 'react';
+
  
 export default function BoardList(){
     

@@ -11,7 +11,7 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
-const ReactQuill = dynamic(() => import("react-quill"), {ssr : false})
+const ReactQuill = dynamic(() => import("react-quill"), {ssr : false});
 
 const schema = yup.object({
   name: yup
@@ -26,27 +26,36 @@ const schema = yup.object({
 
 export default function MarketWrite(props){
 
-  useAuth()
-  const router = useRouter()
+  useAuth();
+  const router = useRouter();
 
-  const { register, handleSubmit, formState, setValue, trigger } = useForm({
-        resolver: yupResolver(schema),
-        mode:"onChange"
+  const [createUseditem] = useMutation(CREATE_USED_ITEM);
+  const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
+  const { data } = useQuery(FETCH_USED_ITEM,{
+    variables:{ useditemId: router.query.useditemId}
   });
+ 
+  const { register, handleSubmit, formState, setValue, trigger, reset, getValues } = useForm({
+        resolver: !props.isEdit && yupResolver(schema),
+        mode:"onChange",   
+        // defaultValues: {
+        //   name: data?.fetchUseditem.name,
+        //   remarks : "하이"
+        // },
+  });
+
+  // useEffect(() => {
+  //   reset({ contents: props.data?.fetchUseditem.contents });
+  // }, [props.data]);
 
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
-  const [createUseditem] = useMutation(CREATE_USED_ITEM)
-  const [updateUseditem] = useMutation(UPDATE_USED_ITEM)
-  const { data } = useQuery(FETCH_USED_ITEM,{
-    variables:{ useditemId: router.query.useditemId}
-  })
 
 
-  const onChangeContents = (value) =>{
+  const onChangeContents = (value: any) =>{
       setValue("contents", value === "<p><br></p>" ? "" : value);
-      trigger("contents")
-  }
+      trigger("contents");
+  };
 
     const onChangeFileUrls = (fileUrl: string, index: number) => {
     const newFileUrls = [...fileUrls];
@@ -70,7 +79,7 @@ export default function MarketWrite(props){
         }
       }
     })
-               
+          console.log(result)     
      Modal.success({
                 content: '상품 등록 성공!',
             });
@@ -86,14 +95,14 @@ export default function MarketWrite(props){
     }
   }
  }
-
+// 수정하기
   const onClickUpdate = async() =>{
     // 이미지 수정
     const currentFiles = JSON.stringify(fileUrls);
     const defaultFiles = JSON.stringify(data.fetchUseditem.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
-        if (
+    if (
       !data.name &&
       !data.remarks &&
       !data.contents &&
@@ -111,12 +120,7 @@ export default function MarketWrite(props){
     if (data.contents) updateUseditemInput.contents = data.contents;
     if (data.price) updateUseditemInput.price = data.price;
     if (isChangedFiles) updateUseditemInput.images = fileUrls;
-    // if (data.zipcode || addressdata.address || addressdata.addressDetail) {
-    //   updateUseditemInput.boardAddress = {};
-    //   if (addressdata.zipcode) updateUseditemInput.boardAddress.zipcode = addressdata.zipcode;
-    //   if (addressdata.address) updateUseditemInput.boardAddress.address = addressdata.address;
-    //   if (addressdata.addressDetail)
-    //     updateUseditemInput.boardAddress.addressDetail = addressdata.addressDetail;
+
 
     try {
       await updateUseditem({
@@ -161,5 +165,7 @@ export default function MarketWrite(props){
     fileUrls={fileUrls}
     onClickUpdate={onClickUpdate}
     isEdit={props.isEdit}
+    data={data}
+    getValues={getValues}
     />)
 }

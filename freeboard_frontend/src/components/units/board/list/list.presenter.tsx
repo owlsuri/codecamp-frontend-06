@@ -5,7 +5,7 @@ import { getDate } from '../../../../../src/commons/libraries/utils';
 import {IBoardListUIProps} from './list.typescript'
 import  Pagination  from '../../../../commons/boardList/Pagination'
 import {v4 as uuidv4} from 'uuid'
-import SearchBars01 from '../../../../searchBars/01/searchBars01.container';
+import SearchBars01 from '../../../../commons/searchBars/01/searchBars01.container';
 
 export default function BoardListUI(props:IBoardListUIProps){
 
