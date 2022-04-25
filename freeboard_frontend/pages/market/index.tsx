@@ -3,6 +3,8 @@ import MarketList from '../../src/components/units/market/marketList/marketList.
 export default function MarketListPage(){
 
     return(
-        <MarketList />
+        <>
+            <MarketList />
+        </>
     )
 }

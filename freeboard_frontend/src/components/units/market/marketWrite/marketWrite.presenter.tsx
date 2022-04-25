@@ -30,7 +30,7 @@ console.log(props.data?.fetchUseditem.name)
             <S.Error>{props.formState.errors.contents?.message}</S.Error>
             
             <S.Label>판매가격</S.Label>
-            <Input01 mytype="text" register={props.register("price")} placeholder="판매가격을 입력주세요." />
+            <Input01 mytype="number" register={props.register("price")} placeholder="판매가격을 입력주세요." />
             <S.Error>{props.formState.errors.price?.message}</S.Error>
 
             <S.Label>태그입력</S.Label>

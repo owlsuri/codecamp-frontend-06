@@ -20,7 +20,7 @@ const schema = yup.object({
     .required("필수 입력 사항입니다."),
   remarks: yup.string().max(300, "300자 이내로 입력해주세요").required("필수 입력 사항입니다."),
   contents: yup.string().max(1000, "100자 이내로 입력해주세요").required("필수 입력 사항입니다."),
-  price: yup.number().required("필수 입력 사항입니다."),
+  price: yup.string().required("숫자만 입력해주세요."),
   tags: yup.string().required("필수 입력 사항입니다.")
 });
 
@@ -63,7 +63,7 @@ export default function MarketWrite(props){
     setFileUrls(newFileUrls);
   };
 
-  const onClickSubmit = async(data) => {
+  const onClickSubmit = async(data:any) => {
     if(data.name && data.remarks && data.contents && data.price && data.tags){
 
     try{
