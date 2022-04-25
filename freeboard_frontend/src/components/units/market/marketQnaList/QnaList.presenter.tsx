@@ -9,7 +9,7 @@ export default function MarketQnAListUI(props){
     return(
         <S.Wrapper>
             {props.data?.fetchUseditemQuestions.map((el:any) => (
-            <S.Container key={props.el?._id} >        
+            <S.Container key={el?._id} >        
                 <S.CommentShowBox >                
                     <S.CommentUserImg>
                         <AccountCircleIcon fontSize="large" color="disabled" />
@@ -17,7 +17,7 @@ export default function MarketQnAListUI(props){
                     <S.CommentDescBox>           
                         <S.CommentUserInfo>
                             <S.CommentUserProfile>
-                            <S.CommentUserName>{props.el?.user}</S.CommentUserName>
+                            <S.CommentUserName>{el?.user.name}</S.CommentUserName>
                             </S.CommentUserProfile>
                             <S.CommentIcon>
                             <FontAwesomeIcon  icon={faPencil}  color="#BDBDBD" />
@@ -25,8 +25,8 @@ export default function MarketQnAListUI(props){
                             </S.CommentIcon>
                         </S.CommentUserInfo>
                         <S.CommentDesc>
-                            <S.Comment>{props.el?.contents}</S.Comment>
-                            <S.CommentDate>{getDate(props.el?.createdAt)}</S.CommentDate>
+                            <S.Comment>{el?.contents}</S.Comment>
+                            <S.CommentDate>{getDate(el?.createdAt)}</S.CommentDate>
                         </S.CommentDesc>
                     </S.CommentDescBox>                 
                 </S.CommentShowBox>               

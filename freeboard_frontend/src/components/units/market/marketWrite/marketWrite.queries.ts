@@ -42,6 +42,7 @@ export const UPDATE_USED_ITEM = gql`
     }
 `
 
+
 export const FETCH_USED_ITEM = gql`
     query fetchUseditem($useditemId: ID!){
         fetchUseditem(useditemId:$useditemId){
@@ -52,6 +53,8 @@ export const FETCH_USED_ITEM = gql`
                 price
                 tags
                 createdAt
+                images
+                pickedCount
         }
     }
 `

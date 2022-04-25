@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 
 
 export const Container= styled.div`
-    width: 1200px;
-    margin: 20px 100px 0px 100px;
+    width: 1000px;
+    margin: 20px 100px 0px 0px;
 `;
 export const CommentBox= styled.div`
 
@@ -24,11 +24,11 @@ export const Star= styled.div`
     margin-left: 20px;
 `;
 export const CommentInputBox= styled.div`
-    width:1200px;
+    width:990px;
     border: 1px solid #BDBDBD;
 `;
 export const CommentInput= styled.textarea`
-    width: 1195px;
+    width: 985px;
     height: 108px;
     padding: 10px;
     border: 1px solid #bdbdbd;

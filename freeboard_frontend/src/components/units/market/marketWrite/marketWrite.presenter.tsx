@@ -40,7 +40,7 @@ console.log(props.data?.fetchUseditem.name)
             <S.LocationBox>
                 <S.Location>
                     <S.Label>거래위치</S.Label>
-                    <KakaoMap />
+                    {/* <KakaoMap /> */}
                 </S.Location>
                 <S.AddressBox>
                     <S.GpsBox>

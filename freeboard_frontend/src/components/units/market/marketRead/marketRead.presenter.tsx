@@ -6,6 +6,8 @@ import { getDate } from '../../../../commons/libraries/utils'
 import * as S from './marketRead.styles'
 import Dompurify from 'dompurify'
 import ImgSlick from '../../../../commons/imageSlick/imageslick'
+import MarketQnAList from '../marketQnaList/QnaList.container'
+import QnaWrite from '../marketQnaWrite/QnaWrite.container'
 
 
 export default function UsedItemReadUI(props){
@@ -43,10 +45,15 @@ console.log(props.data)
         </S.Container>
             <S.DetailBox>
               <S.Detail onClick={props.onClickShowDetail}>상품정보 자세히 보기</S.Detail>
-              <S.Detail onClick={props.onClickQnA}>Q&A</S.Detail>
+              <S.Qna onClick={props.onClickQnA}>Q&A</S.Qna>
+              {props.isShowQnA ? (
+                <div>
+                <QnaWrite />
+                <MarketQnAList />
+                </div>
+              ) : ""}
             </S.DetailBox>
             <S.ContentsDetail></S.ContentsDetail>
-            <S.Qna></S.Qna>
 
       <S.MenuBox>
         <S.MenuBtn onClick={props.onClickList}>목록으로</S.MenuBtn>

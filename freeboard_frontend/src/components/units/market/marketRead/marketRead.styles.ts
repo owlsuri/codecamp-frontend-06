@@ -85,17 +85,25 @@ height: 52px;
 font-weight: 600;
 border: none;
 margin-bottom: 30px;
+cursor: pointer;
     :hover{
     background-color: #6888B2;
     color:white;
-    cursor: pointer;
+    
   }
 `;
 export const ContentsDetail = styled.div`
 
 `;
-export const Qna = styled.div`
-
+export const Qna = styled.button`
+width: 497px;
+height: 52px;
+font-weight: 600;
+border: none;
+margin-bottom: 30px;
+cursor: pointer;
+  background-color: ${(props) => (props.isShowQnA ? "#6888B2" : "none")};
+  color: ${(props) => (props.isShowQnA ? "white" : "black")};
 `;
 
 

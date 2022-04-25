@@ -1,18 +1,17 @@
 import styled from "@emotion/styled";
 
 export const Wrapper= styled.div`
-    width: 1200px;
-    margin-left: 100px;
+    width: 980px;
 `;
 export const Container= styled.div`
-    width: 1200px;
-    margin-left: 100px;
+    width: 980px;
+    
 `;
 export const PasswordInput = styled.input`
   width: 200px;
 `;
 export const CommentShowBox= styled.div`
-    width: 1200px;
+    width: 980px;
     height: 200px;
     display: flex;
     flex-direction: row;

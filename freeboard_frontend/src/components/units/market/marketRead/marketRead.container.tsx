@@ -1,12 +1,14 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import UsedItemReadUI from "./marketRead.presenter";
 import { FETCH_USED_ITEM, DELETE_USED_ITEM } from "./marketRead.queries";
 
 export default function UsedItemRead(){
 
     const router = useRouter()
+    const [ isShowQnA, setIsShowQnA ] = useState(false)
 
     const { data } = useQuery(FETCH_USED_ITEM,{
         variables: { useditemId : router.query.useditemId },
@@ -15,16 +17,16 @@ export default function UsedItemRead(){
     const [deleteUseditem] = useMutation(DELETE_USED_ITEM);
 
     const onClickPay = () => {
-        
     }
-
-
+    
+    // 상품디테일 보여주기
     const onClickShowDetail = () => {
-
+        setIsShowQnA(false)
     }
 
+    // QnA보여주기
     const onClickQnA = () => {
-        
+        setIsShowQnA(true)
     }
 
 
@@ -64,6 +66,7 @@ export default function UsedItemRead(){
         onClickQnA={onClickQnA}
         onClickShowDetail={onClickShowDetail}
         onClickPay={onClickPay}
+        isShowQnA={isShowQnA}
         />
     )
 

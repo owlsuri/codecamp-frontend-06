@@ -8,11 +8,10 @@ export default function MarketQnAList(){
     const router = useRouter()
 
     const {data} = useQuery(FETCH_USED_ITEM_QUESTIONS,{
-        variables:{ useditemId: router.query.useditemId  }
+        variables:{ useditemId: String(router.query.useditemId)  }
     })
 
     return(<MarketQnAListUI 
     data={data}/>
-
     )
 }
