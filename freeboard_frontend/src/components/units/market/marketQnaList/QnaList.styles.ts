@@ -21,6 +21,7 @@ export const CommentShowBox= styled.div`
 `;
 export const CommentUserName= styled.div`
     font-weight: 600;
+    font-size: 16px;
 `;
 export const CommentUserInfo= styled.div`
     display: flex;

@@ -41,7 +41,7 @@ export default function QnaWrite(){
         Modal.success({
                 content: '문의 등록이 완료되었습니다!',
             });
-            console.log(result)
+            
         router.push(`/market/${router.query.useditemId}`);
         setContents("")
     }catch(error){
@@ -57,7 +57,8 @@ export default function QnaWrite(){
 
     return(<QnaWriteUI 
     onChangeContents={onChangeContents}
-    onClickAsk={onClickAsk}/>
-
+    onClickAsk={onClickAsk}
+    data={data}
+    />
     )
 }

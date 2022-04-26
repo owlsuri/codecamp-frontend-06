@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 
 export const Container= styled.div`
     width: 1000px;
-    margin: 20px 100px 0px 0px;
+    margin: 20px 100px 20px 0px;
 `;
 export const CommentBox= styled.div`
 

@@ -102,6 +102,8 @@ font-weight: 600;
 border: none;
 margin-bottom: 30px;
 cursor: pointer;
+
+
   background-color: ${(props) => (props.isShowQnA ? "#6888B2" : "none")};
   color: ${(props) => (props.isShowQnA ? "white" : "black")};
 `;
