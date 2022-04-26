@@ -59,7 +59,7 @@ export default function ImageUploadPreview(){
             files.map((el) => el && uploadFile({ variables:{file : el} }))
         )
 
-       const resultUrls =  results.map((el) => el.data ? el?.data?.uploadFile.url : "")
+       const resultUrls =  results.map((el) => el?.data ? el?.data?.uploadFile.url : "")
 
        console.log(resultUrls)
 

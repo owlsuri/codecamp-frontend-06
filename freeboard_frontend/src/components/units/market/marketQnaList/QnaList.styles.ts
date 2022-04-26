@@ -1,17 +1,17 @@
 import styled from "@emotion/styled";
 
 export const Wrapper= styled.div`
-    width: 980px;
+    width: 960px;
 `;
 export const Container= styled.div`
-    width: 980px;
+    width: 960px;
     
 `;
 export const PasswordInput = styled.input`
   width: 200px;
 `;
 export const CommentShowBox= styled.div`
-    width: 980px;
+    width: 960px;
     height: 200px;
     display: flex;
     flex-direction: row;
@@ -51,8 +51,7 @@ export const CommentDescBox= styled.div`
 export const CommentIcon= styled.div`
     display: flex;
     justify-content: space-between;
-    width: 40px;
-
+    width: 70px;
 `;
 export const CommentUserProfile= styled.div`
     display: flex;

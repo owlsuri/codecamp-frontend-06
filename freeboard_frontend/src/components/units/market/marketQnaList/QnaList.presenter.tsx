@@ -6,7 +6,7 @@ export default function MarketQnAListUI(props){
     return(
         <>
         {/* 무한스크롤 */}
-            <div style={{height:"500px", overflow:"auto"}}>
+            <div style={{height:"700px", overflow:"auto"}}>
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={props.onLoadMore}

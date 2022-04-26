@@ -56,7 +56,7 @@ console.log(props.data?.fetchUseditem.name)
                 </S.AddressBox>
             </S.LocationBox>
                 <S.Label>사진첨부</S.Label>
-                          {props.fileUrls.map((el, index) => (
+                          {/* {props.fileUrls.map((el, index) => (
                             <Uploads01
                             type="button"
                             key={uuidv4()}
@@ -64,7 +64,13 @@ console.log(props.data?.fetchUseditem.name)
                             fileUrl={el}
                             onChangeFileUrls={props.onChangeFileUrls}
                             />
-                        ))}
+                        ))} */}
+                        <input type="file" onChange={props.onChangeFile(0)}/>
+                        <input type="file" onChange={props.onChangeFile(1)}/>
+                        <input type="file" onChange={props.onChangeFile(2)}/><br/>
+                        <img src={props.imageUrls[0]}/>
+                        <img src={props.imageUrls[1]}/>
+                        <img src={props.imageUrls[2]}/>
                 <S.ImageBox>
                     
                 </S.ImageBox>

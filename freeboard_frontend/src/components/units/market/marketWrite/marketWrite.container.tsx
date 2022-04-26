@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from "yup";
 import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_USED_ITEM, UPDATE_USED_ITEM, FETCH_USED_ITEM } from "./marketWrite.queries";
+import { CREATE_USED_ITEM, UPDATE_USED_ITEM, FETCH_USED_ITEM, UPLOAD_FILE } from "./marketWrite.queries";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useAuth } from "../../../../commons/hooks/useAuth";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { IMutation, IMutationUploadFileArgs } from "../../../../commons/types/generated/types";
 
 const ReactQuill = dynamic(() => import("react-quill"), {ssr : false});
 
@@ -31,6 +32,7 @@ export default function MarketWrite(props){
 
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
+  const [uploadFile] = useMutation<Pick<IMutation, "uploadFile">, IMutationUploadFileArgs>(UPLOAD_FILE)
   const { data } = useQuery(FETCH_USED_ITEM,{
     variables:{ useditemId: router.query.useditemId}
   });
@@ -48,8 +50,11 @@ export default function MarketWrite(props){
   //   reset({ contents: props.data?.fetchUseditem.contents });
   // }, [props.data]);
 
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  // const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
+  // 이미지 업로드 스테이트
+    const [files, setFiles] = useState<(File | undefined)[]>([undefined, undefined, undefined])
+    const [imageUrls, setImageUrls] = useState(["","",""])
 
 
   const onChangeContents = (value: any) =>{
@@ -57,16 +62,51 @@ export default function MarketWrite(props){
       trigger("contents");
   };
 
-    const onChangeFileUrls = (fileUrl: string, index: number) => {
-    const newFileUrls = [...fileUrls];
-    newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
-  };
+  //   const onChangeFileUrls = (fileUrl: string, index: number) => {
+  //   const newFileUrls = [...fileUrls];
+  //   newFileUrls[index] = fileUrl;
+  //   setFileUrls(newFileUrls);
+  // };
+
+  // 이미지 업로드
+    const onChangeFile = (number) => (event:ChangeEvent<HTMLInputElement>) =>{
+      const file = event.target.files?.[0]
+      if(!file) {
+          alert("파일이 없습니다!")
+          return
+      }
+
+    const fileReader = new FileReader()
+      fileReader.readAsDataURL(file) // blob 파일을 임시 url 형태로 만들어줌 - 미리보기용 
+
+      // 파일 다 읽으면 아래 함수 실행
+      fileReader.onload = (data) => {
+          if(typeof data.target?.result === "string"){
+              
+              const tempUrls = [...imageUrls]
+              tempUrls[number] = data.target?.result
+              
+              setImageUrls(tempUrls)
+
+              const tempFiles= [...files]
+              tempFiles[number] = file
+              setFiles(tempFiles)
+          }
+      }        
+  }
 
   const onClickSubmit = async(data:any) => {
     if(data.name && data.remarks && data.contents && data.price && data.tags){
+      
+      try{
+      // 이미지
+        const results = await Promise.all(
+            files.map((el) => el && uploadFile({ variables:{file : el} }))
+        )
+       const resultUrls =  results.map((el) => el?.data ? el?.data?.uploadFile.url : "")
+       console.log(resultUrls)
 
-    try{
+
     const result = await createUseditem({
       variables:{ 
         createUseditemInput:{
@@ -75,11 +115,11 @@ export default function MarketWrite(props){
           contents: data.contents,
           price: Number(data.price),
           tags: data.tags,
-          images: fileUrls,
+          images: resultUrls,
         }
       }
     })
-          console.log(result)     
+     console.log(result)     
      Modal.success({
                 content: '상품 등록 성공!',
             });
@@ -98,7 +138,7 @@ export default function MarketWrite(props){
 // 수정하기
   const onClickUpdate = async() =>{
     // 이미지 수정
-    const currentFiles = JSON.stringify(fileUrls);
+    const currentFiles = JSON.stringify(imageUrls);
     const defaultFiles = JSON.stringify(data.fetchUseditem.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
@@ -119,7 +159,7 @@ export default function MarketWrite(props){
     if (data.remarks) updateUseditemInput.remarks = data.remarks;
     if (data.contents) updateUseditemInput.contents = data.contents;
     if (data.price) updateUseditemInput.price = data.price;
-    if (isChangedFiles) updateUseditemInput.images = fileUrls;
+    if (isChangedFiles) updateUseditemInput.images = imageUrls;
 
 
     try {
@@ -127,7 +167,7 @@ export default function MarketWrite(props){
           variables: {
             useditemId: router.query.useditemId,
             password:data.password,
-            image: fileUrls,
+            image: imageUrls,
             updateUseditemInput,
           },
         });
@@ -141,7 +181,7 @@ export default function MarketWrite(props){
               content: error.message,
           });
         }
-        console.log(fileUrls)
+        console.log(imageUrls)
     }
 
   
@@ -149,7 +189,7 @@ export default function MarketWrite(props){
 //  이미지
   useEffect(() => {
     if (data?.fetchUseditem.images?.length) {
-      setFileUrls([...data?.fetchUseditem.images]);
+      setImageUrls([...data?.fetchUseditem.images]);
     }
   }, [data]);
 
@@ -161,11 +201,11 @@ export default function MarketWrite(props){
     onClickSubmit={onClickSubmit}
     onChangeContents={onChangeContents}
     ReactQuill={ReactQuill}
-    onChangeFileUrls={onChangeFileUrls}
-    fileUrls={fileUrls}
+    onChangeFile={onChangeFile}
     onClickUpdate={onClickUpdate}
     isEdit={props.isEdit}
     data={data}
+    imageUrls={imageUrls}
     getValues={getValues}
     />)
 }

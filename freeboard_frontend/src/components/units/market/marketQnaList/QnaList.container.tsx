@@ -55,7 +55,7 @@ export default function MarketQnAList(){
             Modal.success({
                 content: '댓글 삭제가 완료되었습니다!',
             });
-            router.push(`/boards/${router.query.boardId}`);
+            router.push(`/market/${router.query.useditemId}`);
 
         } catch (error) {
             if(error instanceof Error)
