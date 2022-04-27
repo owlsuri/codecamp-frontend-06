@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-function MemoizationPresenterPage(props){
+function MemoizationPresenterPage(){
     console.log("프리젠터가 렌더링됩니다!")
     return(
         <div>

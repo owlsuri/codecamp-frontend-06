@@ -1,30 +1,15 @@
-import * as S from './QnaList.styles'
+
+import * as S from './QnaAnswerList.styles'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommenting, faPencil, faX } from "@fortawesome/free-solid-svg-icons";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { getDate } from '../../../../commons/libraries/utils';
-import { useState } from 'react';
-import QnaWrite from '../marketQnaWrite/QnaWrite.container';
-import QnaAnswerWrite from '../marketQnaAnswerWrite/QnaAnswerWrite.container';
 
+export default function QnaAnswerListUI(props){
 
-export default function MarketQnAListItem(props){
-
-    const [isEdit, setIsEdit] = useState(false);
-    const [isAnswer, setIsAnswer] = useState(false);
-
-    const onClickQnaEdit = () => {
-        setIsEdit(true);
-    };
-
-    const onClickAnswer = () => {
-        !isAnswer ? setIsAnswer(true) : setIsAnswer(false);
-    };
-
+    console.log(props.data)
     return(
-        <>
-        {!isEdit && (
-        <S.Wrapper>
+         <S.Wrapper>
             <S.Container  >        
                 <S.CommentShowBox >                
                     <S.CommentUserImg>
@@ -33,31 +18,23 @@ export default function MarketQnAListItem(props){
                     <S.CommentDescBox>           
                         <S.CommentUserInfo>
                             <S.CommentUserProfile>
-                            <S.CommentUserName>{props.el?.user.name}</S.CommentUserName>
+                            <S.CommentUserName></S.CommentUserName>
                             </S.CommentUserProfile>
                             <S.CommentIcon>
-                                <FontAwesomeIcon  onClick={onClickQnaEdit} icon={faPencil}  color="#BDBDBD" />
-                                <FontAwesomeIcon id={props.el._id} onClick={props.onClickDelete} icon={faX} color="#BDBDBD" />
+                                <FontAwesomeIcon  icon={faPencil}  color="#BDBDBD" />
+                                <FontAwesomeIcon id={props.el._id} icon={faX} color="#BDBDBD" />
                             </S.CommentIcon>
                         </S.CommentUserInfo>
                         <S.CommentDesc>
                             <S.Comment>{props.el?.contents}</S.Comment>
                             <S.AnswerIcon>
                                 <S.CommentDate>{getDate(props.el?.createdAt)}</S.CommentDate>
-                                <FontAwesomeIcon onClick={onClickAnswer}  icon={faCommenting}  color="#BDBDBD" />
+                                <FontAwesomeIcon icon={faCommenting}  color="#BDBDBD" />
                             </S.AnswerIcon>
                         </S.CommentDesc>
                     </S.CommentDescBox>                 
                 </S.CommentShowBox>               
             </S.Container>     
         </S.Wrapper>
-        )}
-        {isEdit && (
-            <QnaWrite isEdit={true} setIsEdit={setIsEdit} el={props.el} />
-        )}
-        {isAnswer && (
-            <QnaAnswerWrite el={props.el} />
-        )}
-        </>
-)
+    )
 }

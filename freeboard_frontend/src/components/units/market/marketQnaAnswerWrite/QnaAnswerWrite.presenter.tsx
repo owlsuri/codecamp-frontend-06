@@ -22,5 +22,6 @@ export default function QnaAnswerWriteUI(props){
                 </S.CommentInputBox>
             </S.CommentBox>
         </S.Container>
+        
     )
 }
