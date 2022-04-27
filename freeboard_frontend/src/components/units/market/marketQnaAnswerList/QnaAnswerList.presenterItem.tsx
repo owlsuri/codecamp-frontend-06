@@ -6,7 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { getDate } from '../../../../commons/libraries/utils';
 import { DELETE_USEDITEM_QUESTION_ANSWER, FETCH_USEDITEM_QUESTION_ANSWERS } from './QnaAnswerList.queries';
 import { useMutation } from '@apollo/client';
-import { IMutation } from '../../../../commons/types/generated/types';
+import { IMutation, IMutationDeleteUseditemQuestionAnswerArgs } from '../../../../commons/types/generated/types';
 import { Modal } from 'antd';
 
 
@@ -29,7 +29,7 @@ export default function QnaAnswerListItem(props){
                 {
                     query: FETCH_USEDITEM_QUESTION_ANSWERS,
                     variables: {
-                    useditemQuestionId: String(props.data._id),
+                    useditemQuestionId: String(props.el._id),
                     },
                 },
         ],
@@ -37,6 +37,8 @@ export default function QnaAnswerListItem(props){
             Modal.success({
                     content: '삭제가 완료되었습니다!',
                 });
+
+                console.log(result)
         } catch (error) {
             if(error instanceof Error)
             Modal.error({
