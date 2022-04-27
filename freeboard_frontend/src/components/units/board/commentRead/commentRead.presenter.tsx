@@ -17,15 +17,15 @@ export default function CommentReadUI(props:ICommentReadUIProps){
                     useWindow={false}
                 >
             {props.data?.fetchBoardComments.map((el:any) => (
-                <CommentReadITem key={el._id} el={el} 
-                onClickWhoWrite={props.onClickWhoWrite}
-                FETCH_BOARD_COMMENTS={props.FETCH_BOARD_COMMENTS}
-                isOpenModal={props.isOpenModal}
-                onClickOpenModal={props.onClickOpenModal}
-                onChangeDeletePassword={props.onChangeDeletePassword}
-                onClickDelete={props.onClickDelete}
-                handleCancel={props.handleCancel}
-                deleteBoardComment={props.deleteBoardComment}
+                <CommentReadITem key={String(el._id)} el={el} 
+                    onClickWhoWrite={props.onClickWhoWrite}
+                    FETCH_BOARD_COMMENTS={props.FETCH_BOARD_COMMENTS}
+                    isOpenModal={props.isOpenModal}
+                    onClickOpenModal={props.onClickOpenModal}
+                    onChangeDeletePassword={props.onChangeDeletePassword}
+                    onClickDelete={props.onClickDelete}
+                    handleCancel={props.handleCancel}
+                    deleteBoardComment={props.deleteBoardComment}
                 />
             ))}
             </InfiniteScroll>

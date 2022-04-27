@@ -51,10 +51,16 @@ export const CommentDescBox= styled.div`
 export const CommentIcon= styled.div`
     display: flex;
     justify-content: space-between;
-    width: 70px;
+    width: 35px;
 `;
 export const CommentUserProfile= styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+`;
+export const AnswerIcon= styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
 `;
