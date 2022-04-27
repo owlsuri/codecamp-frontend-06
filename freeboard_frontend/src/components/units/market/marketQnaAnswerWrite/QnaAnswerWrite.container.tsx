@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { Modal } from 'antd'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { IMutation, IMutationCreateUseditemQuestionAnswerArgs } from '../../../../commons/types/generated/types'
 import QnaAnswerWriteUI from './QnaAnswerWrite.presenter'
@@ -8,11 +7,8 @@ import { CREATE_USED_ITEM_QUESTION_ANSWER, FETCH_USEDITEM_QUESTION_ANSWERS } fro
 
 export default function QnaAnswerWrite(props){
 
-    const router = useRouter()
     const [createUseditemQuestionAnswer] = useMutation<Pick<IMutation,"createUseditemQuestionAnswer">, IMutationCreateUseditemQuestionAnswerArgs>(CREATE_USED_ITEM_QUESTION_ANSWER)
-    // const {data} = useQuery(FETCH_USEDITEM_QUESTION_ANSWERS,{
-    //     variables: {useditemQuestionId: router.query.useditemId}
-    // })
+
 
     const [ qnaAnswer, setQnaAnswer ] = useState("")
 

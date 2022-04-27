@@ -1,22 +1,27 @@
 import styled from "@emotion/styled";
 
 export const Wrapper= styled.div`
-    width: 960px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 10px;
+`;
+export const Arrow= styled.div`
+padding: 30px 0 0 50px;
 `;
 export const Container= styled.div`
-    width: 960px;
-    
-`;
+ width: 860px;
+ `;
 export const PasswordInput = styled.input`
   width: 200px;
-`;
+  `;
 export const CommentShowBox= styled.div`
-    width: 960px;
+padding-right: 30px;
+    width: 830px;
     height: 200px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px ;
     border-bottom: 1px solid #BDBDBD;
 `;
 export const CommentUserName= styled.div`

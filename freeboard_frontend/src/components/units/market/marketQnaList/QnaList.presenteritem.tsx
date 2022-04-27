@@ -6,6 +6,7 @@ import { getDate } from '../../../../commons/libraries/utils';
 import { useState } from 'react';
 import QnaWrite from '../marketQnaWrite/QnaWrite.container';
 import QnaAnswerWrite from '../marketQnaAnswerWrite/QnaAnswerWrite.container';
+import QnaAnswerList from '../marketQnaAnswerList/QnaAnswerList.container';
 
 
 export default function MarketQnAListItem(props){
@@ -57,7 +58,8 @@ export default function MarketQnAListItem(props){
         )}
         {isAnswer && (
             <QnaAnswerWrite el={props.el} />
-        )}
+        ) }
+        <QnaAnswerList isAnswer={isAnswer} setIsAnswer={setIsAnswer} el={props.el}/>
         </>
 )
 }
