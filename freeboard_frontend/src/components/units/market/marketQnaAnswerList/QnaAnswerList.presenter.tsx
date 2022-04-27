@@ -3,19 +3,18 @@ import InfiniteScroll from "react-infinite-scroller";
 
 export default function QnaAnswerListUI(props){
 
-console.log(props.data)
     return(
         <>
             <InfiniteScroll
                 pageStart={0}
-                loadMore={props.onLoadMore}
+                loadMore={props.loadMore}
                 hasMore={true}
-                useWindow={false}
                 >
-            {props.data?.fetchUseditemQuestionAnswers.map((el:any) => (
+            {props.qadata?.fetchUseditemQuestionAnswers.map((el:any) => (
             <QnaAnswerListItem key={String(el?._id)} 
                 el={el}
-                data={props.data} 
+                qadata={props.qadata} 
+                data={props.data}
                 onClickDelete={props.onClickDelete} 
                 onClickUpdate={props.onClickUpdate}          
             />        

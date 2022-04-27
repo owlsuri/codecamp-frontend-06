@@ -3,11 +3,12 @@ import { Modal } from 'antd'
 import { useState } from 'react'
 import { IMutation, IMutationCreateUseditemQuestionAnswerArgs } from '../../../../commons/types/generated/types'
 import QnaAnswerWriteUI from './QnaAnswerWrite.presenter'
-import { CREATE_USED_ITEM_QUESTION_ANSWER, FETCH_USEDITEM_QUESTION_ANSWERS } from './QnaAnswerWrite.queris'
+import { CREATE_USEDITEM_QUESTION_ANSWER, FETCH_USEDITEM_QUESTION_ANSWERS } from './QnaAnswerWrite.queris'
 
 export default function QnaAnswerWrite(props){
 
-    const [createUseditemQuestionAnswer] = useMutation<Pick<IMutation,"createUseditemQuestionAnswer">, IMutationCreateUseditemQuestionAnswerArgs>(CREATE_USED_ITEM_QUESTION_ANSWER)
+    const [createUseditemQuestionAnswer] = useMutation<Pick<IMutation,"createUseditemQuestionAnswer">, 
+    IMutationCreateUseditemQuestionAnswerArgs>(CREATE_USEDITEM_QUESTION_ANSWER)
 
 
     const [ qnaAnswer, setQnaAnswer ] = useState("")

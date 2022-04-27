@@ -1,23 +1,25 @@
 import { gql } from "@apollo/client";
 
-export const FETCH_USED_ITEM_QUESTION_ANSWERS = gql`
-    query fetchUseditemQuestionAnswers($useditemQuestionId: ID!, $page: Int){
-        fetchUseditemQuestionAnswers(useditemQuestionId:$useditemQuestionId, page:$page){
-            _id
-            contents 
-            user {
-                email 
-                name 
-            }
-            createdAt
-        }
+export const FETCH_USEDITEM_QUESTION_ANSWERS = gql`
+  query fetchUseditemQuestionAnswers($page: Int, $useditemQuestionId: ID!) {
+    fetchUseditemQuestionAnswers(
+      page: $page
+      useditemQuestionId: $useditemQuestionId
+    ) {
+      _id
+      contents
+      user {
+        name
+      }
+      createdAt
     }
-`
+  }
+`;
 
-export const DELETE_USED_ITEM_QUESTION_ANSWER = gql`
-    mutation deleteUseditemQuestionAnswer($useditemQuestionAnswerId: ID!){
-        deleteUseditemQuestionAnswer(useditemQuestionAnswerId:$useditemQuestionAnswerId){
-            _id
-        }
-    }
-`
+export const DELETE_USEDITEM_QUESTION_ANSWER = gql`
+  mutation deleteUseditemQuestionAnswer($useditemQuestionAnswerId: ID!) {
+    deleteUseditemQuestionAnswer(
+      useditemQuestionAnswerId: $useditemQuestionAnswerId
+    )
+  }
+`;

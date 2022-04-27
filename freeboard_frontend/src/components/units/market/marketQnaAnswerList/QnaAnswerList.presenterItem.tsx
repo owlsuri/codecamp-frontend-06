@@ -4,16 +4,45 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight,faPencil, faX } from "@fortawesome/free-solid-svg-icons";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { getDate } from '../../../../commons/libraries/utils';
+import { DELETE_USEDITEM_QUESTION_ANSWER, FETCH_USEDITEM_QUESTION_ANSWERS } from './QnaAnswerList.queries';
+import { useMutation } from '@apollo/client';
+import { IMutation } from '../../../../commons/types/generated/types';
+import { Modal } from 'antd';
 
 
 export default function QnaAnswerListItem(props){
 
-    const onClickUpdate = () => {
+    console.log(props.data)
 
-    }
+    const [deleteUseditemQuestionAnswer] = useMutation<Pick<IMutation, "deleteUseditemQuestionAnswer">,IMutationDeleteUseditemQuestionAnswerArgs
+      >(DELETE_USEDITEM_QUESTION_ANSWER);
 
-    const onClickDelete = () => {
-        
+
+          const onClickDelete = async() => {
+      
+        try{
+            const result = await deleteUseditemQuestionAnswer({
+                variables:{
+                    useditemQuestionAnswerId: props.el._id,
+                },
+                refetchQueries: [
+                {
+                    query: FETCH_USEDITEM_QUESTION_ANSWERS,
+                    variables: {
+                    useditemQuestionId: String(props.data._id),
+                    },
+                },
+        ],
+            })
+            Modal.success({
+                    content: '삭제가 완료되었습니다!',
+                });
+        } catch (error) {
+            if(error instanceof Error)
+            Modal.error({
+                content: error.message,
+            });
+        }
     }
 
     return(
@@ -34,7 +63,7 @@ export default function QnaAnswerListItem(props){
                             </S.CommentUserProfile>
                             <S.CommentIcon>
                                 <FontAwesomeIcon onClick={props.onClickUpdate} icon={faPencil}  color="#BDBDBD" />
-                                <FontAwesomeIcon onClick={props.onClickDelete} icon={faX} color="#BDBDBD" />
+                                <FontAwesomeIcon onClick={onClickDelete} icon={faX} color="#BDBDBD" />
                             </S.CommentIcon>
                         </S.CommentUserInfo>
                         <S.CommentDesc>

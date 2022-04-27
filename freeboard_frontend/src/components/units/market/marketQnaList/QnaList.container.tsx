@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { IMutation, IMutationDeleteUseditemQuestionArgs } from '../../../../commons/types/generated/types'
 import MarketQnAListUI from './QnaList.presenter'
-import { FETCH_USED_ITEM_QUESTIONS, DELETE_USED_ITEM_QUESTION } from './QnaList.queries'
+import { FETCH_USEDITEM_QUESTIONS, DELETE_USEDITEM_QUESTION } from './QnaList.queries'
 
 export default function MarketQnAList(){
 
@@ -12,11 +12,12 @@ export default function MarketQnAList(){
 
     const [useditemQuestionId, setUseditemQuestionId] = useState("");
 
-    const {data, fetchMore} = useQuery(FETCH_USED_ITEM_QUESTIONS,{
+    const {data, fetchMore} = useQuery(FETCH_USEDITEM_QUESTIONS,{
         variables:{ useditemId: String(router.query.useditemId)  }
     })
 
-    const [deleteUseditemQuestion] = useMutation<Pick<IMutation,'deleteUseditemQuestion'>, IMutationDeleteUseditemQuestionArgs>(DELETE_USED_ITEM_QUESTION)
+    const [deleteUseditemQuestion] = useMutation<Pick<IMutation,'deleteUseditemQuestion'>, 
+    IMutationDeleteUseditemQuestionArgs>(DELETE_USEDITEM_QUESTION)
 
     // 무한스크롤
     const onLoadMore = () => {
@@ -46,7 +47,7 @@ export default function MarketQnAList(){
             },
             refetchQueries: [{
                     query: FETCH_USED_ITEM_QUESTIONS,
-                    variables: { useditemId: router.query.useditemId },
+                    variables: { useditemId: String(router.query.useditemId) },
                     },
                 ],
         })
