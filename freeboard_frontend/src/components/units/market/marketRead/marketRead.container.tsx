@@ -3,20 +3,44 @@ import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import UsedItemReadUI from "./marketRead.presenter";
-import { FETCH_USED_ITEM, DELETE_USED_ITEM } from "./marketRead.queries";
+import { FETCH_USED_ITEM, DELETE_USEDITEM, TOGGLE_USEDITEM_PICK } from "./marketRead.queries";
 
 export default function UsedItemRead(){
 
     const router = useRouter()
+
     const [ isShowQnA, setIsShowQnA ] = useState(false)
+   
 
     const { data } = useQuery(FETCH_USED_ITEM,{
         variables: { useditemId : router.query.useditemId },
     });
 
-    const [deleteUseditem] = useMutation(DELETE_USED_ITEM);
+    const [deleteUseditem] = useMutation(DELETE_USEDITEM);
 
-    const onClickPay = () => {
+    const [toggleUsedItemPick] = useMutation(TOGGLE_USEDITEM_PICK);
+    
+    // 장바구니에 담기
+    const [isLoad, setIsLoad] = useState(false)
+
+    const onClickBasket = (el) => () =>{
+    const baskets = JSON.parse(localStorage.getItem("baskets") || "[]")
+    console.log(baskets)
+
+    const temp = baskets.filter((basketEl) => basketEl._id === el._id)
+
+     if(temp.length === 1){
+         Modal.error({ content: "이미 장바구니에 담겨있습니다." });
+        return 
+    }
+
+    const {__typename, ...newEl} = el;
+        baskets.push(newEl)
+        localStorage.setItem("baskets", JSON.stringify(baskets))
+        setIsLoad(true)
+
+        Modal.success({ content: "장바구니에 담았습니다." });
+
     }
     
     // 상품디테일 보여주기
@@ -56,18 +80,45 @@ export default function UsedItemRead(){
         router.push(`/market/${router.query.useditemId}/edit`)
     }
 
+    const onClickPay = () => {
+       
+    }
+
+  // 찜하기
+  const onClickPick = async () => {
+    try {
+      await toggleUsedItemPick({
+        variables: { useditemId: String(router.query.useditemId) },
+        refetchQueries: [{
+                    query: FETCH_USED_ITEM,
+                    variables: { useditemId: String(router.query.useditemId) },
+                    },
+                ],
+      });
+    } catch (error) {
+        if(error instanceof Error)
+        Modal.error({
+          content: error.message,
+        });
+    }
+  };
+
+
+
 
     return(
-        <UsedItemReadUI
-        data={data}
-        onClickList={onClickList}
-        onClickDelete={onClickDelete}
-        onClickMoveEdit={onClickMoveEdit}
-        onClickQnA={onClickQnA}
-        onClickShowDetail={onClickShowDetail}
-        onClickPay={onClickPay}
-        isShowQnA={isShowQnA}
-        />
+            <UsedItemReadUI
+            data={data}
+            onClickList={onClickList}
+            onClickDelete={onClickDelete}
+            onClickMoveEdit={onClickMoveEdit}
+            onClickQnA={onClickQnA}
+            onClickShowDetail={onClickShowDetail}
+            onClickPay={onClickPay}
+            isShowQnA={isShowQnA}
+            onClickBasket={onClickBasket}   
+            onClickPick={onClickPick}         
+            />
     )
 
 }

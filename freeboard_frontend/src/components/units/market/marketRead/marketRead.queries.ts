@@ -17,8 +17,15 @@ export const FETCH_USED_ITEM = gql`
     }
 `
 
-export const DELETE_USED_ITEM = gql`
+export const DELETE_USEDITEM = gql`
     mutation deleteUseditem($useditemId: ID!){
         deleteUseditem(useditemId:$useditemId)
     }
 `
+
+// 찜하기
+export const TOGGLE_USEDITEM_PICK = gql`
+  mutation toggleUseditemPick($useditemId: ID!) {
+    toggleUseditemPick(useditemId: $useditemId)
+  }
+`;

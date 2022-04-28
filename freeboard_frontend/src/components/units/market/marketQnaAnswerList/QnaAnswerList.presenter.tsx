@@ -15,8 +15,8 @@ export default function QnaAnswerListUI(props){
                 el={el}
                 qadata={props.qadata} 
                 data={props.data}
-                onClickDelete={props.onClickDelete} 
-                onClickUpdate={props.onClickUpdate}          
+                onClickDelete={props.onClickDelete}   
+                qael={props.qael}        
             />        
             ))}  
             </InfiniteScroll> 

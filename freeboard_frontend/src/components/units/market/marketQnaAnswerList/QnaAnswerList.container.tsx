@@ -6,7 +6,6 @@ import QnaAnswerListUI from "./QnaAnswerList.presenter";
 import { FETCH_USEDITEM_QUESTION_ANSWERS } from "./QnaAnswerList.queries";
 
 export default function QnaAnswerList(props){
-    const router = useRouter()
     
     const { data: qadata, fetchMore } = useQuery(FETCH_USEDITEM_QUESTION_ANSWERS,{
         variables: { useditemQuestionId: props.el._id }
@@ -37,19 +36,12 @@ export default function QnaAnswerList(props){
     });
   };
 
-    const onClickUpdate = () => {
-
-    }
-
-
-
     return(
         <QnaAnswerListUI 
         qadata={qadata}
         data={props.data}
         loadMore={loadMore}
-        onClickUpdate={onClickUpdate}
-        el={props.el}
+        qael={props.el}
         />
     )
 }

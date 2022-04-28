@@ -18,3 +18,4 @@ export const DELETE_USEDITEM_QUESTION = gql`
     deleteUseditemQuestion(useditemQuestionId: $useditemQuestionId)
   }
 `;
+

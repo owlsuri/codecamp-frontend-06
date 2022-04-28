@@ -1,4 +1,3 @@
-
 import * as S from './QnaAnswerList.styles'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight,faPencil, faX } from "@fortawesome/free-solid-svg-icons";
@@ -8,18 +7,24 @@ import { DELETE_USEDITEM_QUESTION_ANSWER, FETCH_USEDITEM_QUESTION_ANSWERS } from
 import { useMutation } from '@apollo/client';
 import { IMutation, IMutationDeleteUseditemQuestionAnswerArgs } from '../../../../commons/types/generated/types';
 import { Modal } from 'antd';
+import { useState } from 'react';
+import QnaAnswerWrite from '../marketQnaAnswerWrite/QnaAnswerWrite.container';
 
 
 export default function QnaAnswerListItem(props){
 
-    console.log(props.data)
+    const [isEdit, setIsEdit] = useState(false);
 
+    const onClicktoUpdate = () => {
+        setIsEdit(true);
+    }
+    
     const [deleteUseditemQuestionAnswer] = useMutation<Pick<IMutation, "deleteUseditemQuestionAnswer">,IMutationDeleteUseditemQuestionAnswerArgs
-      >(DELETE_USEDITEM_QUESTION_ANSWER);
+    >(DELETE_USEDITEM_QUESTION_ANSWER);
+    
+    
+    const onClickDelete = async() => {
 
-
-          const onClickDelete = async() => {
-      
         try{
             const result = await deleteUseditemQuestionAnswer({
                 variables:{
@@ -29,7 +34,7 @@ export default function QnaAnswerListItem(props){
                 {
                     query: FETCH_USEDITEM_QUESTION_ANSWERS,
                     variables: {
-                    useditemQuestionId: String(props.el._id),
+                    useditemQuestionId: props.qael._id,
                     },
                 },
         ],
@@ -48,7 +53,9 @@ export default function QnaAnswerListItem(props){
     }
 
     return(
-        <S.Wrapper>
+        <>
+       {!isEdit && (
+       <S.Wrapper>
                 <S.Arrow>
                 <FontAwesomeIcon size='2x' icon={faArrowRight} color="#6888B2" />        
                 </S.Arrow>
@@ -64,7 +71,7 @@ export default function QnaAnswerListItem(props){
                             <S.CommentUserName>{props.el?.user.name}</S.CommentUserName>
                             </S.CommentUserProfile>
                             <S.CommentIcon>
-                                <FontAwesomeIcon onClick={props.onClickUpdate} icon={faPencil}  color="#BDBDBD" />
+                                <FontAwesomeIcon onClick={onClicktoUpdate} icon={faPencil}  color="#BDBDBD" />
                                 <FontAwesomeIcon onClick={onClickDelete} icon={faX} color="#BDBDBD" />
                             </S.CommentIcon>
                         </S.CommentUserInfo>
@@ -79,5 +86,10 @@ export default function QnaAnswerListItem(props){
             </S.Container>  
                 </div>               
         </S.Wrapper>
+       )}
+        {isEdit && (
+            <QnaAnswerWrite isEdit={true} setIsEdit={setIsEdit} el={props.el}/>
+        )}
+        </>
     )
 }

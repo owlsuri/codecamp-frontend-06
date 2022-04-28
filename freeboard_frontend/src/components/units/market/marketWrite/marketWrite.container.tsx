@@ -33,9 +33,13 @@ export default function MarketWrite(props){
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
   const [uploadFile] = useMutation<Pick<IMutation, "uploadFile">, IMutationUploadFileArgs>(UPLOAD_FILE)
-  const { data } = useQuery(FETCH_USED_ITEM,{
-    variables:{ useditemId: router.query.useditemId}
-  });
+  // const { data } = useQuery(FETCH_USED_ITEM,{
+  //   variables:{ useditemId: router.query.useditemId}
+  // });
+  
+    // 이미지 업로드 스테이트
+      const [files, setFiles] = useState<(File | undefined)[]>([undefined, undefined, undefined])
+      const [imageUrls, setImageUrls] = useState(["","",""])
  
   const { register, handleSubmit, formState, setValue, trigger, reset, getValues } = useForm({
         resolver: !props.isEdit && yupResolver(schema),
@@ -49,12 +53,6 @@ export default function MarketWrite(props){
   // useEffect(() => {
   //   reset({ contents: props.data?.fetchUseditem.contents });
   // }, [props.data]);
-
-  // const [fileUrls, setFileUrls] = useState(["", "", ""]);
-
-  // 이미지 업로드 스테이트
-    const [files, setFiles] = useState<(File | undefined)[]>([undefined, undefined, undefined])
-    const [imageUrls, setImageUrls] = useState(["","",""])
 
 
   const onChangeContents = (value: any) =>{
@@ -136,10 +134,10 @@ export default function MarketWrite(props){
   }
  }
 // 수정하기
-  const onClickUpdate = async() =>{
+  const onClickUpdate = async(data) =>{
     // 이미지 수정
     const currentFiles = JSON.stringify(imageUrls);
-    const defaultFiles = JSON.stringify(data.fetchUseditem.images);
+    const defaultFiles = JSON.stringify(props.data?.images);
     const isChangedFiles = currentFiles !== defaultFiles;
 
     if (
@@ -188,10 +186,10 @@ export default function MarketWrite(props){
 
 //  이미지
   useEffect(() => {
-    if (data?.fetchUseditem.images?.length) {
-      setImageUrls([...data?.fetchUseditem.images]);
+    if (props.data?.fetchUseditem.images?.length) {
+      setImageUrls([...props.data?.fetchUseditem.images]);
     }
-  }, [data]);
+  }, [props.data]);
 
 
     return(< MarketWriteUI
@@ -204,8 +202,9 @@ export default function MarketWrite(props){
     onChangeFile={onChangeFile}
     onClickUpdate={onClickUpdate}
     isEdit={props.isEdit}
-    data={data}
+    data={props.data}
     imageUrls={imageUrls}
     getValues={getValues}
+    reset={reset}
     />)
 }

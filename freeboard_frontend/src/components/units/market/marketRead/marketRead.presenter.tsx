@@ -1,18 +1,21 @@
 import { HeartFilled } from '@ant-design/icons'
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Tooltip } from 'antd'
-import { getDate } from '../../../../commons/libraries/utils'
 import * as S from './marketRead.styles'
 import Dompurify from 'dompurify'
 import ImgSlick from '../../../../commons/imageSlick/imageslick'
 import MarketQnAList from '../marketQnaList/QnaList.container'
 import QnaWrite from '../marketQnaWrite/QnaWrite.container'
+import { useState } from 'react'
+import MarketWrite from '../marketWrite/marketWrite.container'
 
 
 export default function UsedItemReadUI(props){
+  
+  const [isEdit, setIsEdit]=useState(false)
+
 console.log(props.data)
     return(
+      <>
+      {!isEdit && (
       <S.Wrapper>
         <S.Container>
           {/* 이미지 캐러셀 */}
@@ -27,7 +30,7 @@ console.log(props.data)
               <S.Price>{props.data ? props.data?.fetchUseditem.price : "loading..."}원</S.Price>
               </div>
               <S.Heart>
-                <HeartFilled />
+                <HeartFilled onClick={props.onClickPick} />
                 <S.HeartNum>{props.data?.fetchUseditem.pickedCount}</S.HeartNum>
               </S.Heart>
               </S.Infos>
@@ -39,7 +42,7 @@ console.log(props.data)
                <S.Tags>{props.data ? props.data?.fetchUseditem.tags : "loading..."}</S.Tags>
               <S.Buttons>
                 <S.Btn onClick={props.onClickPay}>결제하기</S.Btn>
-                <S.Btn>장바구니에 담기</S.Btn>
+                <S.Btn onClick={props.onClickBasket(props.data?.fetchUseditem)}>장바구니에 담기</S.Btn>
               </S.Buttons>
             </S.Info>
         </S.Container>
@@ -61,7 +64,9 @@ console.log(props.data)
         <S.MenuBtn onClick={props.onClickDelete}>삭제하기</S.MenuBtn>
       </S.MenuBox>
       </S.Wrapper>
+      )}
 
+      {isEdit && <MarketWrite isEdit={true} data={props.data} setIsEdit={setIsEdit} /> }
+    </>
     )
-
 }

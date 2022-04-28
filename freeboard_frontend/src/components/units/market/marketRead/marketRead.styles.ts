@@ -70,14 +70,14 @@ export const DetailBox = styled.div`
 
 export const Heart = styled.div`
 color: red;
-width: 30px;
+width: 50px;
 text-align: center;
-font-size: 20px;
+font-size: 30px;
 padding-right: 5px;
 `;
 export const HeartNum = styled.div`
 color: red;
-font-size: 15px;
+font-size: 17px;
 `;
 export const Detail = styled.button`
 width: 497px;

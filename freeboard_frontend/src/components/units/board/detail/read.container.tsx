@@ -24,9 +24,25 @@ export default function BoardRead(props:IBoardReadProps){
     const onClickLike = async () => {
       const result = await likeBoard({
         variables:{boardId: String(router.query.boardId)},
-        refetchQueries:[
-          { query:FETCH_BOARD, variables:{boardId: String(router.query.boardId)}},
-        ],
+        // refetchQueries:[
+        //   { query:FETCH_BOARD, variables:{boardId: String(router.query.boardId)}},
+        // ],
+        optimisticResponse:{
+                likeBoard : (data?.fetchBoard.likeCount || 0 ) +1,
+            },
+            update(cache, {data}){
+                cache.writeQuery({
+                    query :FETCH_BOARD,
+                    variables:{boardId: String(router.query.boardId) },
+                    data:{
+                        fetchBoard:{
+                            _id : String(router.query.boardId),
+                            __typename: "Board",
+                            likeCount : data?.likeBoard,
+                        }
+                    }
+                })
+            }
       })
       console.log(result)
     }

@@ -46,7 +46,7 @@ export default function MarketQnAList(){
                 useditemQuestionId: event?.target.id,
             },
             refetchQueries: [{
-                    query: FETCH_USED_ITEM_QUESTIONS,
+                    query: FETCH_USEDITEM_QUESTIONS,
                     variables: { useditemId: String(router.query.useditemId) },
                     },
                 ],
