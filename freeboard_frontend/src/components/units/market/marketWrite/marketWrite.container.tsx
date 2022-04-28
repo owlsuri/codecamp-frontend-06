@@ -29,82 +29,93 @@ export default function MarketWrite(props){
 
   useAuth();
   const router = useRouter();
-
+  
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
-  const [uploadFile] = useMutation<Pick<IMutation, "uploadFile">, IMutationUploadFileArgs>(UPLOAD_FILE)
-  // const { data } = useQuery(FETCH_USED_ITEM,{
-  //   variables:{ useditemId: router.query.useditemId}
-  // });
+  // const [uploadFile] = useMutation<Pick<IMutation, "uploadFile">, IMutationUploadFileArgs>(UPLOAD_FILE)
+  const { data } = useQuery(FETCH_USED_ITEM,{
+    variables:{ useditemId: router.query.useditemId}
+  });
+  console.log(data)
   
     // 이미지 업로드 스테이트
-      const [files, setFiles] = useState<(File | undefined)[]>([undefined, undefined, undefined])
-      const [imageUrls, setImageUrls] = useState(["","",""])
+      // const [files, setFiles] = useState<(File | undefined)[]>([undefined, undefined, undefined])
+      // const [imageUrls, setImageUrls] = useState(["","",""])
+      const [fileUrls, setFileUrls] = useState(["", "", ""]);
  
+  // 해시태그
+  const [hashtag, setHashtag] = useState("");
+  const [hashArr, setHashArr] = useState([]);
+  const onKeyUpHash = (event) => {
+    // 자바스크립트 키코드
+
+    if (event.keyCode === 32 && event.target.value !== " ") {
+      setHashArr([...hashArr, "#" + event.target.value]);
+
+      event.target.value = "";
+    }
+    console.log(event.target.value);
+  };
+
+
+
   const { register, handleSubmit, formState, setValue, trigger, reset, getValues } = useForm({
         resolver: !props.isEdit && yupResolver(schema),
         mode:"onChange",   
-        // defaultValues: {
-        //   name: data?.fetchUseditem.name,
-        //   remarks : "하이"
-        // },
   });
-
-  // useEffect(() => {
-  //   reset({ contents: props.data?.fetchUseditem.contents });
-  // }, [props.data]);
-
 
   const onChangeContents = (value: any) =>{
       setValue("contents", value === "<p><br></p>" ? "" : value);
       trigger("contents");
   };
 
-  //   const onChangeFileUrls = (fileUrl: string, index: number) => {
-  //   const newFileUrls = [...fileUrls];
-  //   newFileUrls[index] = fileUrl;
-  //   setFileUrls(newFileUrls);
-  // };
+  // 이미지 등록하기
+    const onChangeFileUrls = (fileUrl: string, index: number) => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  };
 
   // 이미지 업로드
-    const onChangeFile = (number) => (event:ChangeEvent<HTMLInputElement>) =>{
-      const file = event.target.files?.[0]
-      if(!file) {
-          alert("파일이 없습니다!")
-          return
-      }
+  //   const onChangeFile = (number) => (event:ChangeEvent<HTMLInputElement>) =>{
+  //     const file = event.target.files?.[0]
+  //     if(!file) {
+  //         alert("파일이 없습니다!")
+  //         return
+  //     }
 
-    const fileReader = new FileReader()
-      fileReader.readAsDataURL(file) // blob 파일을 임시 url 형태로 만들어줌 - 미리보기용 
+  //   const fileReader = new FileReader()
+  //     fileReader.readAsDataURL(file) // blob 파일을 임시 url 형태로 만들어줌 - 미리보기용 
 
-      // 파일 다 읽으면 아래 함수 실행
-      fileReader.onload = (data) => {
-          if(typeof data.target?.result === "string"){
+  //     // 파일 다 읽으면 아래 함수 실행
+  //     fileReader.onload = (data) => {
+  //         if(typeof data.target?.result === "string"){
               
-              const tempUrls = [...imageUrls]
-              tempUrls[number] = data.target?.result
+  //             const tempUrls = [...imageUrls]
+  //             tempUrls[number] = data.target?.result
               
-              setImageUrls(tempUrls)
+  //             setImageUrls(tempUrls)
 
-              const tempFiles= [...files]
-              tempFiles[number] = file
-              setFiles(tempFiles)
-          }
-      }        
-  }
+  //             const tempFiles= [...files]
+  //             tempFiles[number] = file
+  //             setFiles(tempFiles)
+  //         }
+  //     }        
+  // }
 
   const onClickSubmit = async(data:any) => {
     if(data.name && data.remarks && data.contents && data.price && data.tags){
       
       try{
       // 이미지
-        const results = await Promise.all(
-            files.map((el) => el && uploadFile({ variables:{file : el} }))
-        )
-       const resultUrls =  results.map((el) => el?.data ? el?.data?.uploadFile.url : "")
-       console.log(resultUrls)
+      //   const results = await Promise.all(
+      //       files.map((el) => el && uploadFile({ variables:{file : el} }))
+      //   )
+      //  const resultUrls =  results.map((el) => el?.data ? el?.data?.uploadFile.url : "")
+      //  console.log(resultUrls)
 
 
+    // 등록하기
     const result = await createUseditem({
       variables:{ 
         createUseditemInput:{
@@ -112,8 +123,8 @@ export default function MarketWrite(props){
           remarks: data.remarks,
           contents: data.contents,
           price: Number(data.price),
-          tags: data.tags,
-          images: resultUrls,
+          tags: hashArr,
+          images: fileUrls,
         }
       }
     })
@@ -136,10 +147,9 @@ export default function MarketWrite(props){
 // 수정하기
   const onClickUpdate = async(data) =>{
     // 이미지 수정
-    const currentFiles = JSON.stringify(imageUrls);
-    const defaultFiles = JSON.stringify(props.data?.images);
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(data?.fetchUseditem?.images);
     const isChangedFiles = currentFiles !== defaultFiles;
-
     if (
       !data.name &&
       !data.remarks &&
@@ -156,8 +166,8 @@ export default function MarketWrite(props){
     if (data.name) updateUseditemInput.name = data.name;
     if (data.remarks) updateUseditemInput.remarks = data.remarks;
     if (data.contents) updateUseditemInput.contents = data.contents;
-    if (data.price) updateUseditemInput.price = data.price;
-    if (isChangedFiles) updateUseditemInput.images = imageUrls;
+    if (data.price) updateUseditemInput.price = Number(data.price);
+    if (isChangedFiles) updateUseditemInput.images = fileUrls;
 
 
     try {
@@ -165,7 +175,7 @@ export default function MarketWrite(props){
           variables: {
             useditemId: router.query.useditemId,
             password:data.password,
-            image: imageUrls,
+            image: fileUrls,
             updateUseditemInput,
           },
         });
@@ -179,17 +189,19 @@ export default function MarketWrite(props){
               content: error.message,
           });
         }
-        console.log(imageUrls)
     }
 
   
 
 //  이미지
   useEffect(() => {
-    if (props.data?.fetchUseditem.images?.length) {
-      setImageUrls([...props.data?.fetchUseditem.images]);
+    if (data?.fetchUseditem.images?.length) {
+      setFileUrls([...data?.fetchUseditem.images]);
     }
-  }, [props.data]);
+  }, [data]);
+
+
+
 
 
     return(< MarketWriteUI
@@ -199,12 +211,14 @@ export default function MarketWrite(props){
     onClickSubmit={onClickSubmit}
     onChangeContents={onChangeContents}
     ReactQuill={ReactQuill}
-    onChangeFile={onChangeFile}
+    onChangeFileUrls={onChangeFileUrls}
     onClickUpdate={onClickUpdate}
     isEdit={props.isEdit}
-    data={props.data}
-    imageUrls={imageUrls}
+    fileUrls={fileUrls}
     getValues={getValues}
     reset={reset}
+    data={data}
+    hashArr={hashArr}
+    onKeyUpHash={onKeyUpHash}
     />)
 }

@@ -3,6 +3,6 @@
 import MarketWrite from "../../../../src/components/units/market/marketWrite/marketWrite.container";
 
 
-export default function BoardsEditPage() {
-  return <MarketWrite isEdit={true} />;
+export default function BoardsEditPage(props) {
+  return <MarketWrite isEdit={true} data={props.data} />;
 }

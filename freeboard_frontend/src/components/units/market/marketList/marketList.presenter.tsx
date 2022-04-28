@@ -1,24 +1,17 @@
 import * as S from './marketList.styles'
 import InfiniteScroll from "react-infinite-scroller";
 import { HeartFilled } from '@ant-design/icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
 export default function MarketListUI(props){
 
-function aaa(e){
-  e.target.src = "/images/seoul.jpg"
-}
-
-
-  // const onErrorImg = (e : any) => {
-    
-	//   e.target.src = "/images/seoul.jpg";
-  // }
 
     return(
       <>
            <S.Main>중고마켓 BEST</S.Main>
+             <S.New onClick={props.onClickNew}>중고상품 등록하기</S.New>
            <S.Wrapper>
            <S.BestBox>
               {props.dataUseditemBest?.fetchUseditemsOfTheBest.map((el:any)=>(
@@ -27,7 +20,7 @@ function aaa(e){
                         <div>
                             <S.Img  
                               id={el._id}
-                              onError={aaa}
+                              // onError={aaa}
                               src={
                                 el.images[0]
                                   ? `https://storage.googleapis.com/${el.images?.[0]}`

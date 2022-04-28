@@ -7,6 +7,10 @@ align-items: center;
 width: 1200px;
 margin: 50px 0 0 110px;
 `;
+export const New = styled.div`
+text-align: end;
+cursor: pointer;
+`;
 export const BestBox = styled.div`
 display: grid;
 grid-template-columns: 300px 300px 300px 300px;

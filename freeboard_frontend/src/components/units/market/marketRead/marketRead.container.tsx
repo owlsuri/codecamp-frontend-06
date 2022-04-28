@@ -3,18 +3,30 @@ import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import UsedItemReadUI from "./marketRead.presenter";
-import { FETCH_USED_ITEM, DELETE_USEDITEM, TOGGLE_USEDITEM_PICK } from "./marketRead.queries";
+import { FETCH_USED_ITEM, DELETE_USEDITEM, TOGGLE_USEDITEM_PICK, CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING, FETCH_USER_LOGGED_IN } from "./marketRead.queries";
+
+
+declare const window: typeof globalThis & {
+    IMP:  any
+}
 
 export default function UsedItemRead(){
 
     const router = useRouter()
 
+    const { data:userData } = useQuery(FETCH_USER_LOGGED_IN)
     const [ isShowQnA, setIsShowQnA ] = useState(false)
-   
+    
 
+    
     const { data } = useQuery(FETCH_USED_ITEM,{
-        variables: { useditemId : router.query.useditemId },
+      variables: { useditemId : router.query.useditemId },
     });
+    // 결제 state
+    // const [ amount, setAmount ] = useState(100)
+    // setAmount(data?.fetchUseditem?.price)
+
+    const [createPointTransactionOfBuyingAndSelling] = useMutation(CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING)
 
     const [deleteUseditem] = useMutation(DELETE_USEDITEM);
 
@@ -79,9 +91,27 @@ export default function UsedItemRead(){
     const onClickMoveEdit = () => {
         router.push(`/market/${router.query.useditemId}/edit`)
     }
-
-    const onClickPay = () => {
-       
+    
+    // setAmount(data.fetchUseditem.price)
+    // 결제하기
+    const onClickPay = async() => {
+      if(userData?.fetchUserLoggedIn?.userPoint.amount >= data?.fetchUseditem?.price){
+         try{
+                const pay = await createPointTransactionOfBuyingAndSelling({
+                    variables : {
+                        useritemId : router.query.useditemId,
+                    }
+                })
+                console.log(pay)
+                Modal.success({ content: "결제가 완료되었습니다!" });
+            } catch(error){
+            if(error instanceof Error)
+                Modal.error({ content: error.message });
+            }
+           } else {
+        Modal.error({ content: "충전을 먼저 해주세요" });
+        router.push('/mypage')
+      }
     }
 
   // 찜하기
@@ -102,8 +132,6 @@ export default function UsedItemRead(){
         });
     }
   };
-
-
 
 
     return(

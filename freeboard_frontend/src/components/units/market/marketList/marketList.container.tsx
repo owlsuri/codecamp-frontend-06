@@ -12,6 +12,9 @@ export default function MarketList(){
 
     const [keyword, setKeyword] = useState("")
 
+    const onClickNew = () =>{
+        router.push('market/new')
+    }
 
     // 무한스크롤
     const onLoadMore = () => {
@@ -50,6 +53,7 @@ export default function MarketList(){
         onChangeKeyword={onChangeKeyword}
         refetch={refetch}
         keyword={keyword}
+        onClickNew={onClickNew}
         />
     )
 }

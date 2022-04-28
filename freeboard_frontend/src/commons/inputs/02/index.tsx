@@ -11,5 +11,5 @@ const Input = styled.input`
 
 export default function Input02(props){
     
-    return <Input type={props.mytype} {...props.register}/>
+    return <Input placeholder={props.placeholder} defaultValue={props.defaultValue} type={props.mytype} {...props.register}/>
 }

@@ -12,6 +12,7 @@ export default function MarketWriteUI(props){
         props.reset({ contents: props.data?.fetchUseditem.contents });
     }, [props.data]);
 
+    console.log(props.data)
     return(
         <S.Wrapper>
             <S.Main >{props.isEdit ? "상품 수정하기" : "상품 등록하기"}</S.Main>
@@ -19,13 +20,13 @@ export default function MarketWriteUI(props){
             <S.Label>상품명 </S.Label>
             <Input01 
             mytype="text" register={props.register("name")}
-                        defaultValue={props.data?.fetchUseditem.name || ""}   
+                        defaultValue={props.data?.fetchUseditem.name}   
                         placeholder="상품명을 작성해주세요." />
             <S.Error>{props.formState.errors.name?.message}</S.Error>
 
             <S.Label>한줄요약</S.Label>
             <Input01 mytype="text" register={props.register("remarks")} 
-                    defaultValue={props.data?.fetchUseditem.remarks || ""}
+                    defaultValue={props.data?.fetchUseditem.remarks}
                     placeholder="상품을 한줄로 요약해서 작성해주세요." defaultValues={props.data?.fetchUseditem.remarks}/>
             <S.Error>{props.formState.errors.remarks?.message}</S.Error>
             
@@ -48,7 +49,14 @@ export default function MarketWriteUI(props){
             <S.Label>태그입력</S.Label>
             <Input01 mytype="text" register={props.register("tags")} 
                     defaultValue={props.data?.fetchUseditem.tags || ""}
-                    placeholder="#태그 #태그 #태그" />
+                    // placeholder="#태그 #태그 #태그" 
+                    onKeyUp={props.onKeyUpHash}
+                    />
+                    <span>
+                    {props.hashArr?.map((el, idx) => (
+                        <span key={idx}>{el}</span>
+                    ))}
+                    </span>
             <S.Error>{props.formState.errors.tags?.message}</S.Error>
 
             <S.LocationBox>
@@ -70,7 +78,7 @@ export default function MarketWriteUI(props){
                 </S.AddressBox>
             </S.LocationBox>
                 <S.Label>사진첨부</S.Label>
-                          {/* {props.fileUrls.map((el, index) => (
+                          {props.fileUrls.map((el, index) => (
                             <Uploads01
                             type="button"
                             key={uuidv4()}
@@ -78,13 +86,13 @@ export default function MarketWriteUI(props){
                             fileUrl={el}
                             onChangeFileUrls={props.onChangeFileUrls}
                             />
-                        ))} */}
-                        <input type="file" onChange={props.onChangeFile(0)}/>
+                        ))}
+                        {/* <input type="file" onChange={props.onChangeFile(0)}/>
                         <input type="file" onChange={props.onChangeFile(1)}/>
                         <input type="file" onChange={props.onChangeFile(2)}/><br/>
                         <img src={props.imageUrls[0]}/>
                         <img src={props.imageUrls[1]}/>
-                        <img src={props.imageUrls[2]}/>
+                        <img src={props.imageUrls[2]}/> */}
                 <S.ImageBox>
                     
                 </S.ImageBox>
