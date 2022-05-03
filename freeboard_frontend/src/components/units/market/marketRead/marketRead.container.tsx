@@ -6,9 +6,9 @@ import UsedItemReadUI from "./marketRead.presenter";
 import { FETCH_USED_ITEM, DELETE_USEDITEM, TOGGLE_USEDITEM_PICK, CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING, FETCH_USER_LOGGED_IN } from "./marketRead.queries";
 
 
-declare const window: typeof globalThis & {
-    IMP:  any
-}
+// declare const window: typeof globalThis & {
+//     IMP:  any
+// }
 
 export default function UsedItemRead(){
 

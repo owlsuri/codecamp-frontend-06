@@ -43,11 +43,11 @@ export default function MarketQnAList(){
         try{
         const result = await deleteUseditemQuestion({
             variables:{
-                useditemQuestionId: event?.target.id,
+                useditemQuestionId: event.currentTarget.id,
             },
             refetchQueries: [{
                     query: FETCH_USEDITEM_QUESTIONS,
-                    variables: { useditemId: String(router.query.useditemId) },
+                    variables: { useditemId: router.query.useditemId },
                     },
                 ],
         })

@@ -47,16 +47,23 @@ export default function MarketWriteUI(props){
             <S.Error>{props.formState.errors.price?.message}</S.Error>
 
             <S.Label>태그입력</S.Label>
-            <Input01 mytype="text" register={props.register("tags")} 
-                    defaultValue={props.data?.fetchUseditem.tags || ""}
+            <input type="text" {...props.register("tags")} 
+                    // defaultValue={props.data?.fetchUseditem.tags || ""}
                     // placeholder="#태그 #태그 #태그" 
                     onKeyUp={props.onKeyUpHash}
                     />
-                    <span>
-                    {props.hashArr?.map((el, idx) => (
-                        <span key={idx}>{el}</span>
-                    ))}
-                    </span>
+            {props.hashArr.map((el: any, idx: any) => (
+              <>
+                <span key={idx}>{el}</span>
+                <button
+                  type="button"
+                  id={idx}
+                  onClick={props.onClickDeleteHash}
+                >
+                  X
+                </button>
+              </>
+            ))}
             <S.Error>{props.formState.errors.tags?.message}</S.Error>
 
             <S.LocationBox>

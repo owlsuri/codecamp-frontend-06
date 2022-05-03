@@ -57,7 +57,7 @@ export default function MarketQnAListItem(props){
             <QnaWrite isEdit={true} setIsEdit={setIsEdit} el={props.el} />
         )}
         {isAnswer && (
-            <QnaAnswerWrite el={props.el} />
+            <QnaAnswerWrite el={props.el} isAnswer={isAnswer} setIsAnswer={setIsAnswer} />
         ) }
             <QnaAnswerList isAnswer={isAnswer} setIsAnswer={setIsAnswer} data={props.data} el={props.el}/>
         </>

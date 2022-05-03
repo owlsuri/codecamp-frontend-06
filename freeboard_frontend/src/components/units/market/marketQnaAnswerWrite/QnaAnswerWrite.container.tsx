@@ -41,6 +41,7 @@ export default function QnaAnswerWrite(props){
         Modal.success({
                 content: '답글 등록이 완료되었습니다!',
             });
+            props.setIsAnswer(false)
         } catch(error){
             if (error instanceof Error)
             Modal.error({

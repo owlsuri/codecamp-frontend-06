@@ -10,7 +10,6 @@ export default function QnaAnswerList(props){
     const { data: qadata, fetchMore } = useQuery(FETCH_USEDITEM_QUESTION_ANSWERS,{
         variables: { useditemQuestionId: props.el._id }
     })
-
      // 무한스크롤
     const loadMore = () => {
     if (!qadata) return;

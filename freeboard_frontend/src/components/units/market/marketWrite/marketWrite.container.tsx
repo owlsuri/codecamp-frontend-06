@@ -22,7 +22,7 @@ const schema = yup.object({
   remarks: yup.string().max(300, "300자 이내로 입력해주세요").required("필수 입력 사항입니다."),
   contents: yup.string().max(1000, "100자 이내로 입력해주세요").required("필수 입력 사항입니다."),
   price: yup.string().required("숫자만 입력해주세요."),
-  tags: yup.string().required("필수 입력 사항입니다.")
+  // tags: yup.string().required("필수 입력 사항입니다.")
 });
 
 export default function MarketWrite(props){
@@ -125,6 +125,11 @@ export default function MarketWrite(props){
           price: Number(data.price),
           tags: hashArr,
           images: fileUrls,
+          useditemAddress: {
+              zipcode: data.zipcode,
+              address: data.address,
+              addressDetail: data.addressDetail,
+            },
         }
       }
     })
@@ -168,14 +173,13 @@ export default function MarketWrite(props){
     if (data.contents) updateUseditemInput.contents = data.contents;
     if (data.price) updateUseditemInput.price = Number(data.price);
     if (isChangedFiles) updateUseditemInput.images = fileUrls;
+    if (hashArr) updateUseditemInput.tags = hashArr;
 
 
     try {
       await updateUseditem({
           variables: {
             useditemId: router.query.useditemId,
-            password:data.password,
-            image: fileUrls,
             updateUseditemInput,
           },
         });
@@ -198,7 +202,16 @@ export default function MarketWrite(props){
     if (data?.fetchUseditem.images?.length) {
       setFileUrls([...data?.fetchUseditem.images]);
     }
+    if (data?.fetchUseditem.tags?.length) {
+      setHashArr([...data?.fetchUseditem.tags]);
+    }
   }, [data]);
+
+  // 해시태그 삭제
+  const onClickDeleteHash = (event) => {
+    hashArr.splice(Number(event.target.id), 1);
+    setHashArr([...hashArr]);
+  };
 
 
 
@@ -220,5 +233,6 @@ export default function MarketWrite(props){
     data={data}
     hashArr={hashArr}
     onKeyUpHash={onKeyUpHash}
+    onClickDeleteHash={onClickDeleteHash}
     />)
 }
