@@ -10,3 +10,8 @@ export const basket = atom({
     key: "basketItems", 
     default:[], 
 })
+
+export const basketaaa = atom({
+    key: "basketaaa", 
+    default:[], 
+})
