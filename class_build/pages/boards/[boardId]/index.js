@@ -45,7 +45,7 @@ export const getServerSideProps = async (context) =>{
     // 여기서 페치보드 데이터 요청
 
     // useQuery 못씀
-    const result = await request("https://backend06codebootcamp.co.kr/graphql", FETCH_BOARD, {boardId : context.query.boardId})  // 서버에서 받는 모든 정보는 context에 있음
+    const result = await request("https://backend06.codebootcamp.co.kr/graphql", FETCH_BOARD, {boardId : context.query.boardId})  // 서버에서 받는 모든 정보는 context에 있음
 
     return {
       props: {
