@@ -38,7 +38,6 @@ export default function MarketQnAList(){
         });
     };
 
-    console.log(data)
     const onClickDelete = async(event) => {
         try{
         const result = await deleteUseditemQuestion({

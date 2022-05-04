@@ -42,7 +42,37 @@ export default function MarketWrite(props){
       // const [files, setFiles] = useState<(File | undefined)[]>([undefined, undefined, undefined])
       // const [imageUrls, setImageUrls] = useState(["","",""])
       const [fileUrls, setFileUrls] = useState(["", "", ""]);
+
+    // 주소 스테이트
+    const [ address, setAddress] = useState("")
+    const [ zipcode, setZipcode] = useState("")
+    const [ addressDetail, setAddressDetail] = useState("")
  
+  // 모달 주소입력
+    const [isOpen, setIsOpen] = useState(false);
+
+    const showModal = () => {
+      setIsOpen(true);
+    };
+
+    const handleOk = () => {
+      setIsOpen(false);
+    };
+
+    const handleCancel = () => {
+      setIsOpen(false);
+    };
+    const handleComplete = (data:any) =>{
+      setIsOpen(false);
+      setAddress(data.address)
+      setZipcode(data.zonecode)
+  }
+
+  const onChangeAddressDetail = (event) => {
+    setAddressDetail(event.target.value);
+  };
+
+
   // 해시태그
   const [hashtag, setHashtag] = useState("");
   const [hashArr, setHashArr] = useState([]);
@@ -103,19 +133,13 @@ export default function MarketWrite(props){
   //     }        
   // }
 
-  const onClickSubmit = async(data:any) => {
-    if(data.name && data.remarks && data.contents && data.price && data.tags){
+
+
+   // 등록하기
+   const onClickSubmit = async(data:any) => {
+    if(data.name && data.remarks && data.contents && data.price){
       
-      try{
-      // 이미지
-      //   const results = await Promise.all(
-      //       files.map((el) => el && uploadFile({ variables:{file : el} }))
-      //   )
-      //  const resultUrls =  results.map((el) => el?.data ? el?.data?.uploadFile.url : "")
-      //  console.log(resultUrls)
-
-
-    // 등록하기
+      try{    
     const result = await createUseditem({
       variables:{ 
         createUseditemInput:{
@@ -126,21 +150,18 @@ export default function MarketWrite(props){
           tags: hashArr,
           images: fileUrls,
           useditemAddress: {
-              zipcode: data.zipcode,
-              address: data.address,
-              addressDetail: data.addressDetail,
+              zipcode,
+              address,
+              addressDetail,
             },
         }
       }
-    })
-     console.log(result)     
+    })  
      Modal.success({
                 content: '상품 등록 성공!',
-            });
-          
+            }); 
     router.push(`/market/${result.data.createUseditem._id}`);
-    console.log(result);
-          
+
   }catch(error){
         if(error instanceof Error)
         Modal.error({
@@ -149,6 +170,8 @@ export default function MarketWrite(props){
     }
   }
  }
+
+
 // 수정하기
   const onClickUpdate = async(data) =>{
     // 이미지 수정
@@ -174,13 +197,20 @@ export default function MarketWrite(props){
     if (data.price) updateUseditemInput.price = Number(data.price);
     if (isChangedFiles) updateUseditemInput.images = fileUrls;
     if (hashArr) updateUseditemInput.tags = hashArr;
+    if (address) updateUseditemInput.useditemAddress.address = address; 
+    if (zipcode) updateUseditemInput.useditemAddress.zipcode = zipcode; 
 
 
     try {
       await updateUseditem({
           variables: {
             useditemId: router.query.useditemId,
-            updateUseditemInput,
+            updateUseditemInput : {
+              useditemAddress: {
+                address,
+                zipcode,
+              },
+            }
           },
         });
         Modal.success({
@@ -193,9 +223,71 @@ export default function MarketWrite(props){
               content: error.message,
           });
         }
-    }
+  }
 
-  
+  // const onClickUpdate = async (data) => {
+  //   // 이미지 수정이 되었는지 확인
+  //   const currentFiles = JSON.stringify(fileUrls);
+  //   const defaultFiles = JSON.stringify(data?.fetchUseditem?.images);
+  //   const isChangedFiles = currentFiles !== defaultFiles;
+
+  //   const updateUseditemInput: any = {};
+  //   if (data.name) updateUseditemInput.name = data.name;
+  //   if (data.remarks) updateUseditemInput.remarks = data.remarks;
+  //   if (data.contents) updateUseditemInput.contents = data.contents;
+  //   if (data.price) updateUseditemInput.price = data.price;
+  //   if (zipcode) updateUseditemInput.zipcode = zipcode;
+  //   if (address) updateUseditemInput.address = address;
+  //   if (hashArr) updateUseditemInput.tags = hashArr;
+  //   if (isChangedFiles) updateUseditemInput.images = fileUrls;
+
+  //   if (
+  //     !data.name &&
+  //     !data.remarks &&
+  //     !data.contents &&
+  //     !data.price &&
+  //     !isChangedFiles
+  //   ) {
+  //     alert("수정한 내용이 없습니다.");
+  //     return;
+  //   }
+  //   try {
+  //     await updateUseditem({
+  //       variables: {
+  //         useditemId: router.query.marketId,
+  //         updateUseditemInput: {
+  //           name: data.name,
+  //           remarks: data.remarks,
+  //           contents: data.contents,
+  //           price: Number(data.price),
+  //           tags: hashArr,
+  //           images: fileUrls,
+  //           useditemAddress: {
+  //             zipcode: zipcode,
+  //             address: address,
+  //             addressDetail: addressDetail,
+  //           },
+  //         },
+  //       },
+  //     });
+  //     Modal.success({
+  //           content: '게시물 수정이 완료되었습니다!',
+  //       });
+  //     router.push(`/market/${router.query.useditemId}`);
+  //   } catch (error) {
+  //     if (error instanceof Error)
+  //           Modal.error({
+  //             content: error.message,
+  //         });
+  //   }
+  // };
+
+
+
+
+
+
+
 
 //  이미지
   useEffect(() => {
@@ -212,6 +304,9 @@ export default function MarketWrite(props){
     hashArr.splice(Number(event.target.id), 1);
     setHashArr([...hashArr]);
   };
+
+
+
 
 
 
@@ -234,5 +329,16 @@ export default function MarketWrite(props){
     hashArr={hashArr}
     onKeyUpHash={onKeyUpHash}
     onClickDeleteHash={onClickDeleteHash}
+
+    isOpen={isOpen}
+    showModal={showModal}
+    handleOk={handleOk}
+    handleCancel={handleCancel}
+    handleComplete={handleComplete}
+
+    onChangeAddressDetail={onChangeAddressDetail}
+    address={address}
+    zipcode={zipcode}
+    setAddress={setAddress}
     />)
 }

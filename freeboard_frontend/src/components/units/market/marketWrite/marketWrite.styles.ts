@@ -31,29 +31,72 @@ margin-bottom: 30px;
 
 `
 export const Location= styled.div`
-margin-right: 20px;
-`
-export const Gps= styled.input`
-width: 108px;
-height: 52px;
-border: 1px solid #BDBDBD;
-padding: 10px;
 margin-right: 10px;
-`
-export const GpsBox= styled.div`
-margin: 40px 0 50px 0;
-
+padding: 0;
 `
 export const Address= styled.input`
-width: 480px;
+width: 583px;
 height: 52px;
 border: 1px solid #BDBDBD;
 padding: 10px;
 margin-bottom: 10px;
 `
 export const AddressBox= styled.div`
-margin-bottom: 50px;
+margin-left: 20px;
 `
 export const ImageBox= styled.div`
 margin-bottom: 50px;
 `
+export const Zip= styled.input`
+    width: 100px;
+    height: 56px;
+    border: none;
+    padding: 10px;
+    background: #E9E9E9;
+`
+export const ZipBtn= styled.button`
+    width: 120px;
+    height: 56px;
+    border: none;
+    padding: 10px;
+    background: black;
+    color: white;
+    margin-left: 20px;
+    cursor: pointer;
+`
+export const ZipBox= styled.div`
+padding-top: 20px;
+display: flex;
+align-items: center;
+margin-bottom: 15px;
+`
+export const TagInput= styled.input`
+    width: 996px;
+    height: 52px;
+    border: 1px solid #BDBDBD;
+    padding: 10px;
+`
+export const TagBtn= styled.button`
+border: none;
+width: 15px;
+height: 15px;
+font-size: 10px;
+color: gray;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 10px 0 5px;
+`
+export const Tags= styled.div`
+border: none;
+width: 15px;
+height: 15px;
+font-size: 10px;
+color: gray;
+
+display: flex;
+align-items: center;
+padding: 15px 0 0 15px;
+`
+
+

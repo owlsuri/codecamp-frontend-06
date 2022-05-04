@@ -6,6 +6,7 @@ import MarketQnAList from '../marketQnaList/QnaList.container'
 import QnaWrite from '../marketQnaWrite/QnaWrite.container'
 import { useState } from 'react'
 import MarketWrite from '../marketWrite/marketWrite.container'
+import KakaoMapFetchPage from '../../../../commons/kakaoMapFetch/kakaomap.container'
 
 
 export default function UsedItemReadUI(props){
@@ -46,15 +47,32 @@ console.log(props.data)
               </S.Buttons>
             </S.Info>
         </S.Container>
-            <S.DetailBox>
-              <S.Detail onClick={props.onClickShowDetail}>상품정보 자세히 보기</S.Detail>
-              <S.Qna onClick={props.onClickQnA}>Q&A</S.Qna>
+            <S.DetailBox>    
+                <S.Detail color={props.color} onClick={props.onClickShowDetail}>상품정보 자세히 보기</S.Detail>
+                <S.Qna qnaColor={props.qnaColor} onClick={props.onClickQnA}>Q&A</S.Qna>
+                  
               {props.isShowQnA ? (
                 <div>
                 <QnaWrite />
                 <MarketQnAList />
                 </div>
-              ) : ""}
+              ) : (
+                <>
+                <div>
+                  {props.data?.fetchUseditem.images
+                                    ?.filter((el: string) => el)
+                                    .map((el: string) => (
+                                      <S.DetailImg
+                                      key={el}
+                                      src={`https://storage.googleapis.com/${el}`}
+                                      />
+                                      ))}
+                                  
+                  </div>
+                  <S.Label><S.Pin src="/pin.png" />거래장소</S.Label>
+                  <KakaoMapFetchPage data={props.data}/>
+                  </>
+            )}
             </S.DetailBox>
             <S.ContentsDetail></S.ContentsDetail>
 

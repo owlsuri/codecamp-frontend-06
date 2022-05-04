@@ -17,14 +17,15 @@ export default function UsedItemRead(){
     const { data:userData } = useQuery(FETCH_USER_LOGGED_IN)
     const [ isShowQnA, setIsShowQnA ] = useState(false)
     
+    const [color, setColor] = useState(true)
+    const [qnaColor, setQnaColor] = useState(false)
 
     
     const { data } = useQuery(FETCH_USED_ITEM,{
       variables: { useditemId : router.query.useditemId },
     });
-    // 결제 state
-    // const [ amount, setAmount ] = useState(100)
-    // setAmount(data?.fetchUseditem?.price)
+
+    console.log(data)
 
     const [createPointTransactionOfBuyingAndSelling] = useMutation(CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING)
 
@@ -58,11 +59,15 @@ export default function UsedItemRead(){
     // 상품디테일 보여주기
     const onClickShowDetail = () => {
         setIsShowQnA(false)
+        setColor((prev) => !prev)
+        setQnaColor((prev) => !prev)
     }
 
     // QnA보여주기
     const onClickQnA = () => {
         setIsShowQnA(true)
+        setColor((prev) => !prev)
+        setQnaColor((prev) => !prev)
     }
 
 
@@ -145,7 +150,9 @@ export default function UsedItemRead(){
             onClickPay={onClickPay}
             isShowQnA={isShowQnA}
             onClickBasket={onClickBasket}   
-            onClickPick={onClickPick}         
+            onClickPick={onClickPick}    
+            color={color}    
+            qnaColor={qnaColor} 
             />
     )
 

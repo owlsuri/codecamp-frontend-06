@@ -86,11 +86,8 @@ font-weight: 600;
 border: none;
 margin-bottom: 30px;
 cursor: pointer;
-    :hover{
-    background-color: #6888B2;
-    color:white;
-    
-  }
+  background-color: ${(props) => (props.color ? "#6888B2" : "")};
+  color: ${(props) => (props.color ? "white" : "black")};
 `;
 export const ContentsDetail = styled.div`
 
@@ -102,10 +99,8 @@ font-weight: 600;
 border: none;
 margin-bottom: 30px;
 cursor: pointer;
-
-
-  background-color: ${(props) => (props.isShowQnA ? "#6888B2" : "none")};
-  color: ${(props) => (props.isShowQnA ? "white" : "black")};
+  background-color: ${(props) => (props.qnaColor ? "#6888B2" : "")};
+  color: ${(props) => (props.qnaColor ? "white" : "black")};
 `;
 
 
@@ -130,3 +125,17 @@ export const MenuBtn = styled.button`
     cursor: pointer;
   }
   `
+export const DetailImg = styled.img`
+  width: 992px;
+  margin-bottom: 100px;
+`;
+
+export const Label = styled.div`
+font-size: 24px;
+padding-bottom: 20px;
+`;
+export const Pin = styled.img`
+width: 20px;
+padding-bottom: 10px;
+margin-right: 5px;
+`;

@@ -28,6 +28,7 @@ export default function BoardDetailPage(props){
           <meta
             property="og:image"
             content={props.myboardData?.images[0]}
+            // 앞에 구글도 붙여줘야 이미지 나옴
           ></meta>
         </Head>
         <div>
@@ -56,5 +57,5 @@ export const getServerSideProps = async (context) =>{
         },
       },
     };
-                                                                        
+
 }

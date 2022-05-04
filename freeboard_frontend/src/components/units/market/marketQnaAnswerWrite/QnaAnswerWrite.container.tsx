@@ -21,6 +21,7 @@ export default function QnaAnswerWrite(props){
 
     // 대댓글(answer) 등록하기
     const onClickAnswer = async() => {
+        props.setIsAnswer(false)
        try{
         const result = await createUseditemQuestionAnswer({
             variables:{

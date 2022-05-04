@@ -1,11 +1,15 @@
-import * as S from '../../componunts/write/write.styles'
-export default function KakaoMapFetchUI(props){
+import styled from '@emotion/styled';
+
+const BlockLo=styled.div`
+display: flex;
+`
+export default function KakaoMapFetchUI(){
 
   return(
-        <S.BlockLo>
+        <BlockLo>
         <div>
-          <div id="map" style={{ width: "860px", height: "448px" }}></div>
+          <div id="map" style={{ width: "1000px", height: "548px" }}></div>
         </div>
-       </S.BlockLo>
+       </BlockLo>
   )
 }

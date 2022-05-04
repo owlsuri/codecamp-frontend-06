@@ -18,8 +18,8 @@ export default function KakaoMapPage(props){
 
     script.onload = () => {
       window.kakao.maps.load(function () {
-        const mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = {
+        const mapContainer = document.getElementById('map') // 지도를 표시할 div 
+        const mapOption = {
                 center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
                 level: 3 // 지도의 확대 레벨
                 };
@@ -28,7 +28,7 @@ export default function KakaoMapPage(props){
             const map = new window.kakao.maps.Map(mapContainer, mapOption); 
             
             // 주소-좌표 변환 객체를 생성합니다
-            let geocoder = new window.kakao.maps.services.Geocoder();
+            const geocoder = new window.kakao.maps.services.Geocoder();
             
 
             console.log(props.address)
@@ -46,9 +46,6 @@ export default function KakaoMapPage(props){
                         map: map,
                         position: coords
                     });
-
-                    // console.log(coords)
-                    // props.setGps(coords)
 
                     // 인포윈도우로 장소에 대한 설명을 표시합니다
                           const infowindow = new window.kakao.maps.InfoWindow({

@@ -1,11 +1,16 @@
-import * as S from '../../componunts/write/write.styles'
+import styled from '@emotion/styled';
+
+const BlockLo=styled.div`
+display: flex;
+`
+
 export default function KakaoMapUI(props){
 
   return(
-        <S.BlockLo>
+        <BlockLo>
         <div>
           <div id="map" style={{ width: "384px", height: "252px" }}></div>
         </div>
-       </S.BlockLo>
+       </BlockLo>
   )
 }

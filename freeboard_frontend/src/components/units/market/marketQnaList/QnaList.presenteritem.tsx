@@ -10,6 +10,7 @@ import QnaAnswerList from '../marketQnaAnswerList/QnaAnswerList.container';
 
 
 export default function MarketQnAListItem(props){
+    console.log(props.data.fetchUseditemQuestions)
 
     const [isEdit, setIsEdit] = useState(false);
     const [isAnswer, setIsAnswer] = useState(false);

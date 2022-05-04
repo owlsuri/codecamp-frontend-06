@@ -3,8 +3,10 @@ import Input01 from '../../../../commons/inputs/01'
 import Uploads01 from '../../../../commons/uploads/01/Uploads01.container'
 import * as S from './marketWrite.styles'
 import {v4 as uuidv4} from 'uuid'
-import KakaoMap from '../../../../commons/kakaoMap/kakaoMap'
 import { useEffect } from 'react'
+import KakaoMapPage from '../../../../commons/kakaoMap/kakaomap.container'
+import { Modal } from 'antd';
+import DaumPostcode from 'react-daum-postcode';
 
 export default function MarketWriteUI(props){
     // react-quill contents 값 넣어주기
@@ -47,42 +49,52 @@ export default function MarketWriteUI(props){
             <S.Error>{props.formState.errors.price?.message}</S.Error>
 
             <S.Label>태그입력</S.Label>
-            <input type="text" {...props.register("tags")} 
+            <S.TagInput type="text" {...props.register("tags")} 
                     // defaultValue={props.data?.fetchUseditem.tags || ""}
-                    // placeholder="#태그 #태그 #태그" 
                     onKeyUp={props.onKeyUpHash}
                     />
+            <S.Tags>
             {props.hashArr.map((el: any, idx: any) => (
               <>
                 <span key={idx}>{el}</span>
-                <button
+                <S.TagBtn
                   type="button"
                   id={idx}
                   onClick={props.onClickDeleteHash}
                 >
                   X
-                </button>
+                </S.TagBtn>
               </>
             ))}
+            </S.Tags>
             <S.Error>{props.formState.errors.tags?.message}</S.Error>
-
+            <S.Label>거래위치</S.Label>
+               {props.isOpen && (<Modal title="주소를 검색해주세요" 
+                visible={true} onOk={props.handleOk}  
+                onCancel={props.handleCancel}>
+            <DaumPostcode onComplete={props.handleComplete}/>
+            </Modal>
+            )}                
             <S.LocationBox>
-                <S.Location>
-                    <S.Label>거래위치</S.Label>
-                    {/* <KakaoMap /> */}
-                </S.Location>
-                <S.AddressBox>
-                    <S.GpsBox>
-                        <S.Label>GPS</S.Label>
-                        <S.Gps type="text" placeholder="위도(LAT)" />
-                        <S.Gps type="text" placeholder="경도(LNG)" />
-                    </S.GpsBox>
-                    <div>
-                        <S.Label>주소</S.Label>
-                        <S.Address type="text" />
-                        <S.Address type="text" />
-                    </div>
-                </S.AddressBox>
+             <S.Location>
+               <KakaoMapPage 
+               address={props.address} 
+                zipcode={props.zipcode}
+                onChangeAddressDetail={props.onChangeAddressDetail}
+                data={props.data}
+                />
+
+            </S.Location>
+            <S.AddressBox>
+                <S.Label>주소</S.Label>
+                    <S.ZipBox>
+                        <S.Zip type="text" id="zipcode"
+                                value={props.zipcode || props.data?.fetchUseditem?.useditemAddress?.zipcode || ""} readOnly/>
+                        <S.ZipBtn type="button" onClick={props.showModal}>우편번호 검색</S.ZipBtn>
+                    </S.ZipBox>
+                    <S.Address type="text" id="address" defaultValue={props.address || props.data?.fetchUseditem.useditemAddress?.address ||""} readOnly/>
+                    <S.Address type="text" id="addressDetail" onChange={props.onChangeAddressInputs}/>
+            </S.AddressBox>
             </S.LocationBox>
                 <S.Label>사진첨부</S.Label>
                           {props.fileUrls.map((el, index) => (
@@ -94,17 +106,9 @@ export default function MarketWriteUI(props){
                             onChangeFileUrls={props.onChangeFileUrls}
                             />
                         ))}
-                        {/* <input type="file" onChange={props.onChangeFile(0)}/>
-                        <input type="file" onChange={props.onChangeFile(1)}/>
-                        <input type="file" onChange={props.onChangeFile(2)}/><br/>
-                        <img src={props.imageUrls[0]}/>
-                        <img src={props.imageUrls[1]}/>
-                        <img src={props.imageUrls[2]}/> */}
                 <S.ImageBox>
                     
                 </S.ImageBox>
-
-
             <Button01 isActive={props.formState.isValid} title={props.isEdit ? "수정하기" : "등록하기"} />
             </form>
     </S.Wrapper>
