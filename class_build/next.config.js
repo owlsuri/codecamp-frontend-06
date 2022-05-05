@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
-  generateBuildId: () => "owlsuri.shop",
+  generateBuildId: () => "owlsuri",
   exportPathMap: () => ({
     "/": { page: "/" },
     "/boards": { page: "/boards" },

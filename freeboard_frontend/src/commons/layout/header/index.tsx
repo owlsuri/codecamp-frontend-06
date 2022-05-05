@@ -5,7 +5,7 @@ import { Modal } from "antd"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useRecoilState } from "recoil"
-import { accessTokenState, basketaaa } from "../../store"
+import { accessTokenState, basket, basketaaa } from "../../store"
 import Head from 'next/head'
 
 
@@ -148,7 +148,7 @@ export default function LayoutHeader(){
     const [logoutUser] = useMutation(LOGOUT_USER)
 
     // 장바구니 상품
-  const [basketItems, setBasketItems] = useRecoilState(basketaaa);
+  const [basketItems, setBasketItems] = useRecoilState(basket);
 
   useEffect(() => {
     const baskets = JSON.parse(localStorage.getItem("baskets") || "[]");

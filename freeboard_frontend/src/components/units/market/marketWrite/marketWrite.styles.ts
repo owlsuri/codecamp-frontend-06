@@ -89,7 +89,7 @@ margin: 0 10px 0 5px;
 `
 export const Tags= styled.div`
 border: none;
-width: 15px;
+width: 1000px;
 height: 15px;
 font-size: 10px;
 color: gray;

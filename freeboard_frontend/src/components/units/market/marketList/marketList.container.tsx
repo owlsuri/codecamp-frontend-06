@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { basket } from "../../../../commons/store";
+import { basket, watch } from "../../../../commons/store";
 import MarketListUI from "./marketList.presenter";
 import { FETCH_USED_ITEMS, FETCH_USED_ITEMS_BEST } from "./marketList.queries";
 import _ from "lodash";
@@ -37,7 +37,7 @@ export default function MarketList(){
     },
     });
 };
-    const [basketItems, setBasketItems] = useRecoilState(basket);
+    const [watchItems, setWatchItems] = useRecoilState(watch);
 
     const onClickToDetail = (el) => (event) => {
         router.push(`/market/${event.currentTarget.id}`)
@@ -52,7 +52,7 @@ export default function MarketList(){
     const ddd = _.uniqBy(watch, "_id");
     const ccc = ddd.slice(0, 3);
     console.log(ccc);
-    setBasketItems(ccc);  
+    setWatchItems(ccc);  
 
     }
 

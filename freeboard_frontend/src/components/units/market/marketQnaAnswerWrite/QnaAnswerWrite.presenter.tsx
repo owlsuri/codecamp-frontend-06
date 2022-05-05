@@ -14,7 +14,7 @@ export default function QnaAnswerWriteUI(props){
                 <S.CommentInputBox>
                 <S.CommentInput maxlength={100} 
                                 onChange={props.OnChangeAnswer}
-                                defaultValue={props.contents || ""}
+                                defaultValue={props.contents || props.el?.contents || ""}
                                 placeholder="개인정보를 공유 및 요청하거나 명예회손, 무단광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에대한 책임은 게시자에게 있습니다."/>
                 <S.CommentInputBottom>
                     <S.CommentCount>{props.qnaAnswer.length}/100</S.CommentCount>

@@ -6,12 +6,14 @@ export const accessTokenState = atom({
     default:"", 
 })
 
+// 장바구니
 export const basket = atom({
     key: "basketItems", 
     default:[], 
 })
 
-export const basketaaa = atom({
-    key: "basketaaa", 
+// 최근본상품
+export const watch = atom({
+    key: "watch", 
     default:[], 
 })

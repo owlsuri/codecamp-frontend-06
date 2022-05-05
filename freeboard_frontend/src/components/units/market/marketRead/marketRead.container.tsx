@@ -2,6 +2,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { basket, basketaaa } from "../../../../commons/store";
 import UsedItemReadUI from "./marketRead.presenter";
 import { FETCH_USED_ITEM, DELETE_USEDITEM, TOGGLE_USEDITEM_PICK, CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING, FETCH_USER_LOGGED_IN } from "./marketRead.queries";
 
@@ -13,6 +15,7 @@ import { FETCH_USED_ITEM, DELETE_USEDITEM, TOGGLE_USEDITEM_PICK, CREATE_POINT_TR
 export default function UsedItemRead(){
 
     const router = useRouter()
+const [basketItems, setBasketItems] = useRecoilState(basket);
 
     const { data:userData } = useQuery(FETCH_USER_LOGGED_IN)
     const [ isShowQnA, setIsShowQnA ] = useState(false)
@@ -25,7 +28,7 @@ export default function UsedItemRead(){
       variables: { useditemId : router.query.useditemId },
     });
 
-    console.log(data)
+    
 
     const [createPointTransactionOfBuyingAndSelling] = useMutation(CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING)
 
@@ -38,7 +41,6 @@ export default function UsedItemRead(){
 
     const onClickBasket = (el) => () =>{
     const baskets = JSON.parse(localStorage.getItem("baskets") || "[]")
-    console.log(baskets)
 
     const temp = baskets.filter((basketEl) => basketEl._id === el._id)
 
@@ -51,6 +53,7 @@ export default function UsedItemRead(){
         baskets.push(newEl)
         localStorage.setItem("baskets", JSON.stringify(baskets))
         setIsLoad(true)
+        setBasketItems(baskets)
 
         Modal.success({ content: "장바구니에 담았습니다." });
 
@@ -109,6 +112,7 @@ export default function UsedItemRead(){
                 })
                 console.log(pay)
                 Modal.success({ content: "결제가 완료되었습니다!" });
+                router.push('/mypage')
             } catch(error){
             if(error instanceof Error)
                 Modal.error({ content: error.message });
