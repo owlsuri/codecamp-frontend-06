@@ -5,7 +5,11 @@ import LayoutHeader from "./header";
 import LayoutFooter from "./footer";
 import LayoutNavigation from "./navigation/navigation.container";
 import { useRouter } from "next/router";
+import Today from "./today";
 
+    const Wrapper=styled.div`
+        display: flex;
+    `
     const BodyWrapper=styled.div`
         display: flex;
     `
@@ -13,13 +17,29 @@ import { useRouter } from "next/router";
     const Body=styled.div`
 
     `
+    const TodayShown=styled.div`
+        position: fixed;
+        display: flex;
+        left: 1300px;
+        width: 155px;
+        height: 373px;
+        border: 1px solid black;
+        margin: 50px;
+        background-color: white;
+    `
     const HIDDEN_HEADERS = [
-        "/"
+        "/",
     ]
 
+    const HIDDEN_HEADERSTODAY = [
+        "/",
+        "/login",
+        "/join",
+    ]
 export default function Layout(props){
     const router=useRouter();
     const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath)
+    const isHiddenHeaderToday = HIDDEN_HEADERSTODAY.includes(router.asPath)
     
 
     return(
@@ -27,10 +47,15 @@ export default function Layout(props){
         {!isHiddenHeader && <LayoutHeader /> }
         {!isHiddenHeader && <LayoutBanner />}
         {!isHiddenHeader && <LayoutNavigation />}
-    <BodyWrapper> 
+        <Wrapper>
+        <BodyWrapper> 
                <Body>{props.children}</Body>
-                </BodyWrapper > 
+        </BodyWrapper > 
+        {!isHiddenHeaderToday && <TodayShown>
+            <Today />
+        </TodayShown>}
         {!isHiddenHeader && <LayoutFooter /> }
+        </Wrapper>
         </>
     )
 }

@@ -15,7 +15,7 @@ export default function MarketListUI(props){
            <S.Wrapper>
            <S.BestBox>
               {props.dataUseditemBest?.fetchUseditemsOfTheBest.map((el:any)=>(
-                <S.Row key={el._id}  id={el._id} onClick={props.onClickToDetail}>
+                <S.Row key={el._id}  id={el._id} onClick={props.onClickToDetail(el)}>
                       <S.Info>
                         <div>
                             <S.Img  
@@ -56,7 +56,7 @@ export default function MarketListUI(props){
                 >
            <S.Container>
                 {props.data?.fetchUseditems.map((el:any) => (
-                  <S.Row key={el._id}  id={el._id} onClick={props.onClickToDetail}>
+                  <S.Row key={el._id}  id={el._id} onClick={props.onClickToDetail(el)}>
                       <S.Info>
                         <div>
                             <S.Img  

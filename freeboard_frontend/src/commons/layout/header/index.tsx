@@ -49,13 +49,19 @@ export const FETCH_POINT_TRANSACTIONS_OF_LOADING = gql`
     }
 `
 
+const LOGOUT_USER = gql`
+  mutation logoutUser{
+    logoutUser
+  }
+`
+
+
 const Wrapper = styled.div`
     display: flex;
     justify-content: end;
     align-items: center;
     margin-top: 50px;
     padding-right: 30px;
-
 `
 
 const Label = styled.div`
@@ -85,7 +91,7 @@ font-weight: 700;
 const BasketLength = styled.div`
 width:20px;
 height: 20px;
-background-color: #FFE004;
+background-color:  #6888B2;
 color: white;
 text-align: center;
 border-radius: 30px;
@@ -121,6 +127,10 @@ margin-top: 20px;
 color: white;
 cursor: pointer;
 `
+const Header= styled.div`
+display: flex;
+justify-content: space-between;
+`
 
 export default function LayoutHeader(){
 
@@ -134,6 +144,8 @@ export default function LayoutHeader(){
     const [isOpen, setIsOpen] = useState(false)
 
     const { data } = useQuery(FETCH_USER_LOGGED_IN)
+
+    const [logoutUser] = useMutation(LOGOUT_USER)
 
     // 장바구니 상품
   const [basketItems, setBasketItems] = useRecoilState(basketaaa);
@@ -150,6 +162,7 @@ export default function LayoutHeader(){
     const onClicktoJoin = () => {
         router.push('/join')
     }
+
 
     // 충전모달
     const onToggleModal = () => {
@@ -225,6 +238,7 @@ export default function LayoutHeader(){
     const onClickLogOut = () => {
         localStorage.removeItem("accessToken")
         setAccessToken("")
+        logoutUser()
     }
 
     return(
@@ -249,27 +263,34 @@ export default function LayoutHeader(){
             <ChargeBtn onClick={requestPay}>충전하기</ChargeBtn>
           </Modal>
         )}
-            <Label>{ accessToken ? (
-          <Container>
-            <div>
-              {data?.fetchUserLoggedIn.name} 님의 포인트{" "}
-              <Point>{data?.fetchUserLoggedIn.userPoint.amount}P</Point>
-            </div>
-            <Charge onClick={onToggleModal}>충전</Charge>
-            <Charge onClick={onClickLogOut}>로그아웃</Charge>
-          </Container>
-        ) : (
-          <Container>
-            <Charge onClick={onClicktoLogin}>로그인</Charge>
-            <Charge onClick={onClicktoJoin}>회원가입</Charge>
-          </Container> 
-        )}
-        
-        </Label>
+        <Header>
+          <div>
+            <img src="/owl.png" onClick={onClickToMain}/>
+          </div>
+          
+              <Label>{ accessToken ? (
+            <Container>
+              <div>
+                {data?.fetchUserLoggedIn.name} 님의 포인트{" "}
+                <Point>{data?.fetchUserLoggedIn.userPoint.amount}P</Point>
+              </div>
+              <Charge onClick={onToggleModal}>충전</Charge>
+              <Charge onClick={onClickLogOut}>로그아웃</Charge>
+            </Container>
+          ) : (
+            <Container>
+              <Charge onClick={onClicktoLogin}>로그인</Charge>
+              <Charge onClick={onClicktoJoin}>회원가입</Charge>
+            </Container> 
+          )}
+          </Label>
+       
                 <Basket>
                     <BLabel>장바구니</BLabel>
                     <BasketLength>{basketItems.length}</BasketLength>
                 </Basket>
+          
+        </Header>
             </Wrapper>
     )
 }

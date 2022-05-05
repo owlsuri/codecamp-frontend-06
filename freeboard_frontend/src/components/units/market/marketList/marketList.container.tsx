@@ -1,8 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { basket } from "../../../../commons/store";
 import MarketListUI from "./marketList.presenter";
 import { FETCH_USED_ITEMS, FETCH_USED_ITEMS_BEST } from "./marketList.queries";
+import _ from "lodash";
 
 export default function MarketList(){
 
@@ -34,9 +37,23 @@ export default function MarketList(){
     },
     });
 };
+    const [basketItems, setBasketItems] = useRecoilState(basket);
 
-    const onClickToDetail = (event) => {
+    const onClickToDetail = (el) => (event) => {
         router.push(`/market/${event.currentTarget.id}`)
+
+    // 최근 본 상품
+    const watch = JSON.parse(localStorage.getItem("watch") || "[]");
+
+    const { __typename, ...newEl } = el;
+    watch.unshift(newEl);
+
+    localStorage.setItem("watch", JSON.stringify(watch));
+    const ddd = _.uniqBy(watch, "_id");
+    const ccc = ddd.slice(0, 3);
+    console.log(ccc);
+    setBasketItems(ccc);  
+
     }
 
     const onChangeKeyword = (value: string) => {

@@ -14,7 +14,7 @@ export default function MarketWriteUI(props){
         props.reset({ contents: props.data?.fetchUseditem.contents });
     }, [props.data]);
 
-    console.log(props.data)
+    console.log(props.isEdit)
     return(
         <S.Wrapper>
             <S.Main >{props.isEdit ? "상품 수정하기" : "상품 등록하기"}</S.Main>
@@ -109,7 +109,8 @@ export default function MarketWriteUI(props){
                 <S.ImageBox>
                     
                 </S.ImageBox>
-            <Button01 isActive={props.formState.isValid} title={props.isEdit ? "수정하기" : "등록하기"} />
+            <Button01 isActive={props.formState.isValid} 
+                      title={props.isEdit ? "수정하기" : "등록하기"} />
             </form>
     </S.Wrapper>
     )

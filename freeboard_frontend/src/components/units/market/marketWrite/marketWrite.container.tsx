@@ -74,7 +74,6 @@ export default function MarketWrite(props){
 
 
   // 해시태그
-  const [hashtag, setHashtag] = useState("");
   const [hashArr, setHashArr] = useState([]);
   const onKeyUpHash = (event) => {
     // 자바스크립트 키코드
@@ -150,8 +149,8 @@ export default function MarketWrite(props){
           tags: hashArr,
           images: fileUrls,
           useditemAddress: {
-              zipcode,
-              address,
+              zipcode: zipcode,
+              address: address,
               addressDetail,
             },
         }
@@ -196,21 +195,21 @@ export default function MarketWrite(props){
     if (data.contents) updateUseditemInput.contents = data.contents;
     if (data.price) updateUseditemInput.price = Number(data.price);
     if (isChangedFiles) updateUseditemInput.images = fileUrls;
-    if (hashArr) updateUseditemInput.tags = hashArr;
-    if (address) updateUseditemInput.useditemAddress.address = address; 
-    if (zipcode) updateUseditemInput.useditemAddress.zipcode = zipcode; 
+    if (hashArr) updateUseditemInput.tags = hashArr;  
 
+    const useditemAddressInput= {}
+    if (zipcode) useditemAddressInput.zipcode = zipcode;
+    if (address) useditemAddressInput.address = address;
 
     try {
       await updateUseditem({
           variables: {
             useditemId: router.query.useditemId,
-            updateUseditemInput : {
-              useditemAddress: {
-                address,
-                zipcode,
-              },
-            }
+            
+            updateUseditemInput:{
+              ...updateUseditemInput,
+              useditemAddress: useditemAddressInput
+            },
           },
         });
         Modal.success({
@@ -223,70 +222,7 @@ export default function MarketWrite(props){
               content: error.message,
           });
         }
-  }
-
-  // const onClickUpdate = async (data) => {
-  //   // 이미지 수정이 되었는지 확인
-  //   const currentFiles = JSON.stringify(fileUrls);
-  //   const defaultFiles = JSON.stringify(data?.fetchUseditem?.images);
-  //   const isChangedFiles = currentFiles !== defaultFiles;
-
-  //   const updateUseditemInput: any = {};
-  //   if (data.name) updateUseditemInput.name = data.name;
-  //   if (data.remarks) updateUseditemInput.remarks = data.remarks;
-  //   if (data.contents) updateUseditemInput.contents = data.contents;
-  //   if (data.price) updateUseditemInput.price = data.price;
-  //   if (zipcode) updateUseditemInput.zipcode = zipcode;
-  //   if (address) updateUseditemInput.address = address;
-  //   if (hashArr) updateUseditemInput.tags = hashArr;
-  //   if (isChangedFiles) updateUseditemInput.images = fileUrls;
-
-  //   if (
-  //     !data.name &&
-  //     !data.remarks &&
-  //     !data.contents &&
-  //     !data.price &&
-  //     !isChangedFiles
-  //   ) {
-  //     alert("수정한 내용이 없습니다.");
-  //     return;
-  //   }
-  //   try {
-  //     await updateUseditem({
-  //       variables: {
-  //         useditemId: router.query.marketId,
-  //         updateUseditemInput: {
-  //           name: data.name,
-  //           remarks: data.remarks,
-  //           contents: data.contents,
-  //           price: Number(data.price),
-  //           tags: hashArr,
-  //           images: fileUrls,
-  //           useditemAddress: {
-  //             zipcode: zipcode,
-  //             address: address,
-  //             addressDetail: addressDetail,
-  //           },
-  //         },
-  //       },
-  //     });
-  //     Modal.success({
-  //           content: '게시물 수정이 완료되었습니다!',
-  //       });
-  //     router.push(`/market/${router.query.useditemId}`);
-  //   } catch (error) {
-  //     if (error instanceof Error)
-  //           Modal.error({
-  //             content: error.message,
-  //         });
-  //   }
-  // };
-
-
-
-
-
-
+    }
 
 
 //  이미지
@@ -340,5 +276,6 @@ export default function MarketWrite(props){
     address={address}
     zipcode={zipcode}
     setAddress={setAddress}
+  
     />)
 }
