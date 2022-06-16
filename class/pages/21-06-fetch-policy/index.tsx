@@ -30,3 +30,4 @@ export default function GlobalStatePage() {
     </div>
   );
 }
+// 같은 내용 요청시 또 요청하지않음 캐시에 같은 것이 있다면 그것을 가져옴

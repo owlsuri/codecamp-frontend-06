@@ -14,7 +14,7 @@ import { withAuth } from "../../src/components/commons/hocs/withAuth"
 
 function LoginSuccessPage(){
 
-    const [userInfo, setUsertInfo] = useRecoilState(userInfoState)
+    const [userInfo, setUserInfo] = useRecoilState(userInfoState)
     // const { data } = useQuery(FETCH_USER_LOGGED_IN)
     // const router = useRouter()
 

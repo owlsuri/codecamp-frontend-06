@@ -86,8 +86,6 @@ export default function MarketWrite(props){
     console.log(event.target.value);
   };
 
-
-
   const { register, handleSubmit, formState, setValue, trigger, reset, getValues } = useForm({
         resolver: !props.isEdit && yupResolver(schema),
         mode:"onChange",   
@@ -100,9 +98,9 @@ export default function MarketWrite(props){
 
   // 이미지 등록하기
     const onChangeFileUrls = (fileUrl: string, index: number) => {
-    const newFileUrls = [...fileUrls];
-    newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
+      const newFileUrls = [...fileUrls];
+      newFileUrls[index] = fileUrl;
+      setFileUrls(newFileUrls);
   };
 
   // 이미지 업로드
@@ -276,6 +274,5 @@ export default function MarketWrite(props){
     address={address}
     zipcode={zipcode}
     setAddress={setAddress}
-  
     />)
 }

@@ -20,10 +20,10 @@ export default function LoginPage(){
     const [loginUser] = useMutation(LOGIN_USER)
     const router = useRouter()
 
-    const onChangeEmail =(event)=>{
+    const onChangeEmail =(event:any)=>{
         setEmail(event.target.value)
     }
-    const onChangePassword =(event)=>{
+    const onChangePassword =(event:any)=>{
         setPassword(event.target.value)
     }
     const onClickLogin = async() => {

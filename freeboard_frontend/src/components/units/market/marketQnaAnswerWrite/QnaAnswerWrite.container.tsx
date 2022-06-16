@@ -6,6 +6,8 @@ import QnaAnswerWriteUI from './QnaAnswerWrite.presenter'
 import { CREATE_USEDITEM_QUESTION_ANSWER, FETCH_USEDITEM_QUESTION_ANSWERS, UPDATE_USEDITEM_QUESTION_ANSWER } from './QnaAnswerWrite.queris'
 
 export default function QnaAnswerWrite(props){
+console.log("여기")
+    console.log(props)
 
     const [createUseditemQuestionAnswer] = useMutation<Pick<IMutation,"createUseditemQuestionAnswer">, 
     IMutationCreateUseditemQuestionAnswerArgs>(CREATE_USEDITEM_QUESTION_ANSWER)
@@ -67,12 +69,12 @@ export default function QnaAnswerWrite(props){
                 updateUseditemQuestionAnswerInput:{
                     contents: qnaAnswer,
                 },
-                useditemQuestionAnswerId: String(props.el._id),
+                useditemQuestionAnswerId: String(props.qnaAnswerEl._id),
             },
             refetchQueries: [
                 {
                     query: FETCH_USEDITEM_QUESTION_ANSWERS,
-                    variables: { useditemQuestionId: String(props.el._id) },
+                    variables: { useditemQuestionId: String(props.qnaAnswerEl._id) },
                 },
             ],
         })
@@ -96,6 +98,7 @@ export default function QnaAnswerWrite(props){
         isEdit={props.isEdit}
         el={props.el}
         onClickUpdate={onClickUpdate}
+        qnaAnswerEl={props.qnaAnswerEl}
         />
     )
 }

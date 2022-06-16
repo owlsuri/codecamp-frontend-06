@@ -237,7 +237,7 @@ export default function LayoutHeader(){
    
     const onClickLogOut = () => {
         localStorage.removeItem("accessToken")
-        setAccessToken("")
+        setAccessToken(" ")
         logoutUser()
     }
 

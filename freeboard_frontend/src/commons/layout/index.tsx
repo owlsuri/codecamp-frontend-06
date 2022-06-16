@@ -20,7 +20,7 @@ import Today from "./today";
     const TodayShown=styled.div`
         position: fixed;
         display: flex;
-        left: 1300px;
+        left: 1600px;
         width: 155px;
         height: 373px;
         border: 1px solid black;

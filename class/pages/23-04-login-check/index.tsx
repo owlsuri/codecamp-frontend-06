@@ -43,12 +43,11 @@ export default function LoginPage(){
 
         // 3. 글로벌 스테이트에 저장하기
         setAccesstoken(accessToken)
-        localStorage.setItem("accessToken",accessToken)
+        localStorage.setItem("accessToken", accessToken)
         
         // 4. 로그인 성공페이지도 이동하기
                 alert("로그인성공")        
                 router.push("/23-05-login-check-success")
-        
     }
 
 

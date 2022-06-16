@@ -22,7 +22,7 @@ const FETCH_USER_LOGGED_IN = gql`
 
 export default function LoginPage(){
     const [accessToken, setAccesstoken] = useRecoilState(accessTokenState)
-    const [userInfo, setUsertInfo] = useRecoilState(userInfoState)
+    const [userInfo, setUserInfo] = useRecoilState(userInfoState)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -37,6 +37,7 @@ export default function LoginPage(){
     const onChangePassword =(event)=>{
         setPassword(event.target.value)
     }
+
     const onClickLogin = async() => {
 
         // 1. 로그인하기
@@ -65,10 +66,10 @@ export default function LoginPage(){
 
         // 3. 글로벌 스테이트에 저장하기
         setAccesstoken(accessToken)
-        setUsertInfo(userInfo)
+        setUserInfo(userInfo)
         localStorage.setItem("accessToken",accessToken)
         localStorage.setItem("userInfo", JSON.stringify(userInfo))
-                                        // 객체를 문자로 바꿔서 저장 
+                                        // 객체를 문자로 바꿔서 저장 로컬에는 문자열만 저장됨 객체안됨
 
         
         // 4. 로그인 성공페이지도 이동하기

@@ -78,7 +78,7 @@ export default function MarketWriteUI(props){
             <S.LocationBox>
              <S.Location>
                <KakaoMapPage 
-               address={props.address} 
+                address={props.address} 
                 zipcode={props.zipcode}
                 onChangeAddressDetail={props.onChangeAddressDetail}
                 data={props.data}

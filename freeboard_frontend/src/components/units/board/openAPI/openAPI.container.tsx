@@ -15,6 +15,7 @@ export default function OpenAPI(){
           setStation((prev) => [...prev, el.stationName]),
           setBikeCnt((prev)=> [...prev, el.parkingBikeTotCnt])
         ))
+        console.log(result)
     };
     aaa();    
   }, []);

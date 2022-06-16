@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-width: 1200px;
+/* width: 1200px; */
 margin: 50px 0 0 110px;
 `;
 export const New = styled.div`
@@ -16,15 +16,26 @@ display: grid;
 grid-template-columns: 300px 300px 300px 300px;
 border-bottom: 1px dashed #BDBDBD; 
 padding-bottom: 40px;
+@media (max-width: 999px){
+  grid-template-columns: 300px 300px 300px;
+  
+}
 `;
 export const Container = styled.div`
 display: grid;
-grid-template-columns: 300px 300px 300px 300px;
+margin: auto;
+grid-template-columns: 300px 300px 300px 300px 300px;
+@media (min-width: 1000px) and (max-width: 1300px) {
+  grid-template-columns: 300px 300px 300px 300px;
+}
+@media (max-width: 999px) {
+  grid-template-columns: 300px 300px 300px;
+}
 `;
 export const Main = styled.div`
 font-size: 25px;
 font-weight: 700;
-width: 1200px;
+/* width: 1200px; */
 margin: 50px 0 0 100px;
 text-align: center;
 `;

@@ -19,7 +19,8 @@ export default function QnaAnswerListItem(props){
         setIsEdit(true);
     }
     
-    const [deleteUseditemQuestionAnswer] = useMutation<Pick<IMutation, "deleteUseditemQuestionAnswer">,IMutationDeleteUseditemQuestionAnswerArgs
+    const [deleteUseditemQuestionAnswer] = useMutation<Pick<IMutation, "deleteUseditemQuestionAnswer">,
+    IMutationDeleteUseditemQuestionAnswerArgs
     >(DELETE_USEDITEM_QUESTION_ANSWER);
     
     
@@ -37,13 +38,11 @@ export default function QnaAnswerListItem(props){
                     useditemQuestionId: props.qael._id,
                     },
                 },
-        ],
+               ],
             })
             Modal.success({
                     content: '삭제가 완료되었습니다!',
                 });
-
-                console.log(result)
         } catch (error) {
             if(error instanceof Error)
             Modal.error({
@@ -88,7 +87,7 @@ export default function QnaAnswerListItem(props){
         </S.Wrapper>
        )}
         {isEdit && (
-            <QnaAnswerWrite isEdit={true} setIsEdit={setIsEdit} el={props.el}/>
+            <QnaAnswerWrite isEdit={true} setIsEdit={setIsEdit} qnaAnswerEl={props.el}/>
         )}
         </>
     )
